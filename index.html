@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Храм Знамения Пресвятой Богородицы в Париже</title>
+  <link href="https://fonts.googleapis.com/css2?family=Forum&family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fdfaf5 url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Sign-icon.jpg/800px-Sign-icon.jpg') no-repeat center top;
+      background-size: contain;
+      font-family: 'Open Sans', sans-serif;
+      color: #2f2f2f;
+      text-align: center;
+    }
+    .overlay {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 2em;
+      max-width: 90vw;
+      margin: auto;
+      margin-top: 5vh;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    h1, h2 {
+      font-family: 'Forum', serif;
+      margin-bottom: 0.2em;
+    }
+    h2 {
+      font-size: 1.1em;
+      font-weight: normal;
+    }
+    .languages {
+      margin: 1em 0;
+    }
+    .languages a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #6c3f1a;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .schedule {
+      margin-top: 2em;
+      text-align: left;
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 1em;
+      border-radius: 5px;
+      font-size: 0.95em;
+    }
+    .footer {
+      margin-top: 2em;
+      font-size: 0.9em;
+      color: #555;
+    }
+    @media (max-width: 768px) {
+      .overlay {
+        padding: 1em;
+      }
+      .schedule {
+        font-size: 0.9em;
+      }
+    }
+  </style>
+  <script>
+    const content = {
+      ru: {
+        title: "Храм Знамения Пресвятой Богородицы",
+        subtitle: "Викариат имени Святых Марии Парижской и Алексия Южинского — Вселенский Патриархат",
+        schedule: `📅 Расписание на июль 2025:
+          <ul>
+            <li><strong>7 июля, воскресенье, 10:00</strong> — Божественная литургия (Неделя 3-я по Пятидесятнице)</li>
+            <li><strong>12 июля, пятница, 18:00</strong> — Вечерня. Память святых апостолов Петра и Павла</li>
+            <li><strong>14 июля, воскресенье, 10:00</strong> — Литургия. Неделя 4-я по Пятидесятнице</li>
+          </ul>`
+      },
+      fr: {
+        title: "Église Orthodoxe Notre-Dame du Signe",
+        subtitle: "Vicariat Sainte-Marie-de-Paris et Saint-Alexis-d'Ugine — Métropole Orthodoxe de France — Patriarcat Œcuménique",
+        schedule: `📅 Calendrier pour juillet 2025:
+          <ul>
+            <li><strong>7 juillet, dimanche, 10h00</strong> — Divine Liturgie (3e dimanche après la Pentecôte)</li>
+            <li><strong>12 juillet, vendredi, 18h00</strong> — Vêpres. Mémoire des saints apôtres Pierre et Paul</li>
+            <li><strong>14 juillet, dimanche, 10h00</strong> — Liturgie. 4e dimanche après la Pentecôte</li>
+          </ul>`
+      }
+    };
+
+    function switchLang(lang) {
+      const html = document.documentElement;
+      html.lang = lang;
+      document.getElementById('title').innerText = content[lang].title;
+      document.getElementById('subtitle').innerText = content[lang].subtitle;
+      document.getElementById('schedule').innerHTML = content[lang].schedule;
+    }
+  </script>
+</head>
+<body>
+  <div class="languages">
+    <a onclick="switchLang('ru')">RU</a> | 
+    <a onclick="switchLang('fr')">FR</a>
+  </div>
+
+  <div class="overlay">
+    <h1 id="title"></h1>
+    <h2 id="subtitle"></h2>
+    <div class="schedule" id="schedule"></div>
+    <div class="footer">
+      87, boulevard Exelmans, Paris 75016<br>
+      Métro: Exelmans (ligne 9)<br>
+      ✉️ <a href="mailto:mr.eujineus@proton.me">mr.eujineus@proton.me</a>
+    </div>
+  </div>
+  <script>switchLang('ru');</script>
+</body>
+</html>
