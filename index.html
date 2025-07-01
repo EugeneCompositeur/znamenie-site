@@ -10,7 +10,7 @@
     body {
       margin: 0;
       padding: 0;
-      background: #dcd1b7;
+      background: #ede6d9;
       font-family: 'Open Sans', sans-serif;
       color: #2f2f2f;
       text-align: center;
@@ -41,10 +41,15 @@
       color: #666;
       font-weight: 600;
       transition: color 0.3s;
+      letter-spacing: 0.1em;
+      padding: 0.1em 0.2em;
+      border-radius: 2px;
+      background: none;
     }
     .lang-switch span.active {
       color: #2f2f2f;
       font-weight: 700;
+      background: none;
     }
     .lang-switch span:hover {
       color: #a2906f;
@@ -125,14 +130,24 @@
       font-family: 'Forum', serif;
       font-weight: bold;
       text-align: center;
-      margin: 1em 0 0 0;
+      margin-top: 1.5em;  /* ← вот здесь регулируешь отступ сверху, например 1.5em */
+      margin-bottom: 0;
+    }
+    .schedule-label:first-child {
+      margin-top: 1.5em;  /* ← теперь тоже есть отступ даже у первого */
     }
     .schedule-month {
       font-size: 1.5em;
       font-family: 'Forum', serif;
       font-weight: bold;
       text-align: center;
-      margin: 2em 0 1.5em 0; /* совпадает с margin-top:2em у августа */
+      margin-top: 1.5em;
+      margin-bottom: 1.2em;
+    }
+    .schedule ul {
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-left: 1.2em;
     }
     .footer {
       margin-top: 2em;
@@ -171,27 +186,27 @@
 
     <header>
       <div class="logo-block">
-        <div class="logo-text left">
+        <div class="logo-text left" id="logo-left">
           <span>Храм</span>
           <span>Знамения</span>
         </div>
         <img src="assets/icon.gif" alt="Икона Богородицы" />
-        <div class="logo-text right">
+        <div class="logo-text right" id="logo-right">
           <span>Пресвятой</span>
           <span>Богородицы</span>
         </div>
       </div>
-      <div class="subheading">
+      <div class="subheading" id="subheading">
         Викариат имени Святых Марии Парижской и Алексия Южинского — Вселенский Патриархат
       </div>
     </header>
 
-    <div class="notice">Сайт в разработке</div>
+    <div class="notice" id="notice">Сайт в разработке</div>
 
     <div class="schedule">
-      <div class="schedule-label">Расписание богослужений</div>
-      <div class="schedule-month">ИЮЛЬ</div>
-      <ul class="ru-schedule">
+      <div class="schedule-label" id="schedule-label-1">Расписание богослужений</div>
+      <div class="schedule-month" id="july-label">ИЮЛЬ</div>
+      <ul id="schedule-july">
         <li><strong>7 июля, воскресенье, 10:30</strong> — Божественная литургия (Неделя 3-я по Пятидесятнице)</li>
         <li><strong>12 июля, пятница, 18:00</strong> — Вечерня. Память святых апостолов Петра и Павла</li>
         <li><strong>14 июля, воскресенье, 10:30</strong> — Литургия. Неделя 4-я по Пятидесятнице</li>
@@ -199,65 +214,128 @@
         <li><strong>27 июля, суббота, 18:00</strong> — Всенощное бдение</li>
         <li><strong>28 июля, воскресенье, 10:30</strong> — Литургия. Неделя 6-я по Пятидесятнице</li>
       </ul>
-      <div class="schedule-label" style="margin-top:2em;">АВГУСТ</div>
-      <ul class="ru-schedule">
+      <div class="schedule-month" id="august-label">АВГУСТ</div>
+      <ul id="schedule-august">
         <li><strong>4 августа, воскресенье, 10:30</strong> — Божественная литургия</li>
         <li><strong>11 августа, воскресенье, 10:30</strong> — Литургия</li>
         <li><strong>18 августа, воскресенье, 10:30</strong> — Литургия</li>
         <li><strong>25 августа, воскресенье, 10:30</strong> — Литургия</li>
       </ul>
-      <!-- Здесь появятся другие языковые блоки -->
-      <ul class="fr-schedule" style="display:none;">
-        <li><strong>7 juillet, dimanche, 10:30</strong> — Divine Liturgie (3e semaine après la Pentecôte)</li>
-        <li><strong>12 juillet, vendredi, 18:00</strong> — Vêpres. Mémoire des saints apôtres Pierre et Paul</li>
-        <li><strong>14 juillet, dimanche, 10:30</strong> — Liturgie. 4e semaine après la Pentecôte</li>
-        <li><strong>21 juillet, dimanche, 10:30</strong> — Liturgie. 5e semaine après la Pentecôte</li>
-        <li><strong>27 juillet, samedi, 18:00</strong> — Vigile nocturne</li>
-        <li><strong>28 juillet, dimanche, 10:30</strong> — Liturgie. 6e semaine après la Pentecôte</li>
-      </ul>
-      <div class="schedule-label fr" style="margin-top:2em; display:none;">AOÛT</div>
-      <ul class="fr-schedule" style="display:none;">
-        <li><strong>4 août, dimanche, 10:30</strong> — Divine liturgie</li>
-        <li><strong>11 août, dimanche, 10:30</strong> — Liturgie</li>
-        <li><strong>18 août, dimanche, 10:30</strong> — Liturgie</li>
-        <li><strong>25 août, dimanche, 10:30</strong> — Liturgie</li>
-      </ul>
-      <!-- Можно добавить by-schedule и ua-schedule -->
+      <!-- BY/UA будут позже -->
+      <div class="by-ua-plug" style="display:none; text-align:center; margin:2em 0; color:#a2906f; font-size:1.1em;">
+        Расписание на выбранном языке появится скоро.
+      </div>
     </div>
 
-    <div class="footer">
+    <div class="footer" id="footer">
       87, boulevard Exelmans, Paris 75016<br />
-      Métro: Exelmans (ligne 9)<br />
-      ✉️ <a href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>
+      Métро: Exelmans (ligne 9)<br />
+      ✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>
     </div>
   </div>
   <script>
+    // Все переводы
+    const translations = {
+      ru: {
+        logoLeft: ["Храм", "Знамения"],
+        logoRight: ["Пресвятой", "Богородицы"],
+        subheading: "Викариат имени Святых Марии Парижской и Алексия Южинского — Вселенский Патриархат",
+        notice: "Сайт в разработке",
+        scheduleLabel1: "Расписание богослужений",
+        julyLabel: "ИЮЛЬ",
+        scheduleJuly: [
+          "<strong>7 июля, воскресенье, 10:30</strong> — Божественная литургия (Неделя 3-я по Пятидесятнице)",
+          "<strong>12 июля, пятница, 18:00</strong> — Вечерня. Память святых апостолов Петра и Павла",
+          "<strong>14 июля, воскресенье, 10:30</strong> — Литургия. Неделя 4-я по Пятидесятнице",
+          "<strong>21 июля, воскресенье, 10:30</strong> — Литургия. Неделя 5-я по Пятидесятнице",
+          "<strong>27 июля, суббота, 18:00</strong> — Всенощное бдение",
+          "<strong>28 июля, воскресенье, 10:30</strong> — Литургия. Неделя 6-я по Пятидесятнице"
+        ],
+        augustLabel: "АВГУСТ",
+        scheduleAugust: [
+          "<strong>4 августа, воскресенье, 10:30</strong> — Божественная литургия",
+          "<strong>11 августа, воскресенье, 10:30</strong> — Литургия",
+          "<strong>18 августа, воскресенье, 10:30</strong> — Литургия",
+          "<strong>25 августа, воскресенье, 10:30</strong> — Литургия"
+        ],
+        footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (ligne 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`,
+      },
+      fr: {
+        logoLeft: ["Église", "du Signe"],
+        logoRight: ["Sainte", "Mère de Dieu"],
+        subheading: "Vicariat Sainte-Marie-de-Paris et Saint-Alexis-d’Ugine – Patriarcat Œcuménique",
+        notice: "Site en développement",
+        scheduleLabel1: "Horaires des offices",
+        julyLabel: "JUILLET",
+        scheduleJuly: [
+          "<strong>7 juillet, dimanche, 10:30</strong> — Divine Liturgie (3e semaine après la Pentecôte)",
+          "<strong>12 juillet, vendredi, 18:00</strong> — Vêpres. Mémoire des saints apôtres Pierre et Paul",
+          "<strong>14 juillet, dimanche, 10:30</strong> — Liturgie. 4e semaine après la Pentecôte",
+          "<strong>21 juillet, dimanche, 10:30</strong> — Liturgie. 5e semaine après la Pentecôte",
+          "<strong>27 juillet, samedi, 18:00</strong> — Vigile nocturne",
+          "<strong>28 juillet, dimanche, 10:30</strong> — Liturgie. 6e semaine après la Pentecôte"
+        ],
+        augustLabel: "AOÛT",
+        scheduleAugust: [
+          "<strong>4 août, dimanche, 10:30</strong> — Divine liturgie",
+          "<strong>11 août, dimanche, 10:30</strong> — Liturgie",
+          "<strong>18 août, dimanche, 10:30</strong> — Liturgie",
+          "<strong>25 août, dimanche, 10:30</strong> — Liturgie"
+        ],
+        footer: `87, boulevard Exelmans, Paris 75016<br />Métro : Exelmans (ligne 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`,
+      },
+      by: {
+        plug: "Расписание на выбранном языке появится скоро."
+      },
+      ua: {
+        plug: "Розклад на вибраній мові з’явиться незабаром."
+      }
+    };
+
     const langSwitchers = document.querySelectorAll('.lang-switch span');
-    function showLang(lang) {
-      // Удалить active со всех
-      langSwitchers.forEach(s=>s.classList.remove('active'));
-      // Добавить active к выбранному
-      document.querySelector('.lang-switch span[data-lang="'+lang+'"').classList.add('active');
-      // Скрыть все блоки
-      document.querySelectorAll('.ru-schedule,.fr-schedule,.fr').forEach(e=>e.style.display='none');
-      if(lang==='ru') {
-        document.querySelectorAll('.ru-schedule').forEach(e=>e.style.display='block');
-        document.querySelectorAll('.schedule-month').forEach(e=>e.innerText='ИЮЛЬ');
-        document.querySelectorAll('.schedule-label')[1].innerText='АВГУСТ';
+    const logoLeft = document.getElementById('logo-left');
+    const logoRight = document.getElementById('logo-right');
+    const subheading = document.getElementById('subheading');
+    const notice = document.getElementById('notice');
+    const scheduleLabel1 = document.getElementById('schedule-label-1');
+    const julyLabel = document.getElementById('july-label');
+    const augustLabel = document.getElementById('august-label');
+    const scheduleJuly = document.getElementById('schedule-july');
+    const scheduleAugust = document.getElementById('schedule-august');
+    const footer = document.getElementById('footer');
+    const byUaPlug = document.querySelector('.by-ua-plug');
+
+    function setLang(lang) {
+      langSwitchers.forEach(s => s.classList.remove('active'));
+      document.querySelector(`.lang-switch span[data-lang="${lang}"]`).classList.add('active');
+
+      if (lang === 'ru' || lang === 'fr') {
+        [logoLeft, logoRight, subheading, notice, scheduleLabel1, julyLabel, augustLabel, scheduleJuly, scheduleAugust, footer].forEach(e => e.style.display = '');
+        byUaPlug.style.display = 'none';
+
+        logoLeft.innerHTML = `<span>${translations[lang].logoLeft[0]}</span><span>${translations[lang].logoLeft[1]}</span>`;
+        logoRight.innerHTML = `<span>${translations[lang].logoRight[0]}</span><span>${translations[lang].logoRight[1]}</span>`;
+        subheading.innerText = translations[lang].subheading;
+        notice.innerText = translations[lang].notice;
+        scheduleLabel1.innerText = translations[lang].scheduleLabel1;
+        julyLabel.innerText = translations[lang].julyLabel;
+        augustLabel.innerText = translations[lang].augustLabel;
+        scheduleJuly.innerHTML = translations[lang].scheduleJuly.map(x=>`<li>${x}</li>`).join('');
+        scheduleAugust.innerHTML = translations[lang].scheduleAugust.map(x=>`<li>${x}</li>`).join('');
+        footer.innerHTML = translations[lang].footer;
+      } else if (lang === 'by' || lang === 'ua') {
+        [logoLeft, logoRight, subheading, notice, scheduleLabel1, julyLabel, augustLabel, scheduleJuly, scheduleAugust, footer].forEach(e => e.style.display = 'none');
+        byUaPlug.style.display = 'block';
+        byUaPlug.innerText = translations[lang].plug;
       }
-      if(lang==='fr') {
-        document.querySelectorAll('.fr-schedule').forEach(e=>e.style.display='block');
-        document.querySelectorAll('.fr').forEach(e=>e.style.display='block');
-        document.querySelectorAll('.schedule-month').forEach(e=>e.innerText='JUILLET');
-        document.querySelectorAll('.schedule-label')[1].innerText='AOÛT';
-      }
-      // by и ua пока не реализовано
     }
-    langSwitchers.forEach(s=>{
-      s.onclick=()=>showLang(s.dataset.lang);
+
+    langSwitchers.forEach(s => {
+      s.onclick = () => setLang(s.dataset.lang);
     });
+
     // По умолчанию русский
-    showLang('ru');
+    setLang('ru');
   </script>
 </body>
 </html>
