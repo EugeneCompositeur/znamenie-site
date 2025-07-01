@@ -1,32 +1,60 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Храм Знамения Пресвятой Богородицы в Париже</title>
-  <link rel="icon" href="assets/icon.gif" type="image/gif">
-  <link rel="shortcut icon" href="assets/icon.gif" type="image/gif">
-  <link href="https://fonts.googleapis.com/css2?family=Forum&family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/icon.gif" type="image/gif" />
+  <link href="https://fonts.googleapis.com/css2?family=Forum&family=Open+Sans&family=Roboto+Mono&display=swap" rel="stylesheet" />
   <style>
     body {
       margin: 0;
       padding: 0;
-      background: #fdfaf5;
+      background: #dcd1b7;
       font-family: 'Open Sans', sans-serif;
       color: #2f2f2f;
       text-align: center;
+      position: relative;
     }
     .overlay {
       padding: 2em;
       max-width: 960px;
       margin: auto;
       margin-top: 5vh;
+      position: relative;
+    }
+    .lang-switch {
+      position: absolute;
+      top: 1em;
+      right: 1em;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.9em;
+      user-select: none;
+      display: flex;
+      gap: 0.8em;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+    }
+    .lang-switch span {
+      cursor: pointer;
+      color: #666;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    .lang-switch span.active {
+      color: #2f2f2f;
+      font-weight: 700;
+    }
+    .lang-switch span:hover {
+      color: #a2906f;
     }
     header {
       display: flex;
       flex-direction: column;
       align-items: center;
       margin-bottom: 2em;
+      position: relative;
     }
     .logo-block {
       display: flex;
@@ -62,24 +90,49 @@
       font-family: 'Forum', serif;
     }
     .notice {
+      font-family: 'Roboto Mono', monospace;
       font-size: 3em;
       margin: 2em 0;
-      font-weight: bold;
-      font-family: 'Forum', serif;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      color: #222;
+      user-select: none;
     }
     .schedule {
       text-align: left;
       background: #fff;
-      border: 1px solid #ccc;
       padding: 1.5em;
       border-radius: 5px;
       font-size: 1em;
+      position: relative;
+      margin: 0 auto 3em auto;
+      max-width: 600px;
     }
-    .schedule-label, .schedule-month {
-      font-size: 3em;
+    .schedule::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      border: 3px double #a2906f;
+      pointer-events: none;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    .schedule-label {
+      font-size: 1.5em;
       font-family: 'Forum', serif;
       font-weight: bold;
       text-align: center;
+      margin: 1em 0 0 0;
+    }
+    .schedule-month {
+      font-size: 1.5em;
+      font-family: 'Forum', serif;
+      font-weight: bold;
+      text-align: center;
+      margin: 2em 0 1.5em 0; /* совпадает с margin-top:2em у августа */
     }
     .footer {
       margin-top: 2em;
@@ -97,18 +150,32 @@
       .logo-text.left, .logo-text.right {
         text-align: center;
       }
+      .lang-switch {
+        top: auto;
+        bottom: 1em;
+        right: 50%;
+        transform: translateX(50%);
+      }
     }
   </style>
 </head>
 <body>
   <div class="overlay">
+
+    <div class="lang-switch" role="group" aria-label="Переключение языков">
+      <span class="active" data-lang="ru">RU</span>
+      <span data-lang="fr">FR</span>
+      <span data-lang="by">BY</span>
+      <span data-lang="ua">UA</span>
+    </div>
+
     <header>
       <div class="logo-block">
         <div class="logo-text left">
           <span>Храм</span>
           <span>Знамения</span>
         </div>
-        <img src="assets/icon.gif" alt="Икона Богородицы">
+        <img src="assets/icon.gif" alt="Икона Богородицы" />
         <div class="logo-text right">
           <span>Пресвятой</span>
           <span>Богородицы</span>
@@ -119,28 +186,78 @@
       </div>
     </header>
 
-    <div class="notice">
-      Сайт в разработке
-    </div>
+    <div class="notice">Сайт в разработке</div>
 
     <div class="schedule">
-      <div class="schedule-label">Расписание 2025</div>
+      <div class="schedule-label">Расписание богослужений</div>
       <div class="schedule-month">ИЮЛЬ</div>
-      <ul>
-        <li><strong>7 июля, воскресенье, 10:00</strong> — Божественная литургия (Неделя 3-я по Пятидесятнице)</li>
+      <ul class="ru-schedule">
+        <li><strong>7 июля, воскресенье, 10:30</strong> — Божественная литургия (Неделя 3-я по Пятидесятнице)</li>
         <li><strong>12 июля, пятница, 18:00</strong> — Вечерня. Память святых апостолов Петра и Павла</li>
-        <li><strong>14 июля, воскресенье, 10:00</strong> — Литургия. Неделя 4-я по Пятидесятнице</li>
-        <li><strong>21 июля, воскресенье, 10:00</strong> — Литургия. Неделя 5-я по Пятидесятнице</li>
+        <li><strong>14 июля, воскресенье, 10:30</strong> — Литургия. Неделя 4-я по Пятидесятнице</li>
+        <li><strong>21 июля, воскресенье, 10:30</strong> — Литургия. Неделя 5-я по Пятидесятнице</li>
         <li><strong>27 июля, суббота, 18:00</strong> — Всенощное бдение</li>
-        <li><strong>28 июля, воскресенье, 10:00</strong> — Литургия. Неделя 6-я по Пятидесятнице</li>
+        <li><strong>28 июля, воскресенье, 10:30</strong> — Литургия. Неделя 6-я по Пятидесятнице</li>
       </ul>
+      <div class="schedule-label" style="margin-top:2em;">АВГУСТ</div>
+      <ul class="ru-schedule">
+        <li><strong>4 августа, воскресенье, 10:30</strong> — Божественная литургия</li>
+        <li><strong>11 августа, воскресенье, 10:30</strong> — Литургия</li>
+        <li><strong>18 августа, воскресенье, 10:30</strong> — Литургия</li>
+        <li><strong>25 августа, воскресенье, 10:30</strong> — Литургия</li>
+      </ul>
+      <!-- Здесь появятся другие языковые блоки -->
+      <ul class="fr-schedule" style="display:none;">
+        <li><strong>7 juillet, dimanche, 10:30</strong> — Divine Liturgie (3e semaine après la Pentecôte)</li>
+        <li><strong>12 juillet, vendredi, 18:00</strong> — Vêpres. Mémoire des saints apôtres Pierre et Paul</li>
+        <li><strong>14 juillet, dimanche, 10:30</strong> — Liturgie. 4e semaine après la Pentecôte</li>
+        <li><strong>21 juillet, dimanche, 10:30</strong> — Liturgie. 5e semaine après la Pentecôte</li>
+        <li><strong>27 juillet, samedi, 18:00</strong> — Vigile nocturne</li>
+        <li><strong>28 juillet, dimanche, 10:30</strong> — Liturgie. 6e semaine après la Pentecôte</li>
+      </ul>
+      <div class="schedule-label fr" style="margin-top:2em; display:none;">AOÛT</div>
+      <ul class="fr-schedule" style="display:none;">
+        <li><strong>4 août, dimanche, 10:30</strong> — Divine liturgie</li>
+        <li><strong>11 août, dimanche, 10:30</strong> — Liturgie</li>
+        <li><strong>18 août, dimanche, 10:30</strong> — Liturgie</li>
+        <li><strong>25 août, dimanche, 10:30</strong> — Liturgie</li>
+      </ul>
+      <!-- Можно добавить by-schedule и ua-schedule -->
     </div>
 
     <div class="footer">
-      87, boulevard Exelmans, Paris 75016<br>
-      Métro: Exelmans (ligne 9)<br>
+      87, boulevard Exelmans, Paris 75016<br />
+      Métro: Exelmans (ligne 9)<br />
       ✉️ <a href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>
     </div>
   </div>
+  <script>
+    const langSwitchers = document.querySelectorAll('.lang-switch span');
+    function showLang(lang) {
+      // Удалить active со всех
+      langSwitchers.forEach(s=>s.classList.remove('active'));
+      // Добавить active к выбранному
+      document.querySelector('.lang-switch span[data-lang="'+lang+'"').classList.add('active');
+      // Скрыть все блоки
+      document.querySelectorAll('.ru-schedule,.fr-schedule,.fr').forEach(e=>e.style.display='none');
+      if(lang==='ru') {
+        document.querySelectorAll('.ru-schedule').forEach(e=>e.style.display='block');
+        document.querySelectorAll('.schedule-month').forEach(e=>e.innerText='ИЮЛЬ');
+        document.querySelectorAll('.schedule-label')[1].innerText='АВГУСТ';
+      }
+      if(lang==='fr') {
+        document.querySelectorAll('.fr-schedule').forEach(e=>e.style.display='block');
+        document.querySelectorAll('.fr').forEach(e=>e.style.display='block');
+        document.querySelectorAll('.schedule-month').forEach(e=>e.innerText='JUILLET');
+        document.querySelectorAll('.schedule-label')[1].innerText='AOÛT';
+      }
+      // by и ua пока не реализовано
+    }
+    langSwitchers.forEach(s=>{
+      s.onclick=()=>showLang(s.dataset.lang);
+    });
+    // По умолчанию русский
+    showLang('ru');
+  </script>
 </body>
 </html>
