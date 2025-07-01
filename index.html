@@ -99,7 +99,7 @@
       font-size: 3em;
       margin: 2em 0;
       font-weight: 900;
-      letter-spacing: 0.02em; /* уменьшено! */
+      letter-spacing: 0.02em;
       color: #222;
       user-select: none;
     }
@@ -147,7 +147,11 @@
     .schedule ul {
       margin-top: 0;
       margin-bottom: 0;
-      padding-left: 1.2em;
+      padding-left: 1.7em;    /* сильнее отступаем от края */
+      padding-bottom: 1.5em;  /* дополнительный отступ после последней строки! */
+    }
+    .schedule ul li {
+      text-indent: 0.9em;     /* абзац для каждой строки расписания */
     }
     .footer {
       margin-top: 2em;
