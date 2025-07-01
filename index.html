@@ -147,11 +147,11 @@
     .schedule ul {
       margin-top: 0;
       margin-bottom: 0;
-      padding-left: 1.7em;    /* сильнее отступаем от края */
-      padding-bottom: 1.5em;  /* дополнительный отступ после последней строки! */
+      padding-left: 1.7em;
+      padding-bottom: 1.5em;
     }
     .schedule ul li {
-      text-indent: 0.9em;     /* абзац для каждой строки расписания */
+      text-indent: 0.9em;
     }
     .footer {
       margin-top: 2em;
@@ -225,10 +225,18 @@
         <li><strong>18 августа, воскресенье, 10:30</strong> — Литургия</li>
         <li><strong>25 августа, воскресенье, 10:30</strong> — Литургия</li>
       </ul>
-      <!-- BY/UA будут позже -->
-      <div class="by-ua-plug" style="display:none; text-align:center; margin:2em 0; color:#a2906f; font-size:1.1em;">
-        Расписание на выбранном языке появится скоро.
-      </div>
+      <div class="schedule-month" id="july-label-fr" style="display:none;"></div>
+      <ul id="schedule-july-fr" style="display:none;"></ul>
+      <div class="schedule-month" id="august-label-fr" style="display:none;"></div>
+      <ul id="schedule-august-fr" style="display:none;"></ul>
+      <div class="schedule-month" id="july-label-by" style="display:none;"></div>
+      <ul id="schedule-july-by" style="display:none;"></ul>
+      <div class="schedule-month" id="august-label-by" style="display:none;"></div>
+      <ul id="schedule-august-by" style="display:none;"></ul>
+      <div class="schedule-month" id="july-label-ua" style="display:none;"></div>
+      <ul id="schedule-july-ua" style="display:none;"></ul>
+      <div class="schedule-month" id="august-label-ua" style="display:none;"></div>
+      <ul id="schedule-august-ua" style="display:none;"></ul>
     </div>
 
     <div class="footer" id="footer">
@@ -289,10 +297,52 @@
         footer: `87, boulevard Exelmans, Paris 75016<br />Métro : Exelmans (ligne 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`,
       },
       by: {
-        plug: "Расписание на выбранном языке появится скоро."
+        logoLeft: ["Храм", "Знамені"],
+        logoRight: ["Прасвятой", "Багародзіцы"],
+        subheading: "Вікарыят імя Святых Марыі Парыжскай і Аляксея Югінскага — Сусветны Патрыярхат",
+        notice: "Сайт у распрацоўцы",
+        scheduleLabel1: "Расклад набажэнстваў",
+        julyLabel: "ЛІПЕНЬ",
+        scheduleJuly: [
+          "<strong>7 ліпеня, нядзеля, 10:30</strong> — Боская літургія (3-я нядзеля пасля Пяцідзясятніцы)",
+          "<strong>12 ліпеня, пятніца, 18:00</strong> — Вячэрня. Памяць святых апосталаў Пятра і Паўла",
+          "<strong>14 ліпеня, нядзеля, 10:30</strong> — Літургія. 4-я нядзеля пасля Пяцідзясятніцы",
+          "<strong>21 ліпеня, нядзеля, 10:30</strong> — Літургія. 5-я нядзеля пасля Пяцідзясятніцы",
+          "<strong>27 ліпеня, субота, 18:00</strong> — Усяночнае бдзенне",
+          "<strong>28 ліпеня, нядзеля, 10:30</strong> — Літургія. 6-я нядзеля пасля Пяцідзясятніцы"
+        ],
+        augustLabel: "ЖНІВЕНЬ",
+        scheduleAugust: [
+          "<strong>4 жніўня, нядзеля, 10:30</strong> — Боская літургія",
+          "<strong>11 жніўня, нядзеля, 10:30</strong> — Літургія",
+          "<strong>18 жніўня, нядзеля, 10:30</strong> — Літургія",
+          "<strong>25 жніўня, нядзеля, 10:30</strong> — Літургія"
+        ],
+        footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (лінія 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
       },
       ua: {
-        plug: "Розклад на вибраній мові з’явиться незабаром."
+        logoLeft: ["Храм", "Знамення"],
+        logoRight: ["Пресвятої", "Богородиці"],
+        subheading: "Вікаріат імені Святих Марії Паризької та Олексія Южинського — Вселенський Патріархат",
+        notice: "Сайт у розробці",
+        scheduleLabel1: "Розклад богослужінь",
+        julyLabel: "ЛИПЕНЬ",
+        scheduleJuly: [
+          "<strong>7 липня, неділя, 10:30</strong> — Божественна літургія (3-я неділя після П’ятидесятниці)",
+          "<strong>12 липня, п’ятниця, 18:00</strong> — Вечірня. Пам’ять святих апостолів Петра і Павла",
+          "<strong>14 липня, неділя, 10:30</strong> — Літургія. 4-та неділя після П’ятидесятниці",
+          "<strong>21 липня, неділя, 10:30</strong> — Літургія. 5-та неділя після П’ятидесятниці",
+          "<strong>27 липня, субота, 18:00</strong> — Всенічне бдіння",
+          "<strong>28 липня, неділя, 10:30</strong> — Літургія. 6-та неділя після П’ятидесятниці"
+        ],
+        augustLabel: "СЕРПЕНЬ",
+        scheduleAugust: [
+          "<strong>4 серпня, неділя, 10:30</strong> — Божественна літургія",
+          "<strong>11 серпня, неділя, 10:30</strong> — Літургія",
+          "<strong>18 серпня, неділя, 10:30</strong> — Літургія",
+          "<strong>25 серпня, неділя, 10:30</strong> — Літургія"
+        ],
+        footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (лінія 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
       }
     };
 
@@ -307,31 +357,21 @@
     const scheduleJuly = document.getElementById('schedule-july');
     const scheduleAugust = document.getElementById('schedule-august');
     const footer = document.getElementById('footer');
-    const byUaPlug = document.querySelector('.by-ua-plug');
 
     function setLang(lang) {
       langSwitchers.forEach(s => s.classList.remove('active'));
       document.querySelector(`.lang-switch span[data-lang="${lang}"]`).classList.add('active');
 
-      if (lang === 'ru' || lang === 'fr') {
-        [logoLeft, logoRight, subheading, notice, scheduleLabel1, julyLabel, augustLabel, scheduleJuly, scheduleAugust, footer].forEach(e => e.style.display = '');
-        byUaPlug.style.display = 'none';
-
-        logoLeft.innerHTML = `<span>${translations[lang].logoLeft[0]}</span><span>${translations[lang].logoLeft[1]}</span>`;
-        logoRight.innerHTML = `<span>${translations[lang].logoRight[0]}</span><span>${translations[lang].logoRight[1]}</span>`;
-        subheading.innerText = translations[lang].subheading;
-        notice.innerText = translations[lang].notice;
-        scheduleLabel1.innerText = translations[lang].scheduleLabel1;
-        julyLabel.innerText = translations[lang].julyLabel;
-        augustLabel.innerText = translations[lang].augustLabel;
-        scheduleJuly.innerHTML = translations[lang].scheduleJuly.map(x=>`<li>${x}</li>`).join('');
-        scheduleAugust.innerHTML = translations[lang].scheduleAugust.map(x=>`<li>${x}</li>`).join('');
-        footer.innerHTML = translations[lang].footer;
-      } else if (lang === 'by' || lang === 'ua') {
-        [logoLeft, logoRight, subheading, notice, scheduleLabel1, julyLabel, augustLabel, scheduleJuly, scheduleAugust, footer].forEach(e => e.style.display = 'none');
-        byUaPlug.style.display = 'block';
-        byUaPlug.innerText = translations[lang].plug;
-      }
+      logoLeft.innerHTML = `<span>${translations[lang].logoLeft[0]}</span><span>${translations[lang].logoLeft[1]}</span>`;
+      logoRight.innerHTML = `<span>${translations[lang].logoRight[0]}</span><span>${translations[lang].logoRight[1]}</span>`;
+      subheading.innerText = translations[lang].subheading;
+      notice.innerText = translations[lang].notice;
+      scheduleLabel1.innerText = translations[lang].scheduleLabel1;
+      julyLabel.innerText = translations[lang].julyLabel;
+      augustLabel.innerText = translations[lang].augustLabel;
+      scheduleJuly.innerHTML = translations[lang].scheduleJuly.map(x=>`<li>${x}</li>`).join('');
+      scheduleAugust.innerHTML = translations[lang].scheduleAugust.map(x=>`<li>${x}</li>`).join('');
+      footer.innerHTML = translations[lang].footer;
     }
 
     langSwitchers.forEach(s => {
