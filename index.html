@@ -367,8 +367,16 @@
       scheduleLabel1.innerText = translations[lang].scheduleLabel1;
       currentLabel.innerText = translations[lang].currentLabel;
       nextLabel.innerText = translations[lang].nextLabel;
-      scheduleCurrent.innerHTML = translations[lang].scheduleCurrent.map(x=>`<li>${x}</li>`).join('');
-      scheduleNext.innerHTML = translations[lang].scheduleNext.map(x=>`<li>${x}</li>`).join('');
+      scheduleCurrent.innerHTML = translations[lang].scheduleCurrent.map(x =>
+  x.startsWith("__custom__")
+    ? x.replace("__custom__", "")
+    : `<li>${x}</li>`
+).join('');
+      scheduleNext.innerHTML = translations[lang].scheduleNext.map(x =>
+  x.startsWith("__custom__")
+    ? x.replace("__custom__", "")
+    : `<li>${x}</li>`
+).join('');
       footer.innerHTML = translations[lang].footer;
     }
 
