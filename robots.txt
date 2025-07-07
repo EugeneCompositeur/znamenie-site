@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://znamenie.fr/sitemap.xml
