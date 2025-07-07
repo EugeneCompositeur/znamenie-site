@@ -237,8 +237,177 @@
     </div>
   </div>
   <script>
-    // ... остальной код без изменений ...
-    // Сюда вставляется твой JavaScript translations + setLang (без изменений)
+    const translations = {
+      ru: {
+        logoLeft: ["Храм", "Знамения"],
+        logoRight: ["Пресвятой", "Богородицы"],
+        subheading: "Викариат имени Святых Марии Парижской и Алексия Южинского — Вселенский Патриархат",
+        notice: "Сайт в разработке",
+        scheduleLabel1: "Расписание богослужений",
+        currentLabel: "ИЮЛЬ",
+        scheduleCurrent: [
+          "<strong>5 суббота, 18:00</strong>&nbsp;&ndash; Всенощная (Неделя 4-я по Пятидесятнице) Глас 3-й",
+          "<strong>6 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия (Владимирской иконы Божией Матери)",
+          "<strong>7 понедельник, 10:00</strong>&nbsp;&ndash; Литургия (Рождество Крестителя Господня Иоанна)",
+          "<strong>12 суббота, 10:00</strong>&nbsp;&ndash; Литургия (Святых апостолов Петра и Павла)",
+          "<strong>12 суббота, 18:00</strong>&nbsp;&ndash; Всенощная (Неделя 5-я по Пятидесятнице) Глас 4-й",
+          "<strong>13 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия (Собор Святых 12-ти апостолов)",
+          "<strong>19 суббота, 18:00</strong>&nbsp;&ndash; Всенощная (Неделя 6-я по Пятидесятнице) Глас 5-й",
+          "<strong>20 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия (Прп. Евдокии, вел. кн. Московской)",
+          "<strong>26 суббота, 18:00</strong>&nbsp;&ndash; Всенощная (Неделя 7-я по Пятидесятнице) Глас 6-й",
+          "<strong>27 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия (Свв. отцов шести Вселенских Соборов)",
+          "<strong>28 понедельник, 10:00</strong>&nbsp;&ndash; Литургия (Св. Великого Князя Владимира)"
+        ],
+        nextLabel: "АВГУСТ",
+        scheduleNext: [
+          "<strong>16 суббота, 18:00</strong>&nbsp;&ndash; Всенощная (Неделя 10-я по Пятидесятнице) Глас 1-й",
+          "<strong>17 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия (Свв. семи отроков, иже во Ефесе)",
+          "<strong>18 понедельник, 18:00</strong>&nbsp;&ndash; Всенощная (Преображение Господне)",
+          "<strong>19 вторник, 10:00</strong>&nbsp;&ndash; Литургия/Освящение воды и фруктов (Преображение Господне&nbsp;&ndash; Второй Спас)",
+          "__custom__<div style='text-align:center; color:#b7523b; font-weight:bold; margin:0.7em 0;'>Храм закрывается до Успения</div>",
+          "<strong>27 среда, 18:00</strong>&nbsp;&ndash; Всенощная (Успение Пресвятой Богородицы)",
+          "<strong>28 четверг, 10:00</strong>&nbsp;&ndash; Литургия (Успение Пресвятой Богородицы)"
+        ],
+        footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (ligne 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
+      },
+      fr: {
+        logoLeft: ["Église", "Orthodoxe"],
+        logoRight: ["Notre-Dame", "du Signe"],
+        subheading: "Vicariat Sainte-Marie-de-Paris et Saint-Alexis-d’Ugine – Patriarcat Œcuménique",
+        notice: "Site en développement",
+        scheduleLabel1: "Horaires des offices",
+        currentLabel: "JUILLET",
+        scheduleCurrent: [
+          "<strong>5 samedi, 18:00</strong>&nbsp;&ndash; Vigiles (4<sup>ème</sup>&nbsp;Dimanche après la&nbsp;Pentecôte) 3<sup>ème</sup>&nbsp;ton",
+          "<strong>6 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie (Icône de&nbsp;la&nbsp;Sainte Mère de&nbsp;Dieu de&nbsp;Vladimir)",
+          "<strong>7 lundi, 10:00</strong>&nbsp;&ndash; Liturgie (Naissance de&nbsp;Saint-Jean Baptiste)",
+          "<strong>12 samedi, 10:00</strong>&nbsp;&ndash; Liturgie (Saints Pierre &&nbsp;Paul)",
+          "<strong>12 samedi, 18:00</strong>&nbsp;&ndash; Vigiles (5<sup>ème</sup>&nbsp;Dimanche après la&nbsp;Pentecôte) 4<sup>ème</sup>&nbsp;ton",
+          "<strong>13 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie (Synaxe des 12&nbsp;apôtres)",
+          "<strong>19 samedi, 18:00</strong>&nbsp;&ndash; Vigiles (6<sup>ème</sup>&nbsp;Dimanche après la&nbsp;Pentecôte) 5<sup>ème</sup>&nbsp;ton",
+          "<strong>20 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie (Sainte Eudoxie, princesse de&nbsp;Souzdal)",
+          "<strong>26 samedi, 18:00</strong>&nbsp;&ndash; Vigiles (7<sup>ème</sup>&nbsp;Dimanche après la&nbsp;Pentecôte) 6<sup>ème</sup>&nbsp;ton",
+          "<strong>27 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie (Saints Pères des six Conciles Œcuméniques)",
+          "<strong>28 lundi, 10:00</strong>&nbsp;&ndash; Liturgie (Saint Vladimir, égal aux Apôtres)"
+        ],
+        nextLabel: "AOÛT",
+        scheduleNext: [
+          "<strong>16 samedi, 18:00</strong>&nbsp;&ndash; Vigiles (10<sup>ème</sup>&nbsp;Dimanche après la&nbsp;Pentecôte) 1<sup>er</sup>&nbsp;ton",
+          "<strong>17 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie (Sept dormants d’Ephèse)",
+          "<strong>18 lundi, 18:00</strong>&nbsp;&ndash; Vigiles (Transfiguration de&nbsp;N.S.&nbsp;Jésus-Christ)",
+          "<strong>19 mardi, 10:00</strong>&nbsp;&ndash; Liturgie de&nbsp;la&nbsp;Transfiguration de&nbsp;N.S.&nbsp;Jésus-Christ (Bénédiction de&nbsp;l’eau et&nbsp;des fruits)",
+          "__custom__<div style='text-align:center; color:#b7523b; font-weight:bold; margin:0.7em 0;'> Pas d’office jusqu’à la&nbsp;Dormition </div>",
+          "<strong>27 mercredi, 18:00</strong>&nbsp;&ndash; Vigiles (de&nbsp;la&nbsp;Dormition)",
+          "<strong>28 jeudi, 10:00</strong>&nbsp;&ndash; Liturgie (de&nbsp;la&nbsp;Dormition de&nbsp;la&nbsp;Très Sainte Mère de&nbsp;Dieu)"
+        ],
+        footer: `87, boulevard Exelmans, Paris 75016<br />Métro : Exelmans (ligne 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
+      },
+      by: {
+        logoLeft: ["Храм", "Знамення"],
+        logoRight: ["Прасвятой", "Багародзіцы"],
+        subheading: "Вікарыят імені Святых Марыі Парыжскай і Аляксея Южынскага — Сусветны Патрыярхат",
+        notice: "Сайт у распрацоўцы",
+        scheduleLabel1: "Расклад набажэнстваў",
+        currentLabel: "ЛІПЕНЬ",
+        scheduleCurrent: [
+          "<strong>5 субота, 18:00</strong>&nbsp;&ndash; Усяночная<br>Тыдзень 4-ы пасля Пяцідзясятніцы&nbsp;&ndash; Тон 3-ці",
+          "<strong>6 нядзеля, 10:30</strong>&nbsp;&ndash; Літургія<br>Уладзімірскай іконы Божай Маці",
+          "<strong>7 панядзелак, 10:00</strong>&nbsp;&ndash; Літургія<br>Нараджэнне Хрысціцеля Гасподняга Яна",
+          "<strong>12 субота, 10:00</strong>&nbsp;&ndash; Літургія<br>Святых Пятра і Паўла",
+          "<strong>12 субота, 18:00</strong>&nbsp;&ndash; Усяночная<br>Тыдзень 5-ы пасля Пяцідзясятніцы&nbsp;&ndash; Тон 4-ты",
+          "<strong>13 нядзеля, 10:30</strong>&nbsp;&ndash; Літургія<br>Сабор Святых 12-ці апосталаў",
+          "<strong>19 субота, 18:00</strong>&nbsp;&ndash; Усяночная<br>Тыдзень 6-ы пасля Пяцідзясятніцы&nbsp;&ndash; Тон 5-ты",
+          "<strong>20 нядзеля, 10:30</strong>&nbsp;&ndash; Літургія<br>Прп. Еўдокіі, вял. княгіні Маскоўскай",
+          "<strong>27 субота, 18:00</strong>&nbsp;&ndash; Усяночная<br>Тыдзень 7-ы пасля Пяцідзясятніцы&nbsp;&ndash; Тон 6-ты",
+          "<strong>27 нядзеля, 10:30</strong>&nbsp;&ndash; Літургія<br>Святых айцоў шасці Сусветных Сабораў",
+          "<strong>28 панядзелак, 10:00</strong>&nbsp;&ndash; Літургія<br>Св. Вялікага Князя Уладзіміра"
+        ],
+        nextLabel: "ЖНІВЕНЬ",
+        scheduleNext: [
+          "<strong>16 субота, 18:00</strong>&nbsp;&ndash; Усяночная<br>Тыдзень 10-ы пасля Пяцідзясятніцы&nbsp;&ndash; Тон 1-шы",
+          "<strong>17 нядзеля, 10:30</strong>&nbsp;&ndash; Літургія<br>Святых сямі юнакоў, што былі ў&nbsp;Эфесе",
+          "<strong>18 панядзелак, 18:00</strong>&nbsp;&ndash; Усяночная<br>Пераяўленне Гасподняе",
+          "<strong>19 аўторак, 10:00</strong>&nbsp;&ndash; Літургія, асвячэнне вады і пладоў<br>Пераяўленне Гасподняе&nbsp;&ndash; Другі Спас",
+          "__custom__<div style='text-align:center; color:#b7523b; font-weight:bold; margin:0.7em 0;'> Храм зачыняецца да Успення</div>",
+          "<strong>27 серада, 18:00</strong>&nbsp;&ndash; Усяночная<br>Успенне Прасвятой Багародзіцы",
+          "<strong>28 чацвер, 10:00</strong>&nbsp;&ndash; Літургія<br>Успенне Прасвятой Багародзіцы"
+        ],
+        footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (лінія 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
+      },
+      ua: {
+        logoLeft: ["Храм", "Знамення"],
+        logoRight: ["Пресвятої", "Богородиці"],
+        subheading: "Вікаріат імені Святих Марії Паризької та Олексія Южинського — Вселенський Патріархат",
+        notice: "Сайт у розробці",
+        scheduleLabel1: "Розклад богослужінь",
+        currentLabel: "ЛИПЕНЬ",
+        scheduleCurrent: [
+          "<strong>5 субота, 18:00</strong>&nbsp;&ndash; Всеношна (Неділя 4-та після П’ятидесятниці) Глас 3-й",
+          "<strong>6 неділя, 10:30</strong>&nbsp;&ndash; Літургія (Володимирської ікони Божої Матері)",
+          "<strong>7 понеділок, 10:00</strong>&nbsp;&ndash; Літургія (Різдво Іоанна Хрестителя)",
+          "<strong>12 субота, 10:00</strong>&nbsp;&ndash; Літургія (Святих апостолів Петра і Павла)",
+          "<strong>12 субота, 18:00</strong>&nbsp;&ndash; Всеношна (Неділя 5-та після П’ятидесятниці) Глас 4-й",
+          "<strong>13 неділя, 10:30</strong>&nbsp;&ndash; Літургія (Собор 12-ти святих апостолів)",
+          "<strong>19 субота, 18:00</strong>&nbsp;&ndash; Всеношна (Неділя 6-та після П’ятидесятниці) Глас 5-й",
+          "<strong>20 неділя, 10:30</strong>&nbsp;&ndash; Літургія (Прп. Євдокії, вел. кн. Московської)",
+          "<strong>27 субота, 18:00</strong>&nbsp;&ndash; Всеношна (Неділя 7-ма після П’ятидесятниці) Глас 6-й",
+          "<strong>27 неділя, 10:30</strong>&nbsp;&ndash; Літургія (Святих отців шести Вселенських Соборів)",
+          "<strong>28 понеділок, 10:00</strong>&nbsp;&ndash; Літургія (Св. Великого Князя Володимира)"
+        ],
+        nextLabel: "СЕРПЕНЬ",
+        scheduleNext: [
+          "<strong>16 субота, 18:00</strong>&nbsp;&ndash; Всеношна (Неділя 10-та після П’ятидесятниці) Глас 1-й",
+          "<strong>17 неділя, 10:30</strong>&nbsp;&ndash; Літургія (Семи отроків, що у Ефесі)",
+          "<strong>18 понеділок, 18:00</strong>&nbsp;&ndash; Всеношна (Преображення Господнє)",
+          "<strong>19 вівторок, 10:00</strong>&nbsp;&ndash; Літургія, освячення води та плодів (Преображення Господнє&nbsp;&ndash; Другий Спас)",
+          "__custom__<div style='text-align:center; color:#b7523b; font-weight:bold; margin:0.7em 0;'> Храм зачиняється до Успіння</div>",
+          "<strong>27 середа, 18:00</strong>&nbsp;&ndash; Всеношна (Успіння Пресвятої Богородиці)",
+          "<strong>28 четвер, 10:00</strong>&nbsp;&ndash; Літургія (Успіння Пресвятої Богородиці)"
+        ],
+        footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (лінія 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
+      }
+    };
+
+    const langSwitchers = document.querySelectorAll('.lang-switch span');
+    const logoLeft = document.getElementById('logo-left');
+    const logoRight = document.getElementById('logo-right');
+    const subheading = document.getElementById('subheading');
+    const notice = document.getElementById('notice');
+    const scheduleLabel1 = document.getElementById('schedule-label-1');
+    const currentLabel = document.getElementById('current-label');
+    const nextLabel = document.getElementById('next-label');
+    const scheduleCurrent = document.getElementById('schedule-current');
+    const scheduleNext = document.getElementById('schedule-next');
+    const footer = document.getElementById('footer');
+
+    function setLang(lang) {
+      langSwitchers.forEach(s => s.classList.remove('active'));
+      document.querySelector(`.lang-switch span[data-lang="${lang}"]`).classList.add('active');
+      logoLeft.innerHTML = `<span>${translations[lang].logoLeft[0]}</span><span>${translations[lang].logoLeft[1]}</span>`;
+      logoRight.innerHTML = `<span>${translations[lang].logoRight[0]}</span><span>${translations[lang].logoRight[1]}</span>`;
+      subheading.innerText = translations[lang].subheading;
+      notice.innerText = translations[lang].notice;
+      scheduleLabel1.innerText = translations[lang].scheduleLabel1;
+      currentLabel.innerText = translations[lang].currentLabel;
+      nextLabel.innerText = translations[lang].nextLabel;
+      scheduleCurrent.innerHTML = translations[lang].scheduleCurrent.map(x =>
+        x.startsWith("__custom__")
+          ? x.replace("__custom__", "")
+          : `<li>${x}</li>`
+      ).join('');
+      scheduleNext.innerHTML = translations[lang].scheduleNext.map(x =>
+        x.startsWith("__custom__")
+          ? x.replace("__custom__", "")
+          : `<li>${x}</li>`
+      ).join('');
+      footer.innerHTML = translations[lang].footer;
+    }
+
+    langSwitchers.forEach(s => {
+      s.onclick = () => setLang(s.dataset.lang);
+    });
+
+    setLang('ru');
   </script>
 </body>
 </html>
