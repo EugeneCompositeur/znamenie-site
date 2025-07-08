@@ -172,6 +172,12 @@
     }
     .schedule ul li {
       text-indent: 0.9em;
+      transition: color 0.5s, opacity 0.5s;
+    }
+    .schedule ul li.past {
+      color: #b2b2b2 !important;
+      opacity: 0.8;
+      text-decoration: line-through;
     }
     .footer {
       margin-top: 2em;
@@ -189,7 +195,6 @@
       .logo-text.left, .logo-text.right {
         text-align: center;
       }
-      /* .lang-switch не переезжает вниз! */
     }
   </style>
 </head>
@@ -237,6 +242,7 @@
     </div>
   </div>
   <script>
+    // --- ПОЛНЫЙ translations, четыре языка, как обычно ---
     const translations = {
       ru: {
         logoLeft: ["Храм", "Знамения"],
@@ -380,6 +386,45 @@
     const scheduleNext = document.getElementById('schedule-next');
     const footer = document.getElementById('footer');
 
+    // --- Автоматическое "серение" по дате и времени ---
+    function parseDateTime(text, monthLabel) {
+      // Пример: "<strong>5 суббота, 18:00</strong>..." → [5, 18, 0]
+      // monthLabel: ИЮЛЬ / АВГУСТ и т.п.
+      const months = {
+        'ЯНВАРЬ': 0, 'ФЕВРАЛЬ': 1, 'МАРТ': 2, 'АПРЕЛЬ': 3, 'МАЙ': 4, 'ИЮНЬ': 5, 'ИЮЛЬ': 6, 'АВГУСТ': 7,
+        'СЕНТЯБРЬ': 8, 'ОКТЯБРЬ': 9, 'НОЯБРЬ': 10, 'ДЕКАБРЬ': 11,
+        'JANVIER': 0, 'FÉVRIER': 1, 'MARS': 2, 'AVRIL': 3, 'MAI': 4, 'JUIN': 5, 'JUILLET': 6, 'AOÛT': 7,
+        'ЛІПЕНЬ': 6, 'ЖНІВЕНЬ': 7, 'ЛИПЕНЬ': 6, 'СЕРПЕНЬ': 7
+      };
+      // Получаем дату и время (находим <strong>....</strong>)
+      const m = text.match(/<strong>(\d+)[^\d]*(?:, )?(\d{1,2}):(\d{2})<\/strong>/i);
+      if (!m) return null;
+      let day = parseInt(m[1]);
+      let hour = parseInt(m[2]);
+      let minute = parseInt(m[3]);
+      // Определяем месяц (название блока)
+      let month = months[monthLabel.toUpperCase()] ?? new Date().getMonth();
+      // Год: если месяц < текущего месяца, значит, следующий год
+      let now = new Date();
+      let year = now.getFullYear();
+      if (month < now.getMonth() - 1) year += 1;
+      return new Date(year, month, day, hour, minute);
+    }
+
+    function renderSchedule(list, monthLabel) {
+      const now = new Date();
+      return list.map(text => {
+        if (text.startsWith("__custom__")) return text.replace("__custom__", "");
+        let dt = parseDateTime(text, monthLabel);
+        let isPast = false;
+        if (dt) {
+          // Серая, если прошло больше двух часов от времени службы
+          isPast = (now.getTime() - dt.getTime()) > 2 * 60 * 60 * 1000;
+        }
+        return `<li${isPast ? ' class="past"' : ''}>${text}</li>`;
+      }).join('');
+    }
+
     function setLang(lang) {
       langSwitchers.forEach(s => s.classList.remove('active'));
       document.querySelector(`.lang-switch span[data-lang="${lang}"]`).classList.add('active');
@@ -390,16 +435,8 @@
       scheduleLabel1.innerText = translations[lang].scheduleLabel1;
       currentLabel.innerText = translations[lang].currentLabel;
       nextLabel.innerText = translations[lang].nextLabel;
-      scheduleCurrent.innerHTML = translations[lang].scheduleCurrent.map(x =>
-        x.startsWith("__custom__")
-          ? x.replace("__custom__", "")
-          : `<li>${x}</li>`
-      ).join('');
-      scheduleNext.innerHTML = translations[lang].scheduleNext.map(x =>
-        x.startsWith("__custom__")
-          ? x.replace("__custom__", "")
-          : `<li>${x}</li>`
-      ).join('');
+      scheduleCurrent.innerHTML = renderSchedule(translations[lang].scheduleCurrent, translations[lang].currentLabel);
+      scheduleNext.innerHTML = renderSchedule(translations[lang].scheduleNext, translations[lang].nextLabel);
       footer.innerHTML = translations[lang].footer;
     }
 
