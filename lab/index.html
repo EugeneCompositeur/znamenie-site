@@ -5,190 +5,275 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Храм Знамения Пресвятой Богородицы в Париже</title>
   <link rel="icon" href="assets/icon.gif" type="image/gif" />
-  <link href="https://fonts.googleapis.com/css2?family=Forum&family=Open+Sans&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Forum&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bogoroditsa-blue: #1939A5;
-      --bogoroditsa-blue-dark: #16297d;
-      --page-bg: #f4ede1;
+      --schedule-bg: #1939A5;
+      --schedule-fg: #fff;
+      --transition: 0.3s cubic-bezier(.47,1.64,.41,.8);
     }
     body {
-      margin: 0;
-      padding: 0;
-      background: var(--page-bg);
+      margin: 0; padding: 0;
+      background: #f2ecdf;
       font-family: 'Open Sans', sans-serif;
       color: #222;
-      text-align: center;
     }
     .overlay {
-      padding: 2em 1em 0 1em;
       max-width: 1100px;
       margin: 0 auto;
+      padding: 0;
+      position: relative;
       min-height: 100vh;
     }
     .lang-switch {
       position: absolute;
-      top: 1.2em;
-      right: 2.2em;
+      top: 2.4em;
+      right: 3em;
       font-size: 1em;
-      display: flex;
-      gap: 0.7em;
-      z-index: 100;
+      display: flex; gap: 0.7em;
+      z-index: 99;
       font-family: 'Open Sans', sans-serif;
+      letter-spacing: 0.08em;
     }
     .lang-switch span {
       cursor: pointer;
-      color: #666;
-      font-weight: 500;
-      transition: color 0.2s;
-      letter-spacing: 0.1em;
+      color: #999;
+      font-weight: 600;
+      transition: color .2s;
     }
     .lang-switch span.active {
       color: var(--bogoroditsa-blue);
       font-weight: 700;
     }
-    .lang-switch span:hover {
-      color: var(--bogoroditsa-blue-dark);
-    }
+    /* --------- HEADER --------- */
     header {
-      margin-top: 1em;
+      text-align: center;
+      margin: 0;
+      margin-top: 2.5em;
       margin-bottom: 2em;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      position: relative;
     }
     .logo-block {
       display: flex;
-      flex-direction: row;
-      align-items: center;
       justify-content: center;
-      width: 100%;
-      gap: 1.5em;
-      margin-bottom: 0.7em;
+      align-items: flex-end;
+      gap: 2vw;
+      margin-bottom: 0.1em;
     }
     .logo-text {
+      display: flex;
+      flex-direction: column;
       font-family: 'Forum', serif;
+      color: var(--bogoroditsa-blue);
       font-size: 2.7em;
       font-weight: 400;
-      color: var(--bogoroditsa-blue);
-      line-height: 1.05;
-      letter-spacing: 0.02em;
-      white-space: pre-line;
+      line-height: 1;
+      letter-spacing: 0.01em;
       user-select: none;
     }
+    .logo-text span {
+      font-weight: 400;
+      font-size: 1em;
+      line-height: 1.06;
+    }
+    .logo-text.left {
+      text-align: right;
+      align-items: flex-end;
+      margin-right: 0.6em;
+      white-space: pre-line;
+    }
+    .logo-text.right {
+      text-align: left;
+      align-items: flex-start;
+      margin-left: 0.6em;
+      white-space: pre-line;
+    }
     .logo-block img {
-      height: 112px;
-      margin: 0 1.4em;
-      filter: drop-shadow(0 2px 18px #1939a512);
+      height: 108px;
+      margin: 0 0.3em;
+      filter: drop-shadow(0 2px 24px #1939a526);
+      display: block;
     }
     .subheading {
-      font-family: 'Forum', serif;
-      font-size: 1.07em;
-      margin-top: 0.7em;
-      margin-bottom: 0.5em;
-      color: #958d7a;
+      font-size: 1.1em;
+      margin-top: 1.1em;
+      color: #84745d;
       letter-spacing: 0.01em;
+      font-family: 'Forum', serif;
       font-weight: 400;
     }
 
-    /* РАСПИСАНИЕ (СИНЯЯ ПЛАШКА) */
-    .schedule-panel {
-      background: var(--bogoroditsa-blue);
-      color: #fff;
-      margin: 0 auto 2.3em auto;
-      max-width: 1000px;
-      text-align: left;
-      font-size: 1.19em;
-      cursor: pointer;
-      padding: 2.2em 2.2em 1.3em 3.7em;
+    /* --- SCHEDULE PANEL --- */
+    .schedule-panel-wrap {
+      width: 100vw;
       position: relative;
-      transition: background 0.19s;
-      border-radius: 0; /* Без скруглений! */
-      box-shadow: 0 8px 54px #1939a522;
-      overflow: visible;
-      min-width: 330px;
-      user-select: none;
+      left: 50%;
+      right: 0;
+      transform: translateX(-50%);
+      margin: 3.5em 0 0.5em 0;
+      z-index: 10;
     }
-    .schedule-panel .month {
-      display: none; /* Месяц скрыт */
+    .schedule-panel {
+      width: 100vw;
+      min-height: 170px;
+      background: var(--schedule-bg);
+      color: var(--schedule-fg);
+      padding: 2.7em 5vw 2.4em 4vw;
+      border-radius: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      box-sizing: border-box;
+      box-shadow: 0 5px 44px #1939a519;
+      position: relative;
+      cursor: pointer;
+      transition: box-shadow .25s, background .4s, opacity .35s;
+      overflow: visible;
+      z-index: 5;
     }
     .schedule-panel .panel-title {
       font-family: 'Forum', serif;
-      font-size: 2em;
-      color: #fff;
+      font-size: 2.25em;
       font-weight: 400;
-      margin-bottom: 1.5em;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.04em;
+      margin-bottom: 1.15em;
+      margin-left: 0.3em;
+      line-height: 1.15;
+      user-select: none;
       text-align: left;
     }
     .schedule-panel ul {
-      list-style: none;
+      margin: 0 0 1.1em 0.5em;
       padding: 0;
-      margin: 0;
-      margin-bottom: 0.7em;
-    }
-    .schedule-panel li {
-      margin-bottom: 0.32em;
-      font-size: 1.13em;
-      font-family: 'Open Sans', sans-serif;
-      color: #dde2ff;
-      line-height: 1.6;
-    }
-    .schedule-panel li strong {
-      color: #fff;
-      font-weight: 700;
+      list-style: none;
+      font-size: 1.45em;
+      width: 100%;
+      font-weight: 400;
       letter-spacing: 0.01em;
     }
-    .schedule-panel li.past {
-      color: #93a2c4;
-    }
-    .panel-footer {
-      font-size: 1em;
-      color: #fff;
-      opacity: 0.9;
-      text-decoration: underline;
+    .schedule-panel ul li {
+      margin-bottom: 0.25em;
       text-align: left;
-      margin-top: 1.1em;
-      transition: color 0.16s;
-      display: inline-block;
-      cursor: pointer;
-      padding-left: 0.2em;
+      white-space: normal;
       font-family: 'Open Sans', sans-serif;
+      font-weight: 700;
     }
-    .panel-footer:hover {
-      color: #b3c6fa;
+    .schedule-panel .panel-arrow {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+      transition: transform var(--transition);
+      z-index: 10;
+      pointer-events: none;
     }
-    .panel-expanded {
-      padding-bottom: 2.1em;
-      transition: padding-bottom 0.25s;
+    .panel-arrow svg {
+      width: 30px; height: 30px;
+      display: inline-block;
+      fill: #fff;
+      filter: drop-shadow(0 2px 8px #0003);
+      transition: transform var(--transition);
+      opacity: 0.95;
     }
-    .hidden-schedule {
+    .schedule-panel.expanded {
+      min-height: 400px;
+      background: rgba(25,57,165,0.92);
+      box-shadow: 0 6px 88px #1939a560;
+      opacity: 0.93;
+      transition: opacity .4s, background .32s;
+    }
+    .schedule-panel.expanded .panel-arrow svg {
+      transform: rotate(180deg);
+    }
+    #hiddenSchedule {
       max-height: 0;
       opacity: 0;
       overflow: hidden;
-      transition: max-height 0.42s cubic-bezier(.28,.91,.52,1), opacity 0.3s;
+      transition: max-height .42s cubic-bezier(.4,2.5,.38,.9), opacity .3s;
+      margin-left: 0.5em;
     }
-    .schedule-panel.expanded .hidden-schedule {
+    .schedule-panel.expanded #hiddenSchedule {
       opacity: 1;
       max-height: 900px;
-      margin-top: 1.3em;
-      margin-bottom: 0;
+      transition: max-height .7s cubic-bezier(.34,2,.51,.96), opacity .38s;
     }
-    /* --- */
-    .footer {
-      margin-top: 3em;
+
+    /* --- MAIN BLOCKS --- */
+    .blocks-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2em;
+      justify-content: center;
+      margin: 3em 0 2.3em 0;
+      position: relative;
+      z-index: 1;
+    }
+    .card-block {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 28px #1939a51a;
+      width: 260px;
+      cursor: pointer;
+      transition: transform 0.23s, box-shadow 0.25s;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .card-block img {
+      width: 100%;
+      height: 145px;
+      object-fit: cover;
+      border-top-left-radius: 14px;
+      border-top-right-radius: 14px;
+    }
+    .card-title {
+      font-family: 'Forum', serif;
+      font-size: 1.18em;
+      color: var(--bogoroditsa-blue);
+      margin: 1em 0 0.7em 0;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .card-desc {
       font-size: 1em;
-      color: #555;
+      color: #474747;
+      margin-bottom: 1em;
+      padding: 0 1em;
+      text-align: center;
+    }
+
+    .footer {
+      margin: 2em 0 1.5em 0;
+      font-size: 1.05em;
+      color: #666;
+      text-align: center;
+      z-index: 0;
+      position: relative;
+    }
+    .footer a {
+      color: #1939A5;
+      text-decoration: underline;
+      font-weight: 400;
     }
     @media (max-width: 900px) {
-      .logo-text { font-size: 2em; }
-      .schedule-panel { font-size: 1em; padding: 1.5em 0.7em 1em 1.3em; }
+      .blocks-row { flex-direction: column; gap: 1.2em; }
+      .card-block { width: 95vw; }
+      .schedule-panel { padding: 2em 2vw 1.7em 2vw; }
+      .overlay { max-width: 99vw;}
+      .lang-switch { right: 1.5em; }
     }
-    @media (max-width: 700px) {
-      .overlay { padding: 0.2em 0.2em 0 0.2em; }
-      .logo-block img { height: 70px; margin: 0 0.4em; }
-      .logo-text { font-size: 1.1em; }
-      .schedule-panel { font-size: 0.97em; padding: 1.1em 0.1em 0.7em 0.7em; min-width: 0; }
+    @media (max-width: 600px) {
+      .logo-block { gap: 1vw; }
+      .logo-text { font-size: 1.45em; }
+      .logo-block img { height: 74px; }
+      .schedule-panel { font-size: 0.98em; padding: 1.2em 1vw 1.1em 1vw;}
+      .panel-title { font-size: 1.1em; }
     }
   </style>
 </head>
@@ -203,12 +288,12 @@
 
     <header>
       <div class="logo-block">
-        <div class="logo-text" id="logo-left">
+        <div class="logo-text left" id="logo-left">
           <span>Храм</span>
           <span>Знамения</span>
         </div>
         <img src="assets/icon2.gif" alt="Икона Богородицы" />
-        <div class="logo-text" id="logo-right">
+        <div class="logo-text right" id="logo-right">
           <span>Пресвятой</span>
           <span>Богородицы</span>
         </div>
@@ -218,30 +303,55 @@
       </div>
     </header>
 
-    <div class="schedule-panel" id="schedulePanel">
-      <div class="panel-title" id="panelTitle">АВГУСТ</div>
-      <ul id="mainSchedule"></ul>
-      <div class="panel-footer" id="panelFooter">
-        полное расписание
+    <div class="schedule-panel-wrap">
+      <div class="schedule-panel" id="schedulePanel">
+        <div class="panel-title" id="panelTitle"></div>
+        <ul id="mainSchedule"></ul>
+        <div class="panel-arrow" id="panelArrow">
+          <svg viewBox="0 0 40 40"><path d="M10 16l10 10 10-10" /></svg>
+        </div>
+        <ul id="hiddenSchedule"></ul>
       </div>
-      <div class="hidden-schedule" id="hiddenSchedule"></div>
+    </div>
+
+    <!-- Основные карточки под расписанием -->
+    <div class="blocks-row" id="main-blocks">
+      <div class="card-block" data-block="history">
+        <img src="assets/church_outside.jpg" alt="Вид храма" />
+        <div class="card-title">История прихода</div>
+        <div class="card-desc">Как всё начиналось. Кратко о главном.</div>
+      </div>
+      <div class="card-block" data-block="icon">
+        <img src="assets/icon_inside.jpg" alt="Икона Знамения" />
+        <div class="card-title">Икона Знамения</div>
+        <div class="card-desc">Главная святыня храма — история и чудеса.</div>
+      </div>
+      <div class="card-block" data-block="schedule">
+        <img src="assets/service.jpg" alt="Богослужение" />
+        <div class="card-title">Богослужения</div>
+        <div class="card-desc">Как устроено расписание, ответы на вопросы.</div>
+      </div>
+      <div class="card-block" data-block="community">
+        <img src="assets/movement_blanc.jpg" alt="Белое движение" />
+        <div class="card-title">Приходская жизнь</div>
+        <div class="card-desc">О нашей общине, жизни вне богослужений.</div>
+      </div>
     </div>
 
     <div class="footer" id="footer">
       87, boulevard Exelmans, Paris 75016<br />
-      Métро: Exelmans (ligne 9)<br />
-      ✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>
+      Метро: Exelmans (ligne 9)<br />
+      ✉ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>
     </div>
   </div>
-
   <script>
-    // translations — обязательно дополни для всех языков!
+    // ------ translations ------
     const translations = {
       ru: {
         logoLeft: ["Храм", "Знамения"],
         logoRight: ["Пресвятой", "Богородицы"],
         subheading: "Викариат имени Святых Марии Парижской и Алексия Южинского — Вселенский Патриархат",
-        panelTitle: "АВГУСТ",
+        panelTitle: "",
         mainSchedule: [
           "<strong>16 суббота, 18:00</strong> – Всенощная (Неделя 10-я по Пятидесятнице) Глас 1-й",
           "<strong>17 воскресенье, 10:30</strong> – Литургия (Свв. семи отроков, иже во Ефесе)"
@@ -250,19 +360,16 @@
           "<strong>16 суббота, 18:00</strong> – Всенощная (Неделя 10-я по Пятидесятнице) Глас 1-й",
           "<strong>17 воскресенье, 10:30</strong> – Литургия (Свв. семи отроков, иже во Ефесе)",
           "<strong>18 понедельник, 18:00</strong> – Всенощная (Преображение Господне)",
-          "<strong>19 вторник, 10:00</strong> – Литургия/Освящение воды и фруктов (Преображение Господне — Второй Спас)",
+          "<strong>19 вторник, 10:00</strong> – Литургия/Освящение воды и фруктов (Преображение Господне – Второй Спас)",
           "<strong>27 среда, 18:00</strong> – Всенощная (Успение Пресвятой Богородицы)",
           "<strong>28 четверг, 10:00</strong> – Литургия (Успение Пресвятой Богородицы)"
-        ],
-        showFull: "полное расписание",
-        hideFull: "скрыть полное расписание",
-        footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (ligne 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
+        ]
       },
       fr: {
         logoLeft: ["Église", "Orthodoxe"],
         logoRight: ["Notre-Dame", "du Signe"],
         subheading: "Vicariat Sainte-Marie-de-Paris et Saint-Alexis-d’Ugine – Patriarcat Œcuménique",
-        panelTitle: "AOÛT",
+        panelTitle: "",
         mainSchedule: [
           "<strong>16 samedi, 18:00</strong> – Vigiles (10<sup>ème</sup> Dimanche après la Pentecôte) 1<sup>er</sup> ton",
           "<strong>17 dimanche, 10:30</strong> – Liturgie (Sept dormants d’Ephèse)"
@@ -271,40 +378,34 @@
           "<strong>16 samedi, 18:00</strong> – Vigiles (10<sup>ème</sup> Dimanche après la Pentecôte) 1<sup>er</sup> ton",
           "<strong>17 dimanche, 10:30</strong> – Liturgie (Sept dormants d’Ephèse)",
           "<strong>18 lundi, 18:00</strong> – Vigiles (Transfiguration de N.S. Jésus-Christ)",
-          "<strong>19 mardi, 10:00</strong> – Liturgie/ Bénédiction de l’eau et des fruits (Transfiguration)",
-          "<strong>27 mercredi, 18:00</strong> – Vigiles (Dormition de la Mère de Dieu)",
+          "<strong>19 mardi, 10:00</strong> – Liturgie de la Transfiguration (Bénédiction de l’eau et des fruits)",
+          "<strong>27 mercredi, 18:00</strong> – Vigiles (Dormition)",
           "<strong>28 jeudi, 10:00</strong> – Liturgie (Dormition de la Très Sainte Mère de Dieu)"
-        ],
-        showFull: "horaire complet",
-        hideFull: "masquer l’horaire complet",
-        footer: `87, boulevard Exelmans, Paris 75016<br />Métro : Exelmans (ligne 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
+        ]
       },
       by: {
         logoLeft: ["Храм", "Знамення"],
         logoRight: ["Прасвятой", "Багародзіцы"],
         subheading: "Вікарыят імені Святых Марыі Парыжскай і Аляксея Южынскага — Сусветны Патрыярхат",
-        panelTitle: "ЖНІВЕНЬ",
+        panelTitle: "",
         mainSchedule: [
           "<strong>16 субота, 18:00</strong> – Усяночная (Тыдзень 10-ы пасля Пяцідзясятніцы) Тон 1-шы",
-          "<strong>17 нядзеля, 10:30</strong> – Літургія (Свв. сямі юнакоў, што былі ў Эфесе)"
+          "<strong>17 нядзеля, 10:30</strong> – Літургія (Святых сямі юнакоў, што былі ў Эфесе)"
         ],
         fullSchedule: [
           "<strong>16 субота, 18:00</strong> – Усяночная (Тыдзень 10-ы пасля Пяцідзясятніцы) Тон 1-шы",
-          "<strong>17 нядзеля, 10:30</strong> – Літургія (Свв. сямі юнакоў, што былі ў Эфесе)",
+          "<strong>17 нядзеля, 10:30</strong> – Літургія (Святых сямі юнакоў, што былі ў Эфесе)",
           "<strong>18 панядзелак, 18:00</strong> – Усяночная (Пераяўленне Гасподняе)",
-          "<strong>19 аўторак, 10:00</strong> – Літургія/Асвячэнне вады і пладоў (Пераяўленне Гасподняе — Другі Спас)",
+          "<strong>19 аўторак, 10:00</strong> – Літургія/Асвячэнне вады і пладоў (Пераяўленне Гасподняе – Другі Спас)",
           "<strong>27 серада, 18:00</strong> – Усяночная (Успенне Прасвятой Багародзіцы)",
           "<strong>28 чацвер, 10:00</strong> – Літургія (Успенне Прасвятой Багародзіцы)"
-        ],
-        showFull: "поўны расклад",
-        hideFull: "схаваць поўны расклад",
-        footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (лінія 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
+        ]
       },
       ua: {
         logoLeft: ["Храм", "Знамення"],
         logoRight: ["Пресвятої", "Богородиці"],
         subheading: "Вікаріат імені Святих Марії Паризької та Олексія Южинського — Вселенський Патріархат",
-        panelTitle: "СЕРПЕНЬ",
+        panelTitle: "",
         mainSchedule: [
           "<strong>16 субота, 18:00</strong> – Всеношна (Неділя 10-та після П’ятидесятниці) Глас 1-й",
           "<strong>17 неділя, 10:30</strong> – Літургія (Семи отроків, що у Ефесі)"
@@ -313,86 +414,92 @@
           "<strong>16 субота, 18:00</strong> – Всеношна (Неділя 10-та після П’ятидесятниці) Глас 1-й",
           "<strong>17 неділя, 10:30</strong> – Літургія (Семи отроків, що у Ефесі)",
           "<strong>18 понеділок, 18:00</strong> – Всеношна (Преображення Господнє)",
-          "<strong>19 вівторок, 10:00</strong> – Літургія, освячення води та плодів (Преображення Господнє – Другий Спас)",
+          "<strong>19 вівторок, 10:00</strong> – Літургія/освячення води і плодів (Преображення Господнє – Другий Спас)",
           "<strong>27 середа, 18:00</strong> – Всеношна (Успіння Пресвятої Богородиці)",
           "<strong>28 четвер, 10:00</strong> – Літургія (Успіння Пресвятої Богородиці)"
-        ],
-        showFull: "повний розклад",
-        hideFull: "приховати розклад",
-        footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (лінія 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
+        ]
       }
     };
 
-    let currentLang = 'ru';
+    let currentLang = "ru";
+    let expanded = false;
 
-    function isPast(text) {
+    function parseDateTime(text) {
+      // "<strong>16 суббота, 18:00</strong> ..."
       const m = text.match(/<strong>(\d+)[^\d]*(?:, )?(\d{1,2}):(\d{2})<\/strong>/i);
-      if (!m) return false;
-      let [day, hour, min] = [parseInt(m[1]), parseInt(m[2]), parseInt(m[3])];
+      if (!m) return null;
+      let day = parseInt(m[1]), hour = parseInt(m[2]), minute = parseInt(m[3]);
+      // Определить месяц (август), текущий год
       let now = new Date();
+      let month = now.getMonth() < 7 ? 7 : now.getMonth(); // август, если уже август
       let year = now.getFullYear();
-      let month = now.getMonth() + 1; // 1-based
-      if (month === 8) month = 8; // август (для теста)
-      let dt = new Date(year, 7, day, hour, min); // 7 — август
-      return now.getTime() - dt.getTime() > 2 * 60 * 60 * 1000;
+      return new Date(year, month, day, hour, minute);
+    }
+
+    function getUpcoming(list) {
+      // Вернуть только те, которые еще не прошли (полностью, c запасом 1.5 часа)
+      const now = new Date();
+      return list.filter(txt => {
+        const dt = parseDateTime(txt);
+        if (!dt) return true;
+        return (dt.getTime() + 90 * 60000) > now.getTime();
+      });
     }
 
     function renderMainSchedule(lang) {
-      const t = translations[lang];
-      document.getElementById('logo-left').innerHTML = `<span>${t.logoLeft[0]}</span><span>${t.logoLeft[1]}</span>`;
-      document.getElementById('logo-right').innerHTML = `<span>${t.logoRight[0]}</span><span>${t.logoRight[1]}</span>`;
-      document.getElementById('subheading').innerText = t.subheading;
-      document.getElementById('panelTitle').innerText = t.panelTitle;
-      document.getElementById('footer').innerHTML = t.footer;
+      const schedulePanel = document.getElementById("schedulePanel");
+      const panelTitle = document.getElementById("panelTitle");
+      const mainSchedule = document.getElementById("mainSchedule");
+      const hiddenSchedule = document.getElementById("hiddenSchedule");
+      // Отобразить только следующие 2 (или меньше) службы
+      let all = getUpcoming(translations[lang].fullSchedule);
+      let main = all.slice(0, 2);
+      let hidden = all.slice(2);
 
-      // Краткое расписание (только основные службы)
-      document.getElementById('mainSchedule').innerHTML = t.mainSchedule.map(
-        text => `<li${isPast(text) ? ' class="past"' : ''}>${text}</li>`
-      ).join('');
+      panelTitle.innerHTML = ""; // Нет месяца
 
-      // Скрытое расписание (все остальные службы, которых нет среди первых)
-      let extra = t.fullSchedule.slice(t.mainSchedule.length);
-      document.getElementById('hiddenSchedule').innerHTML = extra.map(
-        text => `<li${isPast(text) ? ' class="past"' : ''}>${text}</li>`
-      ).join('');
-      document.getElementById('hiddenSchedule').style.maxHeight = "0";
-      document.getElementById('hiddenSchedule').style.opacity = "0";
-      document.getElementById('panelFooter').innerText = t.showFull;
+      mainSchedule.innerHTML = main.map(txt =>
+        `<li>${txt}</li>`).join('');
 
-      // Сбросить раскрытие
-      document.getElementById('schedulePanel').classList.remove('expanded');
+      hiddenSchedule.innerHTML = hidden.length
+        ? hidden.map(txt => `<li>${txt}</li>`).join('')
+        : '';
+      document.getElementById('panelArrow').style.display = hidden.length ? "flex" : "none";
+      hiddenSchedule.style.display = expanded && hidden.length ? "block" : "none";
+
+      // Панель становится полупрозрачной и перекрывает карточки
+      if (expanded && hidden.length) {
+        schedulePanel.classList.add("expanded");
+        schedulePanel.style.zIndex = "30";
+      } else {
+        schedulePanel.classList.remove("expanded");
+        schedulePanel.style.zIndex = "5";
+      }
     }
 
-    // Языки
+    // ---------- Языки ----------
     document.querySelectorAll('.lang-switch span').forEach(s => {
       s.onclick = function () {
         document.querySelectorAll('.lang-switch span').forEach(x => x.classList.remove('active'));
         s.classList.add('active');
         currentLang = s.dataset.lang;
+        expanded = false;
         renderMainSchedule(currentLang);
-      };
+        // Переводим шапку
+        document.getElementById('logo-left').innerHTML = `<span>${translations[currentLang].logoLeft[0]}</span><span>${translations[currentLang].logoLeft[1]}</span>`;
+        document.getElementById('logo-right').innerHTML = `<span>${translations[currentLang].logoRight[0]}</span><span>${translations[currentLang].logoRight[1]}</span>`;
+        document.getElementById('subheading').innerText = translations[currentLang].subheading;
+      }
     });
 
-    // Открытие/скрытие расписания
-    const schedulePanel = document.getElementById('schedulePanel');
-    let expanded = false;
-    schedulePanel.onclick = function (e) {
-      // Только если клик не по ссылке в футере!
-      if (e.target.closest('a')) return;
+    // ---------- Спойлер (панель) ----------
+    document.getElementById("schedulePanel").onclick = function (e) {
+      // Только если есть скрытые службы
+      const all = getUpcoming(translations[currentLang].fullSchedule);
+      if (all.length <= 2) return;
       expanded = !expanded;
-      const t = translations[currentLang];
-      if (expanded) {
-        schedulePanel.classList.add('expanded');
-        document.getElementById('hiddenSchedule').style.maxHeight = "900px";
-        document.getElementById('hiddenSchedule').style.opacity = "1";
-        document.getElementById('panelFooter').innerText = t.hideFull;
-      } else {
-        schedulePanel.classList.remove('expanded');
-        document.getElementById('hiddenSchedule').style.maxHeight = "0";
-        document.getElementById('hiddenSchedule').style.opacity = "0";
-        document.getElementById('panelFooter').innerText = t.showFull;
-      }
-    };
+      renderMainSchedule(currentLang);
+    }
 
     renderMainSchedule(currentLang);
   </script>
