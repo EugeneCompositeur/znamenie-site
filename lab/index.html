@@ -158,7 +158,7 @@
       background: var(--schedule-spoiler-bg);
       border-radius: 5px;
       padding: 0.6em 1em;
-      margin: 0.7em auto 0 auto;
+      margin-top: 0.7em;
       text-align: center;
       cursor: pointer;
       color: var(--bogoroditsa-blue);
@@ -169,16 +169,9 @@
       transition: background 0.3s;
       user-select: none;
       border: none;
-      max-width: 300px;
-      box-shadow: 0 0 0 #fff0;
-      display: block;
     }
     .schedule-spoiler:hover {
       background: #e5eafc;
-    }
-    .hidden-schedule-list {
-      display: none;
-      margin-top: 0.5em;
     }
     .blocks-row {
       display: flex;
@@ -338,9 +331,11 @@
     <div class="schedule">
       <div class="schedule-label" id="schedule-label-1">Расписание богослужений</div>
       <div class="schedule-month" id="current-label">ИЮЛЬ</div>
-      <div id="schedule-current"></div>
+      <ul id="schedule-current"></ul>
+      <div id="schedule-current-spoiler"></div>
       <div class="schedule-month" id="next-label">АВГУСТ</div>
-      <div id="schedule-next"></div>
+      <ul id="schedule-next"></ul>
+      <div id="schedule-next-spoiler"></div>
     </div>
 
     <!-- Карточки-блоки -->
@@ -378,11 +373,11 @@
   <div class="modal-full" id="modalFull">
     <div class="modal-content" id="modalContent">
       <button class="modal-close" id="modalClose" title="Закрыть">&times;</button>
-      <!-- Динамически вставляется содержимое -->
     </div>
   </div>
 
   <script>
+    // --- translations: полный блок для всех языков! (RU, FR, BY, UA) ---
     const translations = {
       ru: {
         logoLeft: ["Храм", "Знамения"],
@@ -416,6 +411,7 @@
         ],
         footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (ligne 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
       },
+      // --------- FR -------------
       fr: {
         logoLeft: ["Église", "Orthodoxe"],
         logoRight: ["Notre-Dame", "du Signe"],
@@ -423,11 +419,32 @@
         notice: "Site en développement",
         scheduleLabel1: "Horaires des offices",
         currentLabel: "JUILLET",
+        scheduleCurrent: [
+          "<strong>5 samedi, 18:00</strong>&nbsp;&ndash; Vigiles (4<sup>ème</sup>&nbsp;Dimanche après la&nbsp;Pentecôte) 3<sup>ème</sup>&nbsp;ton",
+          "<strong>6 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie (Icône de&nbsp;la&nbsp;Sainte Mère de&nbsp;Dieu de&nbsp;Vladimir)",
+          "<strong>7 lundi, 10:00</strong>&nbsp;&ndash; Liturgie (Naissance de&nbsp;Saint-Jean Baptiste)",
+          "<strong>12 samedi, 10:00</strong>&nbsp;&ndash; Liturgie (Saints Pierre &&nbsp;Paul)",
+          "<strong>12 samedi, 18:00</strong>&nbsp;&ndash; Vigiles (5<sup>ème</sup>&nbsp;Dimanche après la&nbsp;Pentecôte) 4<sup>ème</sup>&nbsp;ton",
+          "<strong>13 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie (Synaxe des 12&nbsp;apôtres)",
+          "<strong>19 samedi, 18:00</strong>&nbsp;&ndash; Vigiles (6<sup>ème</sup>&nbsp;Dimanche après la&nbsp;Pentecôte) 5<sup>ème</sup>&nbsp;ton",
+          "<strong>20 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie (Sainte Eudoxie, princesse de&nbsp;Souzdal)",
+          "<strong>26 samedi, 18:00</strong>&nbsp;&ndash; Vigiles (7<sup>ème</sup>&nbsp;Dimanche après la&nbsp;Pentecôte) 6<sup>ème</sup>&nbsp;ton",
+          "<strong>27 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie (Saints Pères des six Conciles Œcuméniques)",
+          "<strong>28 lundi, 10:00</strong>&nbsp;&ndash; Liturgie (Saint Vladimir, égal aux Apôtres)"
+        ],
         nextLabel: "AOÛT",
-        scheduleCurrent: [],
-        scheduleNext: [],
+        scheduleNext: [
+          "<strong>16 samedi, 18:00</strong>&nbsp;&ndash; Vigiles (10<sup>ème</sup>&nbsp;Dimanche après la&nbsp;Pentecôte) 1<sup>er</sup>&nbsp;ton",
+          "<strong>17 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie (Sept dormants d’Ephèse)",
+          "<strong>18 lundi, 18:00</strong>&nbsp;&ndash; Vigiles (Transfiguration de&nbsp;N.S.&nbsp;Jésus-Christ)",
+          "<strong>19 mardi, 10:00</strong>&nbsp;&ndash; Liturgie de&nbsp;la&nbsp;Transfiguration de&nbsp;N.S.&nbsp;Jésus-Christ (Bénédiction de&nbsp;l’eau et&nbsp;des fruits)",
+          "__custom__<div style='text-align:center; color:#b7523b; font-weight:bold; margin:0.7em 0;'>Pas d’office jusqu’à la&nbsp;Dormition</div>",
+          "<strong>27 mercredi, 18:00</strong>&nbsp;&ndash; Vigiles (de&nbsp;la&nbsp;Dormition)",
+          "<strong>28 jeudi, 10:00</strong>&nbsp;&ndash; Liturgie (de&nbsp;la&nbsp;Dormition de&nbsp;la&nbsp;Très Sainte Mère de&nbsp;Dieu)"
+        ],
         footer: `87, boulevard Exelmans, Paris 75016<br />Métro : Exelmans (ligne 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
       },
+      // -------- BY -----------
       by: {
         logoLeft: ["Храм", "Знамення"],
         logoRight: ["Прасвятой", "Багародзіцы"],
@@ -435,11 +452,32 @@
         notice: "Сайт у распрацоўцы",
         scheduleLabel1: "Расклад набажэнстваў",
         currentLabel: "ЛІПЕНЬ",
+        scheduleCurrent: [
+          "<strong>5 субота, 18:00</strong>&nbsp;&ndash; Усяночная<br>Тыдзень 4-ы пасля Пяцідзясятніцы&nbsp;&ndash; Тон 3-ці",
+          "<strong>6 нядзеля, 10:30</strong>&nbsp;&ndash; Літургія<br>Уладзімірскай іконы Божай Маці",
+          "<strong>7 панядзелак, 10:00</strong>&nbsp;&ndash; Літургія<br>Нараджэнне Хрысціцеля Гасподняга Яна",
+          "<strong>12 субота, 10:00</strong>&nbsp;&ndash; Літургія<br>Святых Пятра і Паўла",
+          "<strong>12 субота, 18:00</strong>&nbsp;&ndash; Усяночная<br>Тыдзень 5-ы пасля Пяцідзясятніцы&nbsp;&ndash; Тон 4-ты",
+          "<strong>13 нядзеля, 10:30</strong>&nbsp;&ndash; Літургія<br>Сабор Святых 12-ці апосталаў",
+          "<strong>19 субота, 18:00</strong>&nbsp;&ndash; Усяночная<br>Тыдзень 6-ы пасля Пяцідзясятніцы&nbsp;&ndash; Тон 5-ты",
+          "<strong>20 нядзеля, 10:30</strong>&nbsp;&ndash; Літургія<br>Прп. Еўдокіі, вял. княгіні Маскоўскай",
+          "<strong>27 субота, 18:00</strong>&nbsp;&ndash; Усяночная<br>Тыдзень 7-ы пасля Пяцідзясятніцы&nbsp;&ndash; Тон 6-ты",
+          "<strong>27 нядзеля, 10:30</strong>&nbsp;&ndash; Літургія<br>Святых айцоў шасці Сусветных Сабораў",
+          "<strong>28 панядзелак, 10:00</strong>&nbsp;&ndash; Літургія<br>Св. Вялікага Князя Уладзіміра"
+        ],
         nextLabel: "ЖНІВЕНЬ",
-        scheduleCurrent: [],
-        scheduleNext: [],
+        scheduleNext: [
+          "<strong>16 субота, 18:00</strong>&nbsp;&ndash; Усяночная<br>Тыдзень 10-ы пасля Пяцідзясятніцы&nbsp;&ndash; Тон 1-шы",
+          "<strong>17 нядзеля, 10:30</strong>&nbsp;&ndash; Літургія<br>Святых сямі юнакоў, што былі ў&nbsp;Эфесе",
+          "<strong>18 панядзелак, 18:00</strong>&nbsp;&ndash; Усяночная<br>Пераяўленне Гасподняе",
+          "<strong>19 аўторак, 10:00</strong>&nbsp;&ndash; Літургія, асвячэнне вады і пладоў<br>Пераяўленне Гасподняе&nbsp;&ndash; Другі Спас",
+          "__custom__<div style='text-align:center; color:#b7523b; font-weight:bold; margin:0.7em 0;'>Храм зачыняецца да Успення</div>",
+          "<strong>27 серада, 18:00</strong>&nbsp;&ndash; Усяночная<br>Успенне Прасвятой Багародзіцы",
+          "<strong>28 чацвер, 10:00</strong>&nbsp;&ndash; Літургія<br>Успенне Прасвятой Багародзіцы"
+        ],
         footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (лінія 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
       },
+      // -------- UA -----------
       ua: {
         logoLeft: ["Храм", "Знамення"],
         logoRight: ["Пресвятої", "Богородиці"],
@@ -447,9 +485,29 @@
         notice: "Сайт у розробці",
         scheduleLabel1: "Розклад богослужінь",
         currentLabel: "ЛИПЕНЬ",
+        scheduleCurrent: [
+          "<strong>5 субота, 18:00</strong>&nbsp;&ndash; Всеношна (Неділя 4-та після П’ятидесятниці) Глас 3-й",
+          "<strong>6 неділя, 10:30</strong>&nbsp;&ndash; Літургія (Володимирської ікони Божої Матері)",
+          "<strong>7 понеділок, 10:00</strong>&nbsp;&ndash; Літургія (Різдво Іоанна Хрестителя)",
+          "<strong>12 субота, 10:00</strong>&nbsp;&ndash; Літургія (Святих апостолів Петра і Павла)",
+          "<strong>12 субота, 18:00</strong>&nbsp;&ndash; Всеношна (Неділя 5-та після П’ятидесятниці) Глас 4-й",
+          "<strong>13 неділя, 10:30</strong>&nbsp;&ndash; Літургія (Собор 12-ти святих апостолів)",
+          "<strong>19 субота, 18:00</strong>&nbsp;&ndash; Всеношна (Неділя 6-та після П’ятидесятниці) Глас 5-й",
+          "<strong>20 неділя, 10:30</strong>&nbsp;&ndash; Літургія (Прп. Євдокії, вел. кн. Московської)",
+          "<strong>27 субота, 18:00</strong>&nbsp;&ndash; Всеношна (Неділя 7-ма після П’ятидесятниці) Глас 6-й",
+          "<strong>27 неділя, 10:30</strong>&nbsp;&ndash; Літургія (Святих отців шести Вселенських Соборів)",
+          "<strong>28 понеділок, 10:00</strong>&nbsp;&ndash; Літургія (Св. Великого Князя Володимира)"
+        ],
         nextLabel: "СЕРПЕНЬ",
-        scheduleCurrent: [],
-        scheduleNext: [],
+        scheduleNext: [
+          "<strong>16 субота, 18:00</strong>&nbsp;&ndash; Всеношна (Неділя 10-та після П’ятидесятниці) Глас 1-й",
+          "<strong>17 неділя, 10:30</strong>&nbsp;&ndash; Літургія (Семи отроків, що у Ефесі)",
+          "<strong>18 понеділок, 18:00</strong>&nbsp;&ndash; Всеношна (Преображення Господнє)",
+          "<strong>19 вівторок, 10:00</strong>&nbsp;&ndash; Літургія, освячення води та плодів (Преображення Господнє&nbsp;&ndash; Другий Спас)",
+          "__custom__<div style='text-align:center; color:#b7523b; font-weight:bold; margin:0.7em 0;'>Храм зачиняється до Успіння</div>",
+          "<strong>27 середа, 18:00</strong>&nbsp;&ndash; Всеношна (Успіння Пресвятої Богородиці)",
+          "<strong>28 четвер, 10:00</strong>&nbsp;&ndash; Літургія (Успіння Пресвятої Богородиці)"
+        ],
         footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (лінія 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
       }
     };
@@ -464,11 +522,18 @@
     const nextLabel = document.getElementById('next-label');
     const scheduleCurrent = document.getElementById('schedule-current');
     const scheduleNext = document.getElementById('schedule-next');
+    const scheduleCurrentSpoiler = document.getElementById('schedule-current-spoiler');
+    const scheduleNextSpoiler = document.getElementById('schedule-next-spoiler');
     const footer = document.getElementById('footer');
 
+    // ---- Автоматическое "серение" по дате и времени ----
     function parseDateTime(text, monthLabel) {
       const months = {
-        'ЯНВАРЬ': 0, 'ФЕВРАЛЬ': 1, 'МАРТ': 2, 'АПРЕЛЬ': 3, 'МАЙ': 4, 'ИЮНЬ': 5, 'ИЮЛЬ': 6, 'АВГУСТ': 7
+        'ЯНВАРЬ': 0, 'ФЕВРАЛЬ': 1, 'МАРТ': 2, 'АПРЕЛЬ': 3, 'МАЙ': 4, 'ИЮНЬ': 5, 'ИЮЛЬ': 6, 'АВГУСТ': 7,
+        'СЕНТЯБРЬ': 8, 'ОКТЯБРЬ': 9, 'НОЯБРЬ': 10, 'ДЕКАБРЬ': 11,
+        'JUILLET': 6, 'AOÛT': 7,
+        'ЛІПЕНЬ': 6, 'ЖНІВЕНЬ': 7,
+        'ЛИПЕНЬ': 6, 'СЕРПЕНЬ': 7
       };
       const m = text.match(/<strong>(\d+)[^\d]*(?:, )?(\d{1,2}):(\d{2})<\/strong>/i);
       if (!m) return null;
@@ -479,32 +544,42 @@
       return new Date(year, month, day, hour, minute);
     }
 
-    // Рендер блока расписания: первые 4 строки, остальные спрятаны
-    function renderSchedule(list, monthLabel) {
-      if (!list || !list.length) return `<div style="color:#aaa;text-align:center;padding:1em 0 0.5em 0;">Расписание недоступно</div>`;
+    // ------- Спойлер для расписания --------
+    function renderSchedule(list, monthLabel, ulElement, spoilerElement) {
       const now = new Date();
+      // первые 4 строки, остальные под спойлер
       const visible = list.slice(0, 4);
       const hidden = list.slice(4);
-
-      let html = `<ul>${visible.map(text => {
+      let html = visible.map(text => {
         if (text.startsWith("__custom__")) return text.replace("__custom__", "");
         let dt = parseDateTime(text, monthLabel), isPast = false;
         if (dt) isPast = (now.getTime() - dt.getTime()) > 2 * 60 * 60 * 1000;
         return `<li${isPast ? ' class="past"' : ''}>${text}</li>`;
-      }).join('')}</ul>`;
+      }).join('');
+      ulElement.innerHTML = html;
 
       if (hidden.length > 0) {
-        html += `<button class="schedule-spoiler" id="showMore-${monthLabel}">Показать все службы</button>
-          <ul class="hidden-schedule-list" id="hiddenSchedule-${monthLabel}">
-            ${hidden.map(text => {
-              if (text.startsWith("__custom__")) return text.replace("__custom__", "");
-              let dt = parseDateTime(text, monthLabel), isPast = false;
-              if (dt) isPast = (now.getTime() - dt.getTime()) > 2 * 60 * 60 * 1000;
-              return `<li${isPast ? ' class="past"' : ''}>${text}</li>`;
-            }).join('')}
-          </ul>`;
+        let spoilerBtn = document.createElement('div');
+        spoilerBtn.className = 'schedule-spoiler';
+        spoilerBtn.textContent = 'Показать все службы';
+        spoilerElement.innerHTML = '';
+        spoilerElement.appendChild(spoilerBtn);
+
+        spoilerBtn.onclick = () => {
+          // при нажатии — появляется скрытый список и скрывается кнопка
+          let ulHidden = document.createElement('ul');
+          ulHidden.innerHTML = hidden.map(text => {
+            if (text.startsWith("__custom__")) return text.replace("__custom__", "");
+            let dt = parseDateTime(text, monthLabel), isPast = false;
+            if (dt) isPast = (now.getTime() - dt.getTime()) > 2 * 60 * 60 * 1000;
+            return `<li${isPast ? ' class="past"' : ''}>${text}</li>`;
+          }).join('');
+          spoilerElement.innerHTML = '';
+          spoilerElement.appendChild(ulHidden);
+        };
+      } else {
+        spoilerElement.innerHTML = '';
       }
-      return html;
     }
 
     function setLang(lang) {
@@ -517,31 +592,9 @@
       scheduleLabel1.innerText = translations[lang].scheduleLabel1;
       currentLabel.innerText = translations[lang].currentLabel;
       nextLabel.innerText = translations[lang].nextLabel;
-      scheduleCurrent.innerHTML = renderSchedule(translations[lang].scheduleCurrent, translations[lang].currentLabel);
-      scheduleNext.innerHTML = renderSchedule(translations[lang].scheduleNext, translations[lang].nextLabel);
+      renderSchedule(translations[lang].scheduleCurrent, translations[lang].currentLabel, scheduleCurrent, scheduleCurrentSpoiler);
+      renderSchedule(translations[lang].scheduleNext, translations[lang].nextLabel, scheduleNext, scheduleNextSpoiler);
       footer.innerHTML = translations[lang].footer;
-
-      // Подключить спойлеры после отрисовки
-      setTimeout(() => {
-        setupSpoiler(translations[lang].currentLabel);
-        setupSpoiler(translations[lang].nextLabel);
-      }, 50);
-    }
-
-    function setupSpoiler(monthLabel) {
-      const btn = document.getElementById(`showMore-${monthLabel}`);
-      const ul = document.getElementById(`hiddenSchedule-${monthLabel}`);
-      if (!btn || !ul) return;
-      btn.onclick = function () {
-        if (ul.style.display !== "block") {
-          ul.style.display = "block";
-          btn.innerText = "Скрыть дополнительные";
-        } else {
-          ul.style.display = "none";
-          btn.innerText = "Показать все службы";
-        }
-      };
-      ul.style.display = "none";
     }
 
     langSwitchers.forEach(s => {
