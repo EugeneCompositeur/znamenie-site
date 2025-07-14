@@ -4,40 +4,44 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Храм Знамения Пресвятой Богородицы в Париже</title>
-  <meta name="description" content="Официальный сайт Храма Знамения Пресвятой Богородицы в Париже. Православное расписание богослужений, адрес, контакты." />
-  <meta name="keywords" content="храм, православие, Париж, Богородица, Église Orthodoxe, Notre-Dame du Signe, Paris, богослужение, расписание, православный приход, церковь" />
-  <link rel="icon" href="assets/icon2.gif" type="image/gif" />
-  <link href="https://fonts.googleapis.com/css2?family=Forum&family=Open+Sans&family=Roboto+Mono&display=swap" rel="stylesheet" />
+  <link rel="icon" href="assets/icon.gif" type="image/gif" />
+  <link href="https://fonts.googleapis.com/css2?family=Forum&family=Open+Sans&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bogoroditsa-blue: #1939A5;
-      --bogoroditsa-blue-dark: #15297c;
-      --bogoroditsa-bg: #ede6d9;
+      --bogoroditsa-blue-dark: #16297d;
+      --page-bg: #f4ede1;
     }
     body {
       margin: 0;
       padding: 0;
-      background: var(--bogoroditsa-bg);
+      background: var(--page-bg);
       font-family: 'Open Sans', sans-serif;
-      color: #2f2f2f;
+      color: #222;
       text-align: center;
+    }
+    .overlay {
+      padding: 2em 1em 0 1em;
+      max-width: 1100px;
+      margin: 0 auto;
+      min-height: 100vh;
     }
     .lang-switch {
       position: absolute;
       top: 1.2em;
-      right: 1.5em;
-      font-size: 0.93em;
+      right: 2.2em;
+      font-size: 1em;
       display: flex;
-      gap: 1em;
-      letter-spacing: 0.08em;
-      z-index: 200;
+      gap: 0.7em;
+      z-index: 100;
+      font-family: 'Open Sans', sans-serif;
     }
     .lang-switch span {
       cursor: pointer;
       color: #666;
-      font-weight: 600;
-      transition: color 0.3s;
-      padding: 0.1em 0.2em;
+      font-weight: 500;
+      transition: color 0.2s;
+      letter-spacing: 0.1em;
     }
     .lang-switch span.active {
       color: var(--bogoroditsa-blue);
@@ -47,395 +51,349 @@
       color: var(--bogoroditsa-blue-dark);
     }
     header {
+      margin-top: 1em;
+      margin-bottom: 2em;
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 1.5em;
-      margin-top: 1.4em;
     }
     .logo-block {
       display: flex;
       flex-direction: row;
-      justify-content: center;
       align-items: center;
-      gap: 2em;
+      justify-content: center;
+      width: 100%;
+      gap: 1.5em;
+      margin-bottom: 0.7em;
     }
     .logo-text {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
       font-family: 'Forum', serif;
-      font-size: 2.35em;
-      font-weight: 700;
+      font-size: 2.7em;
+      font-weight: 400;
       color: var(--bogoroditsa-blue);
+      line-height: 1.05;
       letter-spacing: 0.02em;
-      text-shadow: 0 2px 14px #dedbff27;
-      min-width: 190px;
+      white-space: pre-line;
+      user-select: none;
     }
-    .logo-text.left { text-align: right; }
-    .logo-text.right { text-align: left; }
     .logo-block img {
-      height: 90px;
-      margin: 0 1em;
-      filter: drop-shadow(0 2px 20px #1939a522);
+      height: 112px;
+      margin: 0 1.4em;
+      filter: drop-shadow(0 2px 18px #1939a512);
     }
     .subheading {
-      font-size: 1em;
-      margin-top: 1em;
       font-family: 'Forum', serif;
-      color: #686868;
+      font-size: 1.07em;
+      margin-top: 0.7em;
+      margin-bottom: 0.5em;
+      color: #958d7a;
       letter-spacing: 0.01em;
-      margin-bottom: 1.2em;
+      font-weight: 400;
     }
-    /* --- Accent schedule bar --- */
-    .main-schedule-block {
+
+    /* РАСПИСАНИЕ (СИНЯЯ ПЛАШКА) */
+    .schedule-panel {
       background: var(--bogoroditsa-blue);
       color: #fff;
-      border-radius: 0 0 22px 22px;
-      max-width: 820px;
-      margin: 0 auto 3em auto;
-      padding: 2em 1.2em 1.3em 1.2em;
-      box-shadow: 0 4px 42px #1939a515;
+      margin: 0 auto 2.3em auto;
+      max-width: 1000px;
+      text-align: left;
+      font-size: 1.19em;
+      cursor: pointer;
+      padding: 2.2em 2.2em 1.3em 3.7em;
       position: relative;
-      z-index: 10;
+      transition: background 0.19s;
+      border-radius: 0; /* Без скруглений! */
+      box-shadow: 0 8px 54px #1939a522;
+      overflow: visible;
+      min-width: 330px;
+      user-select: none;
     }
-    .main-schedule-block .month {
+    .schedule-panel .month {
+      display: none; /* Месяц скрыт */
+    }
+    .schedule-panel .panel-title {
       font-family: 'Forum', serif;
       font-size: 2em;
-      margin-bottom: 0.7em;
-      letter-spacing: 0.1em;
-      font-weight: bold;
+      color: #fff;
+      font-weight: 400;
+      margin-bottom: 1.5em;
+      letter-spacing: 0.06em;
+      text-align: left;
     }
-    .main-schedule-block ul {
+    .schedule-panel ul {
       list-style: none;
       padding: 0;
       margin: 0;
-    }
-    .main-schedule-block li {
-      margin-bottom: 0.32em;
-      font-size: 1.16em;
-      line-height: 1.4em;
-      text-align: left;
-      font-family: 'Open Sans', sans-serif;
-      color: #fff;
-      font-weight: 500;
-    }
-    .main-schedule-block li strong {
-      color: #fff;
-      font-weight: 700;
-    }
-    .main-schedule-block li.past {
-      opacity: 0.5;
-    }
-    .main-schedule-block .show-all {
-      color: #fff;
-      font-family: 'Open Sans', sans-serif;
-      font-size: 1em;
-      font-weight: 500;
-      text-decoration: underline;
-      cursor: pointer;
-      margin-top: 1.5em;
-      display: block;
-      transition: color 0.2s;
-    }
-    .main-schedule-block .show-all:hover {
-      color: #e2c877;
-    }
-    /* Modal full schedule */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(25,57,165,0.08);
-      z-index: 999;
-      justify-content: center;
-      align-items: flex-start;
-      backdrop-filter: blur(2.5px);
-      overflow-y: auto;
-      animation: fadeIn 0.23s;
-    }
-    .modal.open { display: flex; }
-    .modal-content {
-      background: #fff;
-      border-radius: 14px;
-      margin-top: 7vh;
-      max-width: 620px;
-      width: 95vw;
-      padding: 2.3em 1.6em 1.7em 1.6em;
-      box-shadow: 0 8px 80px #1939a522;
-      position: relative;
-      animation: popup 0.27s;
-    }
-    .modal-title {
-      font-family: 'Forum', serif;
-      color: var(--bogoroditsa-blue);
-      font-size: 2em;
-      font-weight: 700;
       margin-bottom: 0.7em;
-      text-align: center;
     }
-    .modal-close {
-      position: absolute;
-      top: 1em;
-      right: 1.4em;
-      font-size: 2.4em;
-      color: #bbb;
-      background: none;
-      border: none;
+    .schedule-panel li {
+      margin-bottom: 0.32em;
+      font-size: 1.13em;
+      font-family: 'Open Sans', sans-serif;
+      color: #dde2ff;
+      line-height: 1.6;
+    }
+    .schedule-panel li strong {
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+    .schedule-panel li.past {
+      color: #93a2c4;
+    }
+    .panel-footer {
+      font-size: 1em;
+      color: #fff;
+      opacity: 0.9;
+      text-decoration: underline;
+      text-align: left;
+      margin-top: 1.1em;
+      transition: color 0.16s;
+      display: inline-block;
       cursor: pointer;
-      transition: color 0.2s;
-      z-index: 100;
+      padding-left: 0.2em;
+      font-family: 'Open Sans', sans-serif;
     }
-    .modal-close:hover { color: var(--bogoroditsa-blue); }
-    .modal ul { padding-left: 1.1em; margin-bottom: 1em;}
-    .modal li { color: #2f2f2f; font-size: 1.1em; margin-bottom: 0.32em;}
-    .modal li.past { color: #b2b2b2; }
-    @media (max-width: 850px) {
-      .main-schedule-block { border-radius: 0 0 18px 18px; padding: 1.6em 0.4em 1.1em 0.4em;}
-      .logo-block img { height: 68px;}
-      .logo-text { font-size: 1.33em; }
+    .panel-footer:hover {
+      color: #b3c6fa;
     }
-    @media (max-width: 480px) {
-      .main-schedule-block { border-radius: 0 0 11px 11px; padding: 1em 0.1em 0.7em 0.1em;}
-      .logo-block img { height: 43px;}
-      .logo-text { font-size: 1em; min-width: 90px;}
+    .panel-expanded {
+      padding-bottom: 2.1em;
+      transition: padding-bottom 0.25s;
     }
-    @keyframes fadeIn { from {opacity:0} to {opacity:1} }
-    @keyframes popup { from {transform:scale(0.97)} to {transform:scale(1)} }
+    .hidden-schedule {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.42s cubic-bezier(.28,.91,.52,1), opacity 0.3s;
+    }
+    .schedule-panel.expanded .hidden-schedule {
+      opacity: 1;
+      max-height: 900px;
+      margin-top: 1.3em;
+      margin-bottom: 0;
+    }
+    /* --- */
+    .footer {
+      margin-top: 3em;
+      font-size: 1em;
+      color: #555;
+    }
+    @media (max-width: 900px) {
+      .logo-text { font-size: 2em; }
+      .schedule-panel { font-size: 1em; padding: 1.5em 0.7em 1em 1.3em; }
+    }
+    @media (max-width: 700px) {
+      .overlay { padding: 0.2em 0.2em 0 0.2em; }
+      .logo-block img { height: 70px; margin: 0 0.4em; }
+      .logo-text { font-size: 1.1em; }
+      .schedule-panel { font-size: 0.97em; padding: 1.1em 0.1em 0.7em 0.7em; min-width: 0; }
+    }
   </style>
 </head>
 <body>
-  <div class="lang-switch" role="group" aria-label="Переключение языков">
-    <span class="active" data-lang="ru">RU</span>
-    <span data-lang="fr">FR</span>
-    <span data-lang="by">BY</span>
-    <span data-lang="ua">UA</span>
-  </div>
-  <header>
-    <div class="logo-block">
-      <div class="logo-text left" id="logo-left">
-        <span>Храм</span>
-        <span>Знамения</span>
-      </div>
-      <img src="assets/icon.gif" alt="Икона Богородицы" />
-      <div class="logo-text right" id="logo-right">
-        <span>Пресвятой</span>
-        <span>Богородицы</span>
-      </div>
+  <div class="overlay">
+    <div class="lang-switch" role="group" aria-label="Переключение языков">
+      <span class="active" data-lang="ru">RU</span>
+      <span data-lang="fr">FR</span>
+      <span data-lang="by">BY</span>
+      <span data-lang="ua">UA</span>
     </div>
-    <div class="subheading" id="subheading">
-      Викариат имени Святых Марии Парижской и Алексия Южинского — Вселенский Патриархат
+
+    <header>
+      <div class="logo-block">
+        <div class="logo-text" id="logo-left">
+          <span>Храм</span>
+          <span>Знамения</span>
+        </div>
+        <img src="assets/icon.gif" alt="Икона Богородицы" />
+        <div class="logo-text" id="logo-right">
+          <span>Пресвятой</span>
+          <span>Богородицы</span>
+        </div>
+      </div>
+      <div class="subheading" id="subheading">
+        Викариат имени Святых Марии Парижской и Алексия Южинского — Вселенский Патриархат
+      </div>
+    </header>
+
+    <div class="schedule-panel" id="schedulePanel">
+      <div class="panel-title" id="panelTitle">АВГУСТ</div>
+      <ul id="mainSchedule"></ul>
+      <div class="panel-footer" id="panelFooter">
+        полное расписание
+      </div>
+      <div class="hidden-schedule" id="hiddenSchedule"></div>
     </div>
-  </header>
 
-  <!-- Главный синий акцент расписания -->
-  <div class="main-schedule-block" id="mainScheduleBlock"></div>
-
-  <!-- Модальное окно для полного расписания -->
-  <div class="modal" id="modalFullSchedule">
-    <div class="modal-content">
-      <button class="modal-close" id="modalClose" title="Закрыть">&times;</button>
-      <div class="modal-title" id="modalTitle">Полное расписание</div>
-      <div id="modalSchedule"></div>
+    <div class="footer" id="footer">
+      87, boulevard Exelmans, Paris 75016<br />
+      Métро: Exelmans (ligne 9)<br />
+      ✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>
     </div>
   </div>
 
   <script>
-    // --- translations: все языки! ---
+    // translations — обязательно дополни для всех языков!
     const translations = {
       ru: {
         logoLeft: ["Храм", "Знамения"],
         logoRight: ["Пресвятой", "Богородицы"],
         subheading: "Викариат имени Святых Марии Парижской и Алексия Южинского — Вселенский Патриархат",
-        month: "АВГУСТ",
+        panelTitle: "АВГУСТ",
         mainSchedule: [
           "<strong>16 суббота, 18:00</strong> – Всенощная (Неделя 10-я по Пятидесятнице) Глас 1-й",
           "<strong>17 воскресенье, 10:30</strong> – Литургия (Свв. семи отроков, иже во Ефесе)"
         ],
         fullSchedule: [
-          "<strong>5 суббота, 18:00</strong> – Всенощная (Неделя 4-я по Пятидесятнице) Глас 3-й",
-          "<strong>6 воскресенье, 10:30</strong> – Литургия (Владимирской иконы Божией Матери)",
-          "<strong>7 понедельник, 10:00</strong> – Литургия (Рождество Крестителя Господня Иоанна)",
-          "<strong>12 суббота, 10:00</strong> – Литургия (Святых апостолов Петра и Павла)",
-          "<strong>12 суббота, 18:00</strong> – Всенощная (Неделя 5-я по Пятидесятнице) Глас 4-й",
-          "<strong>13 воскресенье, 10:30</strong> – Литургия (Собор Святых 12-ти апостолов)",
-          "<strong>19 суббота, 18:00</strong> – Всенощная (Неделя 6-я по Пятидесятнице) Глас 5-й",
-          "<strong>20 воскресенье, 10:30</strong> – Литургия (Прп. Евдокии, вел. кн. Московской)",
-          "<strong>26 суббота, 18:00</strong> – Всенощная (Неделя 7-я по Пятидесятнице) Глас 6-й",
-          "<strong>27 воскресенье, 10:30</strong> – Литургия (Свв. отцов шести Вселенских Соборов)",
-          "<strong>28 понедельник, 10:00</strong> – Литургия (Св. Великого Князя Владимира)",
           "<strong>16 суббота, 18:00</strong> – Всенощная (Неделя 10-я по Пятидесятнице) Глас 1-й",
           "<strong>17 воскресенье, 10:30</strong> – Литургия (Свв. семи отроков, иже во Ефесе)",
           "<strong>18 понедельник, 18:00</strong> – Всенощная (Преображение Господне)",
-          "<strong>19 вторник, 10:00</strong> – Литургия/Освящение воды и фруктов (Преображение Господне – Второй Спас)",
+          "<strong>19 вторник, 10:00</strong> – Литургия/Освящение воды и фруктов (Преображение Господне — Второй Спас)",
           "<strong>27 среда, 18:00</strong> – Всенощная (Успение Пресвятой Богородицы)",
           "<strong>28 четверг, 10:00</strong> – Литургия (Успение Пресвятой Богородицы)"
-        ]
+        ],
+        showFull: "полное расписание",
+        hideFull: "скрыть полное расписание",
+        footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (ligne 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
       },
       fr: {
         logoLeft: ["Église", "Orthodoxe"],
         logoRight: ["Notre-Dame", "du Signe"],
         subheading: "Vicariat Sainte-Marie-de-Paris et Saint-Alexis-d’Ugine – Patriarcat Œcuménique",
-        month: "AOÛT",
+        panelTitle: "AOÛT",
         mainSchedule: [
           "<strong>16 samedi, 18:00</strong> – Vigiles (10<sup>ème</sup> Dimanche après la Pentecôte) 1<sup>er</sup> ton",
           "<strong>17 dimanche, 10:30</strong> – Liturgie (Sept dormants d’Ephèse)"
         ],
         fullSchedule: [
-          "<strong>5 samedi, 18:00</strong> – Vigiles (4<sup>ème</sup> Dimanche après la Pentecôte) 3<sup>ème</sup> ton",
-          "<strong>6 dimanche, 10:30</strong> – Liturgie (Icône de la Sainte Mère de Dieu de Vladimir)",
-          "<strong>7 lundi, 10:00</strong> – Liturgie (Naissance de Saint-Jean Baptiste)",
-          "<strong>12 samedi, 10:00</strong> – Liturgie (Saints Pierre et Paul)",
-          "<strong>12 samedi, 18:00</strong> – Vigiles (5<sup>ème</sup> Dimanche après la Pentecôte) 4<sup>ème</sup> ton",
-          "<strong>13 dimanche, 10:30</strong> – Liturgie (Synaxe des 12 apôtres)",
-          "<strong>19 samedi, 18:00</strong> – Vigiles (6<sup>ème</sup> Dimanche après la Pentecôte) 5<sup>ème</sup> ton",
-          "<strong>20 dimanche, 10:30</strong> – Liturgie (Sainte Eudoxie, princesse de Souzdal)",
-          "<strong>26 samedi, 18:00</strong> – Vigiles (7<sup>ème</sup> Dimanche après la Pentecôte) 6<sup>ème</sup> ton",
-          "<strong>27 dimanche, 10:30</strong> – Liturgie (Saints Pères des six Conciles Œcuméniques)",
-          "<strong>28 lundi, 10:00</strong> – Liturgie (Saint Vladimir, égal aux Apôtres)",
           "<strong>16 samedi, 18:00</strong> – Vigiles (10<sup>ème</sup> Dimanche après la Pentecôte) 1<sup>er</sup> ton",
           "<strong>17 dimanche, 10:30</strong> – Liturgie (Sept dormants d’Ephèse)",
-          "<strong>18 lundi, 18:00</strong> – Vigiles (Transfiguration du Seigneur)",
-          "<strong>19 mardi, 10:00</strong> – Liturgie/ bénédiction d’eau et de fruits (Transfiguration du Seigneur – Second Sauveur)",
-          "<strong>27 mercredi, 18:00</strong> – Vigiles (Dormition de la Très Sainte Mère de Dieu)",
+          "<strong>18 lundi, 18:00</strong> – Vigiles (Transfiguration de N.S. Jésus-Christ)",
+          "<strong>19 mardi, 10:00</strong> – Liturgie/ Bénédiction de l’eau et des fruits (Transfiguration)",
+          "<strong>27 mercredi, 18:00</strong> – Vigiles (Dormition de la Mère de Dieu)",
           "<strong>28 jeudi, 10:00</strong> – Liturgie (Dormition de la Très Sainte Mère de Dieu)"
-        ]
+        ],
+        showFull: "horaire complet",
+        hideFull: "masquer l’horaire complet",
+        footer: `87, boulevard Exelmans, Paris 75016<br />Métro : Exelmans (ligne 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
       },
       by: {
         logoLeft: ["Храм", "Знамення"],
         logoRight: ["Прасвятой", "Багародзіцы"],
         subheading: "Вікарыят імені Святых Марыі Парыжскай і Аляксея Южынскага — Сусветны Патрыярхат",
-        month: "ЖНІВЕНЬ",
+        panelTitle: "ЖНІВЕНЬ",
         mainSchedule: [
           "<strong>16 субота, 18:00</strong> – Усяночная (Тыдзень 10-ы пасля Пяцідзясятніцы) Тон 1-шы",
           "<strong>17 нядзеля, 10:30</strong> – Літургія (Свв. сямі юнакоў, што былі ў Эфесе)"
         ],
         fullSchedule: [
-          "<strong>5 субота, 18:00</strong> – Усяночная (Тыдзень 4-ы пасля Пяцідзясятніцы) Тон 3-ці",
-          "<strong>6 нядзеля, 10:30</strong> – Літургія (Уладзімірскай іконы Божай Маці)",
-          "<strong>7 панядзелак, 10:00</strong> – Літургія (Нараджэнне Хрысціцеля Гасподняга Яна)",
-          "<strong>12 субота, 10:00</strong> – Літургія (Святых Пятра і Паўла)",
-          "<strong>12 субота, 18:00</strong> – Усяночная (Тыдзень 5-ы пасля Пяцідзясятніцы) Тон 4-ты",
-          "<strong>13 нядзеля, 10:30</strong> – Літургія (Сабор Святых 12-ці апосталаў)",
-          "<strong>19 субота, 18:00</strong> – Усяночная (Тыдзень 6-ы пасля Пяцідзясятніцы) Тон 5-ты",
-          "<strong>20 нядзеля, 10:30</strong> – Літургія (Прп. Еўдокіі, вял. княгіні Маскоўскай)",
-          "<strong>27 субота, 18:00</strong> – Усяночная (Тыдзень 7-ы пасля Пяцідзясятніцы) Тон 6-ты",
-          "<strong>27 нядзеля, 10:30</strong> – Літургія (Святых айцоў шасці Сусветных Сабораў)",
-          "<strong>28 панядзелак, 10:00</strong> – Літургія (Св. Вялікага Князя Уладзіміра)",
           "<strong>16 субота, 18:00</strong> – Усяночная (Тыдзень 10-ы пасля Пяцідзясятніцы) Тон 1-шы",
           "<strong>17 нядзеля, 10:30</strong> – Літургія (Свв. сямі юнакоў, што былі ў Эфесе)",
           "<strong>18 панядзелак, 18:00</strong> – Усяночная (Пераяўленне Гасподняе)",
           "<strong>19 аўторак, 10:00</strong> – Літургія/Асвячэнне вады і пладоў (Пераяўленне Гасподняе — Другі Спас)",
           "<strong>27 серада, 18:00</strong> – Усяночная (Успенне Прасвятой Багародзіцы)",
           "<strong>28 чацвер, 10:00</strong> – Літургія (Успенне Прасвятой Багародзіцы)"
-        ]
+        ],
+        showFull: "поўны расклад",
+        hideFull: "схаваць поўны расклад",
+        footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (лінія 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
       },
       ua: {
         logoLeft: ["Храм", "Знамення"],
         logoRight: ["Пресвятої", "Богородиці"],
         subheading: "Вікаріат імені Святих Марії Паризької та Олексія Южинського — Вселенський Патріархат",
-        month: "СЕРПЕНЬ",
+        panelTitle: "СЕРПЕНЬ",
         mainSchedule: [
           "<strong>16 субота, 18:00</strong> – Всеношна (Неділя 10-та після П’ятидесятниці) Глас 1-й",
           "<strong>17 неділя, 10:30</strong> – Літургія (Семи отроків, що у Ефесі)"
         ],
         fullSchedule: [
-          "<strong>5 субота, 18:00</strong> – Всеношна (Неділя 4-та після П’ятидесятниці) Глас 3-й",
-          "<strong>6 неділя, 10:30</strong> – Літургія (Володимирської ікони Божої Матері)",
-          "<strong>7 понеділок, 10:00</strong> – Літургія (Різдво Іоанна Хрестителя)",
-          "<strong>12 субота, 10:00</strong> – Літургія (Святих апостолів Петра і Павла)",
-          "<strong>12 субота, 18:00</strong> – Всеношна (Неділя 5-та після П’ятидесятниці) Глас 4-й",
-          "<strong>13 неділя, 10:30</strong> – Літургія (Собор 12-ти святих апостолів)",
-          "<strong>19 субота, 18:00</strong> – Всеношна (Неділя 6-та після П’ятидесятниці) Глас 5-й",
-          "<strong>20 неділя, 10:30</strong> – Літургія (Прп. Євдокії, вел. кн. Московської)",
-          "<strong>27 субота, 18:00</strong> – Всеношна (Неділя 7-ма після П’ятидесятниці) Глас 6-й",
-          "<strong>27 неділя, 10:30</strong> – Літургія (Святих отців шести Вселенських Соборів)",
-          "<strong>28 понеділок, 10:00</strong> – Літургія (Св. Великого Князя Володимира)",
           "<strong>16 субота, 18:00</strong> – Всеношна (Неділя 10-та після П’ятидесятниці) Глас 1-й",
           "<strong>17 неділя, 10:30</strong> – Літургія (Семи отроків, що у Ефесі)",
           "<strong>18 понеділок, 18:00</strong> – Всеношна (Преображення Господнє)",
           "<strong>19 вівторок, 10:00</strong> – Літургія, освячення води та плодів (Преображення Господнє – Другий Спас)",
           "<strong>27 середа, 18:00</strong> – Всеношна (Успіння Пресвятої Богородиці)",
           "<strong>28 четвер, 10:00</strong> – Літургія (Успіння Пресвятої Богородиці)"
-        ]
+        ],
+        showFull: "повний розклад",
+        hideFull: "приховати розклад",
+        footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (лінія 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
       }
     };
 
-    // --- Динамика расписания (серые прошедшие) ---
+    let currentLang = 'ru';
+
     function isPast(text) {
       const m = text.match(/<strong>(\d+)[^\d]*(?:, )?(\d{1,2}):(\d{2})<\/strong>/i);
       if (!m) return false;
-      let [day, hour, minute] = [parseInt(m[1]), parseInt(m[2]), parseInt(m[3])];
-      // Для простоты — август 2024
-      let dt = new Date(2024, 7, day, hour, minute);
-      return (Date.now() - dt.getTime()) > 2 * 60 * 60 * 1000;
+      let [day, hour, min] = [parseInt(m[1]), parseInt(m[2]), parseInt(m[3])];
+      let now = new Date();
+      let year = now.getFullYear();
+      let month = now.getMonth() + 1; // 1-based
+      if (month === 8) month = 8; // август (для теста)
+      let dt = new Date(year, 7, day, hour, min); // 7 — август
+      return now.getTime() - dt.getTime() > 2 * 60 * 60 * 1000;
     }
 
-    // --- Основной рендер блока расписания ---
     function renderMainSchedule(lang) {
-      const tr = translations[lang];
-      let html = `<div class="month">${tr.month}</div><ul>`;
-      tr.mainSchedule.forEach(text => {
-        html += `<li${isPast(text) ? ' class="past"' : ''}>${text}</li>`;
-      });
-      html += `</ul><span class="show-all" id="showAllSchedule">${{
-        ru: "полное расписание", fr: "horaire complet", by: "поўны расклад", ua: "повний розклад"
-      }[lang]}</span>`;
-      document.getElementById('mainScheduleBlock').innerHTML = html;
+      const t = translations[lang];
+      document.getElementById('logo-left').innerHTML = `<span>${t.logoLeft[0]}</span><span>${t.logoLeft[1]}</span>`;
+      document.getElementById('logo-right').innerHTML = `<span>${t.logoRight[0]}</span><span>${t.logoRight[1]}</span>`;
+      document.getElementById('subheading').innerText = t.subheading;
+      document.getElementById('panelTitle').innerText = t.panelTitle;
+      document.getElementById('footer').innerHTML = t.footer;
+
+      // Краткое расписание (только основные службы)
+      document.getElementById('mainSchedule').innerHTML = t.mainSchedule.map(
+        text => `<li${isPast(text) ? ' class="past"' : ''}>${text}</li>`
+      ).join('');
+
+      // Скрытое расписание (все остальные службы, которых нет среди первых)
+      let extra = t.fullSchedule.slice(t.mainSchedule.length);
+      document.getElementById('hiddenSchedule').innerHTML = extra.map(
+        text => `<li${isPast(text) ? ' class="past"' : ''}>${text}</li>`
+      ).join('');
+      document.getElementById('hiddenSchedule').style.maxHeight = "0";
+      document.getElementById('hiddenSchedule').style.opacity = "0";
+      document.getElementById('panelFooter').innerText = t.showFull;
+
+      // Сбросить раскрытие
+      document.getElementById('schedulePanel').classList.remove('expanded');
     }
 
-    // --- Модальное окно (полное расписание) ---
-    function showModalSchedule(lang) {
-      const tr = translations[lang];
-      let html = `<ul>`;
-      tr.fullSchedule.forEach(text => {
-        html += `<li${isPast(text) ? ' class="past"' : ''}>${text}</li>`;
-      });
-      html += `</ul>`;
-      document.getElementById('modalSchedule').innerHTML = html;
-      document.getElementById('modalFullSchedule').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeModal() {
-      document.getElementById('modalFullSchedule').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-    document.getElementById('modalClose').onclick = closeModal;
-    document.getElementById('modalFullSchedule').onclick = function(e) {
-      if (e.target === this) closeModal();
-    };
-    document.addEventListener('keydown', function(e) {
-      if (e.key === "Escape") closeModal();
-    });
-
-    // --- Языки и заголовки ---
-    const langSwitchers = document.querySelectorAll('.lang-switch span');
-    let currentLang = 'ru';
-    function setHeaderLang(lang) {
-      const tr = translations[lang];
-      document.getElementById('logo-left').innerHTML = `<span>${tr.logoLeft[0]}</span><span>${tr.logoLeft[1]}</span>`;
-      document.getElementById('logo-right').innerHTML = `<span>${tr.logoRight[0]}</span><span>${tr.logoRight[1]}</span>`;
-      document.getElementById('subheading').innerText = tr.subheading;
-    }
-    langSwitchers.forEach(s => {
-      s.onclick = () => {
-        langSwitchers.forEach(ss => ss.classList.remove('active'));
+    // Языки
+    document.querySelectorAll('.lang-switch span').forEach(s => {
+      s.onclick = function () {
+        document.querySelectorAll('.lang-switch span').forEach(x => x.classList.remove('active'));
         s.classList.add('active');
         currentLang = s.dataset.lang;
-        setHeaderLang(currentLang);
         renderMainSchedule(currentLang);
       };
     });
 
-    // --- Клик на "полное расписание" ---
-    document.addEventListener('click', function(e) {
-      if (e.target && e.target.id === "showAllSchedule") {
-        showModalSchedule(currentLang);
+    // Открытие/скрытие расписания
+    const schedulePanel = document.getElementById('schedulePanel');
+    let expanded = false;
+    schedulePanel.onclick = function (e) {
+      // Только если клик не по ссылке в футере!
+      if (e.target.closest('a')) return;
+      expanded = !expanded;
+      const t = translations[currentLang];
+      if (expanded) {
+        schedulePanel.classList.add('expanded');
+        document.getElementById('hiddenSchedule').style.maxHeight = "900px";
+        document.getElementById('hiddenSchedule').style.opacity = "1";
+        document.getElementById('panelFooter').innerText = t.hideFull;
+      } else {
+        schedulePanel.classList.remove('expanded');
+        document.getElementById('hiddenSchedule').style.maxHeight = "0";
+        document.getElementById('hiddenSchedule').style.opacity = "0";
+        document.getElementById('panelFooter').innerText = t.showFull;
       }
-    });
+    };
 
-    // --- Первый запуск ---
-    setHeaderLang(currentLang);
     renderMainSchedule(currentLang);
   </script>
 </body>
