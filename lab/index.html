@@ -4,8 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Храм Знамения Пресвятой Богородицы в Париже</title>
+  <!-- SEO & OpenGraph -->
+  <meta name="description" content="Православный храм Знамения Пресвятой Богородицы в Париже. Расписание служб, история прихода, воскресная школа и другие разделы. Добро пожаловать!" />
+  <meta name="keywords" content="православный храм, Париж, богородица, расписание служб, воскресная школа, православная церковь" />
+  <meta property="og:title" content="Храм Знамения Пресвятой Богородицы в Париже" />
+  <meta property="og:description" content="Расписание богослужений, история, воскресная школа, православная жизнь в Париже." />
+  <meta property="og:image" content="assets/icon2.gif" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ru_RU" />
   <link rel="icon" href="assets/icon2.gif" type="image/gif" />
-  <link href="https://fonts.googleapis.com/css2?family=Forum&family=Open+Sans&family=Roboto+Mono&display=swap" rel="stylesheet" />
+  <!-- Google Fonts + Fallbacks -->
+  <link href="https://fonts.googleapis.com/css2?family=Forum&family=Open+Sans:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bogoroditsa-blue: #1939A5;
@@ -19,37 +28,52 @@
       --footer-bg: #d5cbb9;
       --schedule-gradient: linear-gradient(to bottom, rgba(25,57,165,0.98) 70%, rgba(25,57,165,0.81) 100%);
     }
+    html { box-sizing: border-box; }
+    *, *:before, *:after { box-sizing: inherit; }
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Open Sans', sans-serif;
+      font-family: 'Open Sans', Arial, Helvetica, sans-serif;
       background: var(--main-bg);
       color: #2f2f2f;
       min-height: 100vh;
       overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* Верхний бар с меню и языками */
-    .header-bar {
-      width: 100vw;
+    /* ======================== Header & Nav */
+    header.site-header {
+      background: var(--main-bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    nav {
+      width: 100%;
       background: var(--header-bg);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-family: 'Roboto Mono', monospace;
-      font-size: 1.28em;
+      font-family: 'Roboto Mono', 'Courier New', monospace;
+      font-size: 1.16em;
       padding: 0.32em 2em 0.18em 2em;
-      box-sizing: border-box;
-      position: relative;
-      z-index: 42;
       min-height: 54px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid #eee;
     }
-    .header-bar-left {
+    .nav-left, .nav-right {
       display: flex;
       align-items: center;
       gap: 1.3em;
-      margin-left: 1vw;
     }
+    .nav-left { margin-left: 0; }
+    .nav-right { margin-right: 0; }
     .menu-link {
       color: var(--menu-color);
       text-decoration: none;
@@ -58,23 +82,26 @@
       border-radius: 7px;
       transition: color 0.2s, background 0.18s;
       cursor: pointer;
+      background: none;
+      border: none;
+      font: inherit;
     }
-    .menu-link:hover, .menu-link.active {
+    .menu-link:focus { outline: 2px solid var(--menu-active); }
+    .menu-link[aria-current="page"],
+    .menu-link.active,
+    .menu-link:hover {
       color: var(--menu-active);
       background: #ece5d7;
     }
-    .header-bar-right {
-      display: flex;
-      align-items: center;
-      gap: 1.2em;
-      margin-right: 1vw;
-    }
+    /* Language switcher */
     .lang-switch {
       display: flex;
       gap: 1.1em;
     }
-    .lang-switch span {
+    .lang-btn {
       color: var(--menu-color);
+      background: none;
+      border: none;
       font-size: 1em;
       font-family: 'Roboto Mono', monospace;
       font-weight: 400;
@@ -82,15 +109,17 @@
       transition: color 0.2s;
       user-select: none;
       padding: 0 0.09em;
+      border-radius: 4px;
     }
-    .lang-switch span.active {
+    .lang-btn.active,
+    .lang-btn:focus {
       color: var(--menu-active);
       font-weight: 700;
       background: #f2ede0;
-      border-radius: 4px;
+      outline: 2px solid var(--menu-active);
     }
 
-    /* Мобильное меню */
+    /* Hamburger for mobile */
     .hamburger {
       display: none;
       flex-direction: column;
@@ -98,7 +127,9 @@
       cursor: pointer;
       margin-left: 1vw;
       margin-right: 0.2em;
-      z-index: 1002;
+      z-index: 100;
+      background: none;
+      border: none;
     }
     .hamburger span {
       display: block;
@@ -108,26 +139,16 @@
       border-radius: 4px;
       transition: all 0.25s;
     }
-    @media (max-width: 720px) {
-      .header-bar { font-size: 1.02em; padding-left: 0.5em; padding-right: 0.5em;}
-      .header-bar-left { gap: 0.6em; }
-      .header-bar-right { gap: 0.5em;}
-    }
-    @media (max-width: 650px) {
-      .header-bar { font-size: 0.94em; min-height: 44px;}
-      .header-bar-left, .header-bar-right { display: none; }
-      .hamburger { display: flex; margin-left: auto; }
-    }
 
-    /* Мобильное боковое меню */
+    /* ========== Mobile Nav */
     .mobile-menu {
       position: fixed;
       top: 0; right: -100vw;
-      width: 72vw; max-width: 360px;
+      width: 82vw; max-width: 360px;
       height: 100vh;
       background: #f7f2e8;
       box-shadow: -7px 0 38px #1939a513;
-      z-index: 1200;
+      z-index: 1001;
       display: flex;
       flex-direction: column;
       padding: 2em 1.2em 1.4em 1.2em;
@@ -135,6 +156,19 @@
       transition: right 0.33s cubic-bezier(.67,-0.01,.42,.99);
     }
     .mobile-menu.open { right: 0; }
+    .mobile-menu-close {
+      position: absolute;
+      top: 1.0em; right: 1.2em;
+      font-size: 2.7em;
+      color: #b8a99e;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      z-index: 1400;
+      line-height: 1;
+    }
+    .mobile-menu-close:hover, .mobile-menu-close:focus { color: #be6a45;}
     .mobile-menu-link {
       font-size: 1.16em;
       color: var(--menu-color);
@@ -147,45 +181,23 @@
       padding: 0.23em 0.12em;
       transition: color 0.18s, background 0.19s;
       cursor: pointer;
+      background: none;
+      border: none;
     }
-    .mobile-menu-link:hover,
-    .mobile-menu-link.active {
+    .mobile-menu-link.active, .mobile-menu-link:hover, .mobile-menu-link:focus {
       color: var(--menu-active);
       background: #f3eae0;
       font-weight: 700;
     }
-    .mobile-menu-close {
-      position: absolute;
-      top: 1.0em; right: 1.2em;
-      font-size: 2.7em;
-      color: #b8a99e;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
-      z-index: 1400;
-    }
-    .mobile-menu-close:hover { color: #be6a45;}
     .mobile-menu-langs {
       margin-top: 2.8em;
       display: flex;
       gap: 1.3em;
       font-size: 1.09em;
     }
-    .mobile-menu-langs span { color: var(--menu-color); cursor: pointer; }
-    .mobile-menu-langs span.active { color: var(--menu-active); font-weight: 700; background: #f2ede0; border-radius: 4px; padding: 0 0.18em;}
+    .mobile-menu-langs .lang-btn { padding: 0 0.18em;}
 
-    /* Хедер с логотипом и названием */
-    .site-header {
-      background: var(--main-bg);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 100vw;
-      margin: 0;
-      padding: 0;
-    }
+    /* Header with logo */
     .header-wrap {
       display: flex;
       flex-direction: row;
@@ -200,7 +212,7 @@
       position: relative;
     }
     .logo-title {
-      font-family: 'Forum', serif;
+      font-family: 'Forum', Georgia, serif;
       font-size: clamp(2.7em, 5vw, 5em);
       color: var(--bogoroditsa-blue);
       text-shadow: 0 1px 10px #fff7;
@@ -227,26 +239,8 @@
       display: block;
       z-index: 3;
     }
-    @media (max-width: 950px) {
-      .header-wrap { gap: 0.7vw; min-height: 110px;}
-      .logo-title { font-size: clamp(1.9em, 5vw, 3.5em);}
-      .logo-icon { height: clamp(80px, 20vw, 120px); width: clamp(62px, 13vw, 94px);}
-    }
-    @media (max-width: 600px) {
-      .header-wrap { gap: 2vw; margin-top: 4vw; margin-bottom: 2vw;}
-      .logo-title, .logo-title.right {
-        font-size: clamp(1.47em, 9vw, 3.15em);
-        min-width: unset;
-        margin: 0;
-      }
-      .logo-icon {
-        height: clamp(85px, 42vw, 155px);
-        width: clamp(50px, 31vw, 112px);
-        margin: 0 0.7vw;
-      }
-    }
     .header-desc {
-      font-family: 'Forum', serif;
+      font-family: 'Forum', Georgia, serif;
       font-size: 1.09em;
       color: #988c7c;
       text-align: center;
@@ -255,76 +249,21 @@
       letter-spacing: 0.01em;
       font-weight: 400;
     }
-    @media (max-width: 600px) {
-      .header-desc {
-        font-size: 0.99em;
-        margin-top: 0.26em;
-        margin-bottom: 0.77em;
-      }
-    }
 
-    /* --- СЛОЙ РАСПИСАНИЯ --- */
-    .schedule-overlay {
-      position: fixed;
-      left: 0; right: 0;
-      top: 0; /* Будет скорректировано JS */
-      z-index: 1001;
-      width: 100vw;
-      pointer-events: auto;
-      animation: fadeIn 0.34s;
-      box-shadow: 0 20px 54px #1939a529;
-      background: var(--schedule-gradient);
-      opacity: 0.96;
-      transition: opacity .36s;
-      padding-bottom: 1.8em;
-      /* Этот блок будет виден только когда открыт */
-      display: none;
-    }
-    .schedule-overlay.open {
-      display: block;
-    }
-    .schedule-overlay-inner {
-      max-width: 740px;
-      margin: 0 auto;
-      padding: 2.2em 0 1.1em 0;
-    }
-    .schedule-overlay .schedule-row {
-      font-size: clamp(1.14em, 2.7vw, 1.36em);
-      color: #fff;
-      font-weight: 400;
-      margin-bottom: 0.25em;
-      text-align: left;
-      display: flex;
-      align-items: baseline;
-      gap: 0.7em;
-    }
-    .schedule-overlay .schedule-date {
-      font-weight: 700;
-      color: #fff;
-      font-size: inherit;
-    }
-    .schedule-overlay .schedule-desc {
-      font-weight: 400;
-      color: #fff;
-      font-size: inherit;
-      opacity: 0.99;
-    }
-
-    /* Обычный режим расписания (всегда на месте) */
+    /* ========== Schedule */
     .schedule-main {
-      width: 100vw;
+      width: 100%;
       margin: 0 auto;
-      padding: 0;
-      box-sizing: border-box;
-      position: relative;
-      z-index: 25;
-      min-height: 50px;
       background: var(--bogoroditsa-blue);
       border: none;
       display: flex;
       flex-direction: column;
       align-items: stretch;
       justify-content: flex-start;
+      position: relative;
+      z-index: 5;
+      min-height: 50px;
+      box-sizing: border-box;
     }
     .schedule-main-inner {
       margin-left: clamp(2vw, 11vw, 8vw);
@@ -333,7 +272,7 @@
       padding: 1.15em 0 0.35em 0;
     }
     .schedule-row {
-      font-family: 'Open Sans', sans-serif;
+      font-family: 'Open Sans', Arial, sans-serif;
       font-size: clamp(1.14em, 2.7vw, 1.36em);
       margin-bottom: 0.18em;
       text-align: left;
@@ -376,16 +315,54 @@
       margin-top: 2px;
       position: relative;
       z-index: 6;
+      background: none;
+      border: none;
+      padding: 0;
     }
     .schedule-arrow svg {
       width: 21px; height: 15px; fill: #fff;
       transition: transform .25s;
       display: block;
     }
+    /* Overlay schedule */
+    .schedule-overlay {
+      position: fixed;
+      left: 0; top: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: auto;
+      background: var(--schedule-gradient);
+      opacity: 0.97;
+      transition: opacity .36s;
+      z-index: 999;
+      box-shadow: 0 20px 54px #1939a529;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      overflow-y: auto;
+    }
+    .schedule-overlay.open { display: flex; }
+    .schedule-overlay-inner {
+      max-width: 740px;
+      margin: 3em auto;
+      padding: 2.2em 1.2em 1.1em 1.2em;
+      background: transparent;
+      width: 100%;
+    }
+    .schedule-overlay .schedule-row {
+      font-size: clamp(1.14em, 2.7vw, 1.36em);
+      color: #fff;
+      font-weight: 400;
+      margin-bottom: 0.25em;
+      text-align: left;
+      display: flex;
+      align-items: baseline;
+      gap: 0.7em;
+    }
     .schedule-overlay .schedule-arrow-wrap,
     .schedule-overlay .schedule-arrow { display: none; }
 
-    /* Карточки */
+    /* ========== Blocks row (cards) */
     .blocks-row {
       display: flex;
       flex-wrap: wrap;
@@ -395,16 +372,15 @@
       position: relative;
       z-index: 5;
       max-width: 1200px;
-      /* Убираем filter! */
     }
     .card-block {
       background: #fff;
       border-radius: var(--block-radius);
       box-shadow: var(--box-shadow);
-      width: clamp(240px, 22vw, 310px);
-      min-width: 180px;
+      width: clamp(240px, 25vw, 320px);
+      min-width: 150px;
       min-height: 240px;
-      aspect-ratio: 0.8/1; /* min высота >= ширина */
+      aspect-ratio: 0.8/1;
       cursor: pointer;
       transition: transform 0.23s, box-shadow 0.24s;
       overflow: hidden;
@@ -414,6 +390,7 @@
       justify-content: flex-start;
       margin-bottom: 0.1em;
     }
+    .card-block:focus { outline: 2px solid var(--bogoroditsa-blue);}
     .card-block:hover {
       transform: scale(1.027);
       box-shadow: 0 14px 48px #1939a523;
@@ -438,7 +415,7 @@
       text-align: center;
     }
     .card-title {
-      font-family: 'Forum', serif;
+      font-family: 'Forum', Georgia, serif;
       font-size: 1.11em;
       color: var(--bogoroditsa-blue);
       margin: 0.45em 0 0.2em 0;
@@ -455,19 +432,9 @@
       text-align: center;
       font-weight: 400;
     }
-    @media (max-width: 900px) {
-      .blocks-row { flex-direction: column; gap: 1.1em; }
-      .card-block { width: 97vw; min-width: 160px;}
-      .card-img { height: 140px;}
-    }
-    @media (max-width: 600px) {
-      .blocks-row { gap: 0.7em; }
-      .card-block { border-radius: 9px; width: 97vw; }
-      .card-img { border-radius: 0; }
-    }
 
-    /* Футер */
-    .footer {
+    /* ========== Footer */
+    footer.footer {
       margin: 0;
       padding: 2em 0 1.4em 0;
       font-size: 1.07em;
@@ -475,7 +442,7 @@
       background: var(--footer-bg);
       text-align: center;
       letter-spacing: 0.01em;
-      width: 100vw;
+      width: 100%;
       border-radius: 0 !important;
       position: relative;
       bottom: 0;
@@ -483,46 +450,85 @@
     }
     .footer a { color: var(--bogoroditsa-blue); text-decoration: underline dotted; }
     .footer a:hover { color: #e15f41; }
+
+    @media (max-width: 950px) {
+      .header-wrap { gap: 0.7vw; min-height: 110px;}
+      .logo-title { font-size: clamp(1.9em, 5vw, 3.5em);}
+      .logo-icon { height: clamp(80px, 20vw, 120px); width: clamp(62px, 13vw, 94px);}
+      .blocks-row { gap: 1.1em; }
+    }
+    @media (max-width: 720px) {
+      nav { font-size: 1.02em; padding-left: 0.5em; padding-right: 0.5em;}
+      .nav-left, .nav-right { gap: 0.6em; }
+      .header-wrap { gap: 2vw; }
+    }
+    @media (max-width: 650px) {
+      nav { font-size: 0.94em; min-height: 44px;}
+      .nav-left, .nav-right { display: none; }
+      .hamburger { display: flex; margin-left: auto; }
+      .blocks-row { flex-direction: column; gap: 1em; }
+      .card-block { width: 98vw; min-width: 140px;}
+    }
+    @media (max-width: 400px) {
+      .blocks-row { gap: 0.3em;}
+      .card-block { width: 99vw; }
+      .header-wrap { min-height: 66px; }
+    }
+    @media (max-width: 600px) {
+      .header-desc { font-size: 0.99em; margin-top: 0.26em; margin-bottom: 0.77em; }
+      .card-block { border-radius: 9px; }
+      .card-img { border-radius: 0; }
+      .logo-title, .logo-title.right {
+        font-size: clamp(1.47em, 9vw, 3.15em);
+        min-width: unset;
+        margin: 0;
+      }
+      .logo-icon {
+        height: clamp(85px, 42vw, 155px);
+        width: clamp(50px, 31vw, 112px);
+        margin: 0 0.7vw;
+      }
+    }
     @keyframes fadeIn { from {opacity:0} to {opacity:1} }
   </style>
 </head>
 <body>
-  <!-- Верхний бар: меню и языки -->
-  <div class="header-bar">
-    <div class="header-bar-left">
-      <a class="menu-link" href="#">Подкаст</a>
-      <a class="menu-link" href="#">Интернет-магазин</a>
-      <a class="menu-link" href="#">Пожертвовать</a>
+  <!-- Навигация -->
+  <nav role="navigation" aria-label="Главное меню">
+    <div class="nav-left" id="desktop-menu">
+      <a class="menu-link" href="#" data-link="podcast">Подкаст</a>
+      <a class="menu-link" href="#" data-link="shop">Интернет-магазин</a>
+      <a class="menu-link" href="#" data-link="donate">Пожертвовать</a>
     </div>
-    <div class="hamburger" id="hamburger" aria-label="Открыть меню">
+    <button class="hamburger" id="hamburger" aria-label="Открыть меню" aria-controls="mobileMenu" aria-expanded="false">
       <span></span><span></span><span></span>
-    </div>
-    <div class="header-bar-right">
-      <div class="lang-switch">
-        <span class="active" data-lang="ru">RU</span>
-        <span data-lang="fr">FR</span>
-        <span data-lang="by">BY</span>
-        <span data-lang="ua">UA</span>
+    </button>
+    <div class="nav-right">
+      <div class="lang-switch" id="lang-switch">
+        <button class="lang-btn active" type="button" data-lang="ru" aria-current="true" aria-label="Русский">RU</button>
+        <button class="lang-btn" type="button" data-lang="fr" aria-label="Français">FR</button>
+        <button class="lang-btn" type="button" data-lang="by" aria-label="Беларуская">BY</button>
+        <button class="lang-btn" type="button" data-lang="ua" aria-label="Українська">UA</button>
       </div>
     </div>
-  </div>
+  </nav>
 
   <!-- Мобильное меню -->
-  <div class="mobile-menu" id="mobileMenu">
-    <button class="mobile-menu-close" id="mobileMenuClose" title="Закрыть меню">&times;</button>
-    <a class="mobile-menu-link" href="#">Подкаст</a>
-    <a class="mobile-menu-link" href="#">Интернет-магазин</a>
-    <a class="mobile-menu-link" href="#">Пожертвовать</a>
-    <div class="mobile-menu-langs">
-      <span class="active" data-lang="ru">RU</span>
-      <span data-lang="fr">FR</span>
-      <span data-lang="by">BY</span>
-      <span data-lang="ua">UA</span>
+  <aside class="mobile-menu" id="mobileMenu" aria-modal="true" aria-hidden="true" role="dialog">
+    <button class="mobile-menu-close" id="mobileMenuClose" title="Закрыть меню" aria-label="Закрыть меню">&times;</button>
+    <a class="mobile-menu-link" href="#" data-link="podcast">Подкаст</a>
+    <a class="mobile-menu-link" href="#" data-link="shop">Интернет-магазин</a>
+    <a class="mobile-menu-link" href="#" data-link="donate">Пожертвовать</a>
+    <div class="mobile-menu-langs" id="mobile-lang-switch">
+      <button class="lang-btn active" type="button" data-lang="ru" aria-label="Русский">RU</button>
+      <button class="lang-btn" type="button" data-lang="fr" aria-label="Français">FR</button>
+      <button class="lang-btn" type="button" data-lang="by" aria-label="Беларуская">BY</button>
+      <button class="lang-btn" type="button" data-lang="ua" aria-label="Українська">UA</button>
     </div>
-  </div>
+  </aside>
 
   <!-- Хедер: логотип и название -->
-  <header class="site-header">
+  <header class="site-header" role="banner">
     <div class="header-wrap">
       <div class="logo-title" id="logo-left"><span>Храм</span><span>Знамения</span></div>
       <img src="assets/icon2.gif" alt="Икона Богородицы" class="logo-icon" />
@@ -533,112 +539,204 @@
     </div>
   </header>
 
-  <!-- Расписание: всегда на месте -->
-  <div class="schedule-main" id="schedule-main">
+  <!-- Расписание -->
+  <section class="schedule-main" id="schedule-main" aria-label="Ближайшие службы">
     <div class="schedule-main-inner" id="schedule-main-inner">
-      <!-- Две ближайшие службы — тут -->
+      <!-- Две ближайшие службы -->
     </div>
     <div class="schedule-arrow-wrap" id="schedule-arrow-wrap">
-      <div class="schedule-arrow" id="schedule-arrow" title="Показать все">
+      <button class="schedule-arrow" id="schedule-arrow" title="Показать все" aria-label="Показать все службы">
         <svg viewBox="0 0 20 12"><path d="M2 2l8 8 8-8"/></svg>
-      </div>
+      </button>
     </div>
-  </div>
-
-  <!-- Слой расписания поверх карточек (будет появляться при раскрытии) -->
-  <div class="schedule-overlay" id="schedule-overlay">
+  </section>
+  <!-- Оверлей расписания -->
+  <div class="schedule-overlay" id="schedule-overlay" tabindex="-1" aria-modal="true" role="dialog" aria-label="Все службы">
     <div class="schedule-overlay-inner" id="schedule-overlay-inner">
-      <!-- Весь список — сюда! -->
+      <!-- Весь список -->
     </div>
   </div>
 
   <!-- Карточки -->
-  <div class="blocks-row" id="main-blocks">
-    <div class="card-block" data-block="history">
+  <main class="blocks-row" id="main-blocks">
+    <section class="card-block" tabindex="0" data-block="history">
       <img class="card-img" src="assets/church_outside.jpg" alt="Вид храма" />
       <div class="card-content">
-        <div class="card-title">История прихода</div>
-        <div class="card-desc">Как всё начиналось. Кратко о главном.</div>
+        <div class="card-title" data-i18n="history_title">История прихода</div>
+        <div class="card-desc" data-i18n="history_desc">Как всё начиналось. Кратко о главном.</div>
       </div>
-    </div>
-    <div class="card-block" data-block="clergy">
+    </section>
+    <section class="card-block" tabindex="0" data-block="clergy">
       <img class="card-img" src="assets/clergy.jpg" alt="Клирики храма" />
       <div class="card-content">
-        <div class="card-title">Клирики храма</div>
-        <div class="card-desc">Служащие, настоятели, диаконы и псаломщики.</div>
+        <div class="card-title" data-i18n="clergy_title">Клирики храма</div>
+        <div class="card-desc" data-i18n="clergy_desc">Служащие, настоятели, диаконы и псаломщики.</div>
       </div>
-    </div>
-    <div class="card-block" data-block="reading">
+    </section>
+    <section class="card-block" tabindex="0" data-block="reading">
       <img class="card-img" src="assets/reading.jpg" alt="Чтение дня" />
       <div class="card-content">
-        <div class="card-title">Чтение дня</div>
-        <div class="card-desc">Слово на каждый день, молитвы, отрывки Евангелия.</div>
+        <div class="card-title" data-i18n="reading_title">Чтение дня</div>
+        <div class="card-desc" data-i18n="reading_desc">Слово на каждый день, молитвы, отрывки Евангелия.</div>
       </div>
-    </div>
-    <div class="card-block" data-block="library">
+    </section>
+    <section class="card-block" tabindex="0" data-block="library">
       <img class="card-img" src="assets/library.jpg" alt="Библиотека" />
       <div class="card-content">
-        <div class="card-title">Библиотека</div>
-        <div class="card-desc">Книги, статьи, аудио и видео для всех возрастов.</div>
+        <div class="card-title" data-i18n="library_title">Библиотека</div>
+        <div class="card-desc" data-i18n="library_desc">Книги, статьи, аудио и видео для всех возрастов.</div>
       </div>
-    </div>
-    <div class="card-block" data-block="school">
+    </section>
+    <section class="card-block" tabindex="0" data-block="school">
       <img class="card-img" src="assets/school.jpg" alt="Воскресная школа" />
       <div class="card-content">
-        <div class="card-title">Воскресная школа</div>
-        <div class="card-desc">Обучение детей и взрослых, творческие мастер-классы.</div>
+        <div class="card-title" data-i18n="school_title">Воскресная школа</div>
+        <div class="card-desc" data-i18n="school_desc">Обучение детей и взрослых, творческие мастер-классы.</div>
       </div>
-    </div>
-    <div class="card-block" data-block="white">
+    </section>
+    <section class="card-block" tabindex="0" data-block="white">
       <img class="card-img" src="assets/white_movement.jpg" alt="Белое движение" />
       <div class="card-content">
-        <div class="card-title">Белое движение</div>
-        <div class="card-desc">История и наследие Белого движения во Франции.</div>
+        <div class="card-title" data-i18n="white_title">Белое движение</div>
+        <div class="card-desc" data-i18n="white_desc">История и наследие Белого движения во Франции.</div>
       </div>
-    </div>
-    <div class="card-block" data-block="icons">
+    </section>
+    <section class="card-block" tabindex="0" data-block="icons">
       <img class="card-img" src="assets/icon_inside.jpg" alt="Иконы" />
       <div class="card-content">
-        <div class="card-title">Иконы</div>
-        <div class="card-desc">Иконописные традиции, чудеса, галерея образов.</div>
+        <div class="card-title" data-i18n="icons_title">Иконы</div>
+        <div class="card-desc" data-i18n="icons_desc">Иконописные традиции, чудеса, галерея образов.</div>
       </div>
-    </div>
-    <div class="card-block" data-block="choir">
+    </section>
+    <section class="card-block" tabindex="0" data-block="choir">
       <img class="card-img" src="assets/choir.jpg" alt="Хор" />
       <div class="card-content">
-        <div class="card-title">Хор</div>
-        <div class="card-desc">Профессиональное и любительское хоровое служение.</div>
+        <div class="card-title" data-i18n="choir_title">Хор</div>
+        <div class="card-desc" data-i18n="choir_desc">Профессиональное и любительское хоровое служение.</div>
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
 
-  <!-- Footer -->
-  <div class="footer" id="footer">
-    87, boulevard Exelmans, Paris 75016<br>
-    Метро: Exelmans (ligne 9)<br>
-    ✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>
-  </div>
+  <!-- Футер -->
+  <footer class="footer" id="footer" role="contentinfo">
+    <address>
+      87, boulevard Exelmans, Paris 75016<br>
+      Метро: Exelmans (ligne 9)<br>
+      ✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>
+    </address>
+  </footer>
 
   <script>
-    // --- Мобильное меню гамбургер ---
+    // ---------- ACCESSIBLE MOBILE MENU -----------
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
     const mobileMenuClose = document.getElementById('mobileMenuClose');
-    hamburger.onclick = () => mobileMenu.classList.add('open');
-    mobileMenuClose.onclick = () => mobileMenu.classList.remove('open');
-    mobileMenu.onclick = e => { if (e.target === mobileMenu) mobileMenu.classList.remove('open'); };
 
-    // --- Языки (переключение синхронизировано) ---
-    function setLangAll(lang) {
-      document.querySelectorAll('[data-lang]').forEach(el => el.classList.toggle('active', el.dataset.lang === lang));
-      // Тут может быть твоя логика для смены языка
-      renderSchedule(lang);
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.add('open');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      hamburger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflowY = 'hidden';
+      mobileMenu.focus();
+    });
+    mobileMenuClose.addEventListener('click', closeMobileMenu);
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('open');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflowY = '';
     }
-    document.querySelectorAll('[data-lang]').forEach(el => {
-      el.onclick = () => setLangAll(el.dataset.lang);
+    // Закрытие по клику вне меню или по Escape
+    mobileMenu.addEventListener('click', e => {
+      if (e.target === mobileMenu) closeMobileMenu();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === "Escape" && mobileMenu.classList.contains('open')) {
+        closeMobileMenu();
+      }
     });
 
-    // --- Расписание на всех языках ---
+    // ------------ UNIFIED LANGUAGE SWITCHER ----------------
+    // Список всех переключателей языка (desktop + mobile)
+    function getAllLangButtons() {
+      return [...document.querySelectorAll('.lang-btn')];
+    }
+    // Переводы для карточек (пример: расширяй по мере наполнения сайта)
+    const i18n = {
+      ru: {
+        history_title: "История прихода",
+        history_desc: "Как всё начиналось. Кратко о главном.",
+        clergy_title: "Клирики храма",
+        clergy_desc: "Служащие, настоятели, диаконы и псаломщики.",
+        reading_title: "Чтение дня",
+        reading_desc: "Слово на каждый день, молитвы, отрывки Евангелия.",
+        library_title: "Библиотека",
+        library_desc: "Книги, статьи, аудио и видео для всех возрастов.",
+        school_title: "Воскресная школа",
+        school_desc: "Обучение детей и взрослых, творческие мастер-классы.",
+        white_title: "Белое движение",
+        white_desc: "История и наследие Белого движения во Франции.",
+        icons_title: "Иконы",
+        icons_desc: "Иконописные традиции, чудеса, галерея образов.",
+        choir_title: "Хор",
+        choir_desc: "Профессиональное и любительское хоровое служение."
+      },
+      fr: {
+        history_title: "Histoire de la paroisse",
+        history_desc: "Comment tout a commencé. L’essentiel en bref.",
+        clergy_title: "Clergé de l'église",
+        clergy_desc: "Prêtres, responsables, diacres et psalmistes.",
+        reading_title: "Lecture du jour",
+        reading_desc: "Parole du jour, prières, passages de l'Évangile.",
+        library_title: "Bibliothèque",
+        library_desc: "Livres, articles, audio et vidéo pour tous âges.",
+        school_title: "École du dimanche",
+        school_desc: "Éducation enfants/adultes, ateliers créatifs.",
+        white_title: "Mouvement blanc",
+        white_desc: "Histoire et héritage du mouvement blanc en France.",
+        icons_title: "Icônes",
+        icons_desc: "Tradition iconographique, miracles, galerie d’images.",
+        choir_title: "Chœur",
+        choir_desc: "Service choral professionnel et amateur."
+      },
+      by: {
+        history_title: "Гісторыя прыходу",
+        history_desc: "Як усё пачыналася. Каротка пра галоўнае.",
+        clergy_title: "Клірыкі храма",
+        clergy_desc: "Святары, настаяцелі, дыяканы і псалмісты.",
+        reading_title: "Чытанне дня",
+        reading_desc: "Слова на кожны дзень, малітвы, урыўкі Евангелля.",
+        library_title: "Бібліятэка",
+        library_desc: "Кнігі, артыкулы, аўдыё і відэа для ўсіх.",
+        school_title: "Нядзельная школа",
+        school_desc: "Навучанне дзяцей і дарослых, творчыя майстар-класы.",
+        white_title: "Белы рух",
+        white_desc: "Гісторыя і спадчына Белага руху ў Францыі.",
+        icons_title: "Іконы",
+        icons_desc: "Іканапіс, цуды, галерэя вобразаў.",
+        choir_title: "Хор",
+        choir_desc: "Прафесійнае і аматарскае хорам служэнне."
+      },
+      ua: {
+        history_title: "Історія парафії",
+        history_desc: "Як усе починалося. Коротко про головне.",
+        clergy_title: "Клірики храму",
+        clergy_desc: "Священики, настоятелі, диякони і псалмисти.",
+        reading_title: "Читання дня",
+        reading_desc: "Слово на кожен день, молитви, уривки Євангелія.",
+        library_title: "Бібліотека",
+        library_desc: "Книги, статті, аудіо й відео для всіх вікових груп.",
+        school_title: "Недільна школа",
+        school_desc: "Навчання дітей та дорослих, творчі майстер-класи.",
+        white_title: "Білий рух",
+        white_desc: "Історія і спадщина Білого руху у Франції.",
+        icons_title: "Ікони",
+        icons_desc: "Іконописні традиції, чудеса, галерея образів.",
+        choir_title: "Хор",
+        choir_desc: "Професійне і аматорське хорове служіння."
+      }
+    };
+    // Расписание (пример)
     const schedules = {
       ru: [
         { date: "16 суббота, 18:00", desc: "Всенощная (Неделя 10-я по Пятидесятнице) Глас 1-й" },
@@ -674,77 +772,100 @@
       ]
     };
     let currentLang = "ru";
-
+    // Отрисовка расписания
     function renderSchedule(lang) {
       lang = lang || currentLang;
       currentLang = lang;
       const schedule = schedules[lang] || schedules['ru'];
       let rows = [], extra = [];
       for (let i = 0; i < schedule.length; ++i) {
-        if (i < 2) {
-          rows.push(`<div class="schedule-row"><span class="schedule-date">${schedule[i].date}</span> <span class="schedule-desc">${schedule[i].desc}</span></div>`);
-        } else {
-          extra.push(`<div class="schedule-row"><span class="schedule-date">${schedule[i].date}</span> <span class="schedule-desc">${schedule[i].desc}</span></div>`);
-        }
+        const row = `<div class="schedule-row"><span class="schedule-date">${schedule[i].date}</span> <span class="schedule-desc">${schedule[i].desc}</span></div>`;
+        (i < 2 ? rows : extra).push(row);
       }
       document.getElementById('schedule-main-inner').innerHTML = rows.join('');
-      // Overlay
       document.getElementById('schedule-overlay-inner').innerHTML = schedule.map(ev =>
         `<div class="schedule-row"><span class="schedule-date">${ev.date}</span> <span class="schedule-desc">${ev.desc}</span></div>`
       ).join('');
     }
-    renderSchedule();
+    // Перевод контента карточек
+    function renderBlocks(lang) {
+      const dict = i18n[lang] || i18n['ru'];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) el.textContent = dict[key];
+      });
+    }
+    // Универсальный переключатель языка
+    function setLangAll(lang) {
+      getAllLangButtons().forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+        if (btn.dataset.lang === lang) {
+          btn.setAttribute('aria-current', 'true');
+        } else {
+          btn.removeAttribute('aria-current');
+        }
+      });
+      renderSchedule(lang);
+      renderBlocks(lang);
+    }
+    // События для всех переключателей
+    getAllLangButtons().forEach(btn => {
+      btn.addEventListener('click', function () {
+        setLangAll(this.dataset.lang);
+        closeMobileMenu();
+      });
+    });
+    // Инициализация
+    renderSchedule(currentLang);
+    renderBlocks(currentLang);
 
-    // --- Раскрытие расписания поверх карточек ---
+    // ------------- SCHEDULE OVERLAY -------------
     const scheduleMain = document.getElementById('schedule-main');
     const scheduleOverlay = document.getElementById('schedule-overlay');
+    const scheduleArrow = document.getElementById('schedule-arrow');
     const scheduleArrowWrap = document.getElementById('schedule-arrow-wrap');
-
-    function positionScheduleOverlay() {
-      // позиционируем верх оверлея по низу scheduleMain
-      const rect = scheduleMain.getBoundingClientRect();
-      scheduleOverlay.style.top = (window.scrollY + rect.top) + "px";
-    }
-
     let scheduleOpen = false;
+
+    scheduleArrow.addEventListener('click', function (e) {
+      e.stopPropagation();
+      openScheduleOverlay();
+    });
     function openScheduleOverlay() {
       scheduleOpen = true;
       scheduleOverlay.classList.add('open');
       scheduleArrowWrap.style.display = 'none';
-      positionScheduleOverlay();
-      document.body.style.overflowY = 'hidden'; // Фикс чтобы фон не прокручивался
+      document.body.style.overflowY = 'hidden';
+      scheduleOverlay.focus();
     }
     function closeScheduleOverlay() {
       scheduleOpen = false;
       scheduleOverlay.classList.remove('open');
-      scheduleArrowWrap.style.display = 'flex';
+      scheduleArrowWrap.style.display = '';
       document.body.style.overflowY = '';
     }
-
-    scheduleMain.onclick = function(e) {
-      if (!scheduleOpen) {
-        openScheduleOverlay();
-      }
-    };
-    scheduleOverlay.onclick = function(e) {
-      if (scheduleOpen) {
-        closeScheduleOverlay();
-      }
-    };
-    window.addEventListener('resize', function() {
-      if (scheduleOpen) positionScheduleOverlay();
+    // Закрытие по клику вне расписания или по Esc
+    scheduleOverlay.addEventListener('click', function (e) {
+      if (e.target === scheduleOverlay) closeScheduleOverlay();
     });
-    window.addEventListener('scroll', function() {
-      if (scheduleOpen) positionScheduleOverlay();
+    document.addEventListener('keydown', e => {
+      if (e.key === "Escape" && scheduleOpen) closeScheduleOverlay();
     });
 
-    // --- Языки (отдельно для overlay) ---
-    // Обновлять расписание и в оверлее!
-    document.querySelectorAll('[data-lang]').forEach(el => {
-      el.onclick = () => {
-        setLangAll(el.dataset.lang);
-        if (scheduleOpen) renderSchedule(el.dataset.lang);
-      };
+    // -------------- MENU/ROUTER MOCKUP (принцип для реализации навигации) --------------
+    // document.querySelectorAll('[data-link]').forEach(link => {
+    //   link.addEventListener('click', function (e) {
+    //     e.preventDefault();
+    //     // router logic
+    //   });
+    // });
+
+    // ---------- ACCESSIBILITY: Фокус и клавиатура для карточек -------------
+    document.querySelectorAll('.card-block').forEach(card => {
+      card.addEventListener('keydown', function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          this.click();
+        }
+      });
     });
 
     // Done!
