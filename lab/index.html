@@ -4,504 +4,425 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Храм Знамения Пресвятой Богородицы в Париже</title>
-  <meta name="description" content="Официальный сайт Храма Знамения Пресвятой Богородицы в Париже. Православное расписание богослужений, адрес, контакты." />
-  <meta name="keywords" content="храм, православие, Париж, Богородица, Église Orthodoxe, Notre-Dame du Signe, Paris, богослужение, расписание, православный приход, церковь" />
   <link rel="icon" href="assets/icon2.gif" type="image/gif" />
-  <link href="https://fonts.googleapis.com/css2?family=Forum&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Forum&family=Open+Sans&family=Roboto+Mono&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #ede7df;
-      --bg-strip: #e3dbcd;
-      --blue: #1939a5;
-      --blue-light: #2348d4;
-      --border-blue: #e4e7f3;
-      --blue-shadow: #1939a540;
-      --blue-shadow-strong: #1939a599;
-      --shadow-main: 0 6px 54px #1939a511, 0 1.5px 10px #cab9a912;
-      --icon-shadow: 0 8px 28px #2348d422, 0 0px 4px #fff7;
-    }
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Open Sans', sans-serif;
-      background: var(--bg);
-      min-height: 100vh;
-      color: #23232b;
+      --bogoroditsa-blue: #1939A5;
+      --bogoroditsa-blue-light: #4062bf;
+      --main-bg: #e8decd;
+      --header-bg: #ede1d0;
+      --langbar-bg: #e3d3bc;
+      --border-schedule: #c5c5dc;
+      --block-radius: 8px;
+      --block-radius-mob: 6px;
+      --box-shadow: 0 2px 32px #1939a519;
+      --modal-bg: rgba(25, 57, 165, 0.08);
     }
     body {
-      min-height: 100vh;
-      box-sizing: border-box;
       margin: 0;
+      padding: 0;
+      font-family: 'Open Sans', sans-serif;
+      background: var(--main-bg);
+      color: #2f2f2f;
+      min-height: 100vh;
     }
+    /* Верхняя языковая полоса */
     .lang-bar {
       width: 100vw;
-      background: var(--bg-strip);
-      height: 2.6em;
+      background: var(--langbar-bg);
+      min-height: 30px;
       display: flex;
-      align-items: center;
       justify-content: flex-end;
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 50;
-      font-family: 'Open Sans', sans-serif;
-      box-shadow: 0 1.5px 8px #bbb4a22a;
-    }
-    .lang-switch {
-      margin-right: 1.8em;
-      font-size: 1.03em;
-      display: flex;
-      gap: 0.85em;
       align-items: center;
+      padding: 0.2em 1.5em 0.1em 0;
+      box-sizing: border-box;
+      font-family: 'Roboto Mono', monospace;
+      position: relative;
+      z-index: 40;
+      letter-spacing: 0.09em;
     }
-    .lang-switch span {
+    .lang-bar span {
+      font-size: 1.12em;
+      color: #888;
+      margin-left: 1.3em;
       cursor: pointer;
-      color: #7c7c7c;
-      font-weight: 600;
-      letter-spacing: 0.13em;
-      padding: 0.04em 0.15em;
-      border-radius: 2px;
-      background: none;
-      font-size: 0.98em;
-      transition: color 0.23s;
+      transition: color .2s;
       user-select: none;
     }
-    .lang-switch span.active {
-      color: var(--blue);
+    .lang-bar span.active {
+      color: var(--bogoroditsa-blue);
       font-weight: 700;
-      background: none;
     }
-    .lang-switch span:hover {
-      color: var(--blue-light);
+    @media (max-width: 650px) {
+      .lang-bar {
+        min-height: 26px;
+        padding-right: 0.6em;
+      }
+      .lang-bar span {
+        font-size: 0.9em;
+        margin-left: 0.5em;
+      }
     }
-    /* HEADER */
-    .main-header {
-      margin-top: 2.9em; /* чтобы не залезать под языки */
-      margin-bottom: 1.2em;
+
+    /* Верхняя часть: лого + название */
+    header.site-header {
+      background: var(--header-bg);
+      padding: 0 0 0.4em 0;
+      box-shadow: 0 1px 38px #d9bda05f;
+      z-index: 10;
+    }
+    .header-wrap {
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin-top: 0.6em;
+      margin-bottom: 0.15em;
       position: relative;
-      user-select: none;
     }
-    .logo-block {
+    .header-top {
       display: flex;
-      flex-direction: row;
       align-items: center;
       justify-content: center;
-      gap: 1.1em;
-      margin-bottom: 0.55em;
+      gap: 0.4em;
+      margin-bottom: 0.13em;
     }
-    .logo-text {
+    .logo-title {
       font-family: 'Forum', serif;
-      font-size: 2.7em;
-      color: var(--blue);
+      font-size: 2.8em;
+      color: var(--bogoroditsa-blue);
+      text-shadow: 0 1px 4px #fff8, 0 1px 8px #fff5;
+      margin: 0 1.02em 0 0;
+      line-height: 0.92;
       font-weight: 400;
       letter-spacing: 0.01em;
-      text-align: center;
-      line-height: 1.07;
-      filter: drop-shadow(0 2.5px 0.5px #e5e7f2cc)
-              drop-shadow(0 0 14px #e3eaff22);
-      text-shadow: 0 8px 18px #fff5, 0 1px 1px #e2eaf911;
-    }
-    .logo-text.left {
-      margin-right: 0.15em;
+      text-align: right;
+      white-space: pre-line;
       display: flex;
       flex-direction: column;
       align-items: flex-end;
       justify-content: center;
-      line-height: 1.09;
     }
-    .logo-text.right {
-      margin-left: 0.15em;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      line-height: 1.09;
-    }
-    .logo-block img {
-      height: 90px;
-      width: 90px;
-      min-width: 64px;
-      margin: 0 0.8em;
-      display: block;
-      filter: drop-shadow(0 7px 14px #b3bbff55) drop-shadow(0 1px 5px #1939a526);
-      box-shadow: var(--icon-shadow);
-      border-radius: 60px;
-      background: #f4f7fa;
-      padding: 0.3em;
-      transition: box-shadow 0.23s;
-    }
-    .subheading {
-      font-size: 1.07em;
-      margin-top: 0.35em;
-      margin-bottom: 0.25em;
-      font-family: 'Forum', serif;
-      color: #9a927f;
-      letter-spacing: 0.01em;
-      text-align: center;
-      filter: drop-shadow(0 2.5px 0.5px #ede1cc77);
-    }
-    /* Отцентровка заголовка по центру блока */
-    .header-center {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      gap: 1.4em;
-      margin: 0 auto;
-    }
-    /* ШАПКА MOBILE */
-    @media (max-width: 600px) {
-      .main-header { margin-top: 2.2em;}
-      .logo-block img { height: 61px; width: 61px; }
-      .logo-text { font-size: 1.21em; }
-      .subheading { font-size: 0.90em;}
-      .header-center { gap: 0.6em;}
-    }
-    /* СИНИЙ БЛОК РАСПИСАНИЯ */
-    .schedule-outer {
-      width: 100vw;
-      left: 0; right: 0;
-      background: var(--blue);
-      margin: 0;
-      margin-bottom: 0;
-      padding: 0;
-      position: relative;
-      min-height: 0.01em;
-      z-index: 2;
-      overflow: visible;
-      box-shadow: 0 4px 36px #1939a518;
-    }
-    .schedule-box {
-      max-width: 1050px;
-      margin: 0 auto;
-      padding: 1.5em 2.3em 1.1em 3.5em;
-      position: relative;
-      box-sizing: border-box;
-    }
-    .schedule-box-inner {
-      border: 0;
-      border-radius: 0;
-      padding: 0;
-      margin: 0;
-      position: relative;
-    }
-    .schedule-border {
-      position: absolute;
-      top: 0.8em; left: 0.8em; right: 0.8em; bottom: 0.8em;
-      pointer-events: none;
-      border: double 3px var(--border-blue);
-      border-radius: 0.27em;
-      z-index: 1;
-      opacity: 0.7;
-    }
-    .schedule-list {
-      list-style: none;
-      margin: 0 0 0.1em 0;
-      padding: 0;
-      color: #fff;
-      font-size: 1.18em;
-      line-height: 1.4;
-      font-weight: 400;
+    .logo-title.right {
+      margin: 0 0 0 1.02em;
       text-align: left;
-      /* плотнее при мобиле */
+      align-items: flex-start;
     }
-    .schedule-list li {
-      margin-bottom: 0.18em;
-      padding-left: 0;
+    .logo-icon {
+      height: 80px;
+      width: 80px;
+      filter: none;
+      margin: 0 0.08em;
+      display: block;
+      z-index: 3;
+    }
+    .header-desc {
+      font-family: 'Forum', serif;
+      font-size: 1em;
+      color: #988c7c;
+      text-align: center;
+      margin-top: 0.27em;
+      letter-spacing: 0.01em;
+      font-weight: 400;
+    }
+    @media (max-width: 750px) {
+      .logo-title { font-size: 2.1em; }
+      .logo-icon { height: 62px; width: 62px;}
+    }
+    @media (max-width: 600px) {
+      .header-top { flex-direction: column; gap: 0;}
+      .logo-title, .logo-title.right { 
+        font-size: 1.18em; 
+        align-items: center; 
+        margin: 0; 
+        line-height: 1;
+      }
+      .logo-icon { height: 46px; width: 46px;}
+      .header-wrap { margin-top: 0.22em;}
+      .header-desc { font-size: 0.91em; }
+    }
+
+    /* Расписание */
+    .schedule-main {
+      background: var(--bogoroditsa-blue);
+      color: #fff;
+      width: 100vw;
+      margin: 0 auto;
+      padding: 1.1em 0 0.06em 0;
+      box-sizing: border-box;
+      position: relative;
+      z-index: 20;
+      border-top: 1px solid var(--border-schedule);
+      border-bottom: 1px solid var(--border-schedule);
+      outline: 2.2px double var(--border-schedule);
+      outline-offset: -11px;
+      box-shadow: 0 2px 50px #1939a51b;
+      min-height: 48px;
+      transition: box-shadow 0.28s, outline-offset 0.24s;
+      overflow: visible;
+    }
+    .schedule-main-inner {
+      margin-left: 8vw;
+      margin-right: 6vw;
+      min-width: 190px;
+      max-width: 810px;
+    }
+    .schedule-main .row {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 1.17em;
+      margin-bottom: 0.16em;
+      text-align: left;
       display: flex;
       align-items: baseline;
+      gap: 0.45em;
     }
-    .schedule-list span.strong {
+    .schedule-main .date {
       font-weight: 700;
-      color: #fff;
-      font-size: 1em;
+      font-size: 1.13em;
       letter-spacing: 0.01em;
+      color: #fff;
+      margin-right: 0.28em;
+      white-space: nowrap;
     }
-    /* СТРЕЛКА РАСКРЫТИЯ */
-    .schedule-toggle {
+    .schedule-main .desc {
+      font-weight: 400;
+      font-size: 0.97em;
+      opacity: 0.99;
+      color: #f5f5fc;
+    }
+    .schedule-arrow {
+      width: 28px;
+      height: 18px;
+      margin: 0.18em auto 0.10em auto;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      margin: 0.12em auto 0.19em auto;
-      width: 100%;
-      height: 1.7em;
-      background: none;
-      border: none;
-      outline: none;
-      transition: background 0.13s;
-      z-index: 10;
-      position: relative;
+      opacity: 0.8;
+      transition: opacity .18s, transform 0.2s;
+      user-select: none;
     }
-    .schedule-toggle:active {
-      background: #e7e7fd16;
+    .schedule-arrow svg {
+      width: 21px; height: 15px; fill: #fff;
+      transition: transform .24s;
     }
-    .schedule-arrow {
-      border: solid #fff;
-      border-width: 0 0 2.8px 2.8px;
-      display: inline-block;
-      padding: 0.22em;
-      margin: 0 auto;
-      width: 1.2em;
-      height: 1.2em;
-      transform: rotate(45deg);
-      transition: transform 0.24s;
-      margin-top: 0.13em;
+    .schedule-main.open .schedule-arrow svg {
+      transform: rotate(180deg);
     }
-    .schedule-toggle.open .schedule-arrow {
-      transform: rotate(-135deg);
+    .schedule-main.open {
+      box-shadow: 0 12px 66px #1939a530;
+      outline-offset: -5px;
     }
-    /* РАСКРЫТИЕ */
-    .schedule-all {
+    .schedule-main .extra {
       max-height: 0;
       overflow: hidden;
-      opacity: 0.12;
-      transition: max-height 0.48s cubic-bezier(0.55,0.1,0.41,0.91), opacity 0.33s;
-      background: none;
-      z-index: 30;
-      position: relative;
-      pointer-events: none;
+      transition: max-height 0.42s cubic-bezier(.45,.12,.52,1.02), opacity 0.38s;
+      opacity: 0.91;
     }
-    .schedule-all.open {
-      max-height: 400px;
-      opacity: 0.98;
-      transition: max-height 0.7s cubic-bezier(0.18,0.9,0.45,0.94), opacity 0.33s;
-      pointer-events: auto;
-      z-index: 99;
-    }
-    /* Overlay при раскрытии */
-    .schedule-overlay {
-      display: none;
+    .schedule-main.open .extra {
+      max-height: 380px;
+      opacity: 1;
+      background: #233a9057;
       position: absolute;
-      left: 0; right: 0;
-      top: 0; bottom: 0;
-      background: #e4eaf744;
-      z-index: 35;
-      pointer-events: none;
-      border-radius: 0.27em;
+      left: 0; right: 0; 
+      z-index: 25;
+      box-shadow: 0 12px 52px #1939a54d;
+      pointer-events: auto;
+      padding-bottom: 1.1em;
+      backdrop-filter: blur(2.5px);
+      border-radius: 0 0 0 0;
     }
-    .schedule-all.open ~ .schedule-overlay {
-      display: block;
+    @media (max-width: 750px) {
+      .schedule-main-inner { margin-left: 2vw; margin-right: 2vw;}
+      .schedule-main .row { font-size: 1.02em; }
     }
-    /* При раскрытии накладываем блок */
-    .schedule-outer.expanded ~ .main-blocks-row {
-      position: relative;
-      z-index: 1;
+    @media (max-width: 480px) {
+      .schedule-main-inner { margin-left: 0.4em; margin-right: 0.4em;}
+      .schedule-main .row { font-size: 0.95em; }
     }
-    .main-blocks-row.overlayed {
-      filter: blur(0.5px) brightness(0.97);
-      opacity: 0.63;
-      pointer-events: none;
-      transition: opacity 0.36s, filter 0.36s;
-    }
-    /* КАРТОЧКИ-БЛОКИ */
-    .main-blocks-row {
+
+    /* Карточки */
+    .blocks-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 2.1em;
+      gap: 2em;
       justify-content: center;
-      margin: 2.8em auto 0 auto;
-      max-width: 1050px;
-      z-index: 0;
+      margin: 2.1em auto 0 auto;
       position: relative;
-      transition: filter 0.36s, opacity 0.36s;
+      z-index: 5;
+      max-width: 1200px;
+      transition: filter .28s;
+    }
+    .schedule-main.open ~ .blocks-row {
+      filter: blur(1.6px) brightness(0.88);
+      pointer-events: none;
+      user-select: none;
     }
     .card-block {
       background: #fff;
-      border-radius: 7px;
-      box-shadow: 0 4px 28px #1939a51a;
-      width: 260px;
-      min-width: 200px;
+      border-radius: var(--block-radius);
+      box-shadow: var(--box-shadow);
+      width: 310px;
+      min-height: 270px;
       cursor: pointer;
-      transition: transform 0.22s, box-shadow 0.3s;
+      transition: transform 0.23s, box-shadow 0.24s;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 310px;
-      z-index: 3;
-      margin-bottom: 1.8em;
     }
     .card-block:hover {
-      transform: scale(1.028);
-      box-shadow: 0 10px 40px #1939a532;
+      transform: scale(1.033);
+      box-shadow: 0 14px 64px #1939a527;
     }
     .card-block img {
       width: 100%;
-      height: 134px;
+      height: 144px;
       object-fit: cover;
-      border-top-left-radius: 7px;
-      border-top-right-radius: 7px;
+      border-radius: var(--block-radius) var(--block-radius) 0 0;
     }
     .card-title {
       font-family: 'Forum', serif;
-      font-size: 1.13em;
-      color: var(--blue);
-      margin: 0.9em 0 0.54em 0;
-      font-weight: 600;
+      font-size: 1.17em;
+      color: var(--bogoroditsa-blue);
+      margin: 1.0em 0 0.6em 0;
+      font-weight: 700;
       letter-spacing: 0.01em;
       text-align: center;
+      text-shadow: 0 1px 3px #fff7;
     }
     .card-desc {
-      font-size: 1em;
+      font-size: 1.03em;
       color: #474747;
       margin-bottom: 1em;
       padding: 0 1em;
       text-align: center;
     }
-    /* MODAL */
+    @media (max-width: 900px) {
+      .blocks-row { flex-direction: column; gap: 1.1em; }
+      .card-block { width: 99vw; min-height: 160px;}
+      .card-block img { height: 110px;}
+    }
+    @media (max-width: 600px) {
+      .blocks-row { gap: 0.7em; }
+      .card-block { border-radius: var(--block-radius-mob); }
+      .card-block img { border-radius: var(--block-radius-mob) var(--block-radius-mob) 0 0; }
+    }
+
+    /* Модальное окно */
     .modal-full {
       display: none;
       position: fixed;
-      z-index: 2000;
+      z-index: 1200;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(25, 57, 165, 0.12);
-      backdrop-filter: blur(2.8px);
+      background: var(--modal-bg);
+      backdrop-filter: blur(2.5px);
       justify-content: center;
       align-items: center;
-      animation: fadeIn 0.23s;
+      animation: fadeIn 0.3s;
     }
-    .modal-full.open {
-      display: flex;
-    }
+    .modal-full.open { display: flex; }
     .modal-content {
       background: #fff;
-      border-radius: 13px;
-      max-width: 93vw;
-      max-height: 92vh;
+      border-radius: 17px;
+      max-width: 97vw;
+      max-height: 91vh;
       overflow-y: auto;
-      box-shadow: 0 8px 80px #1939a533;
-      padding: 2em 2em 1.7em 2em;
+      box-shadow: 0 10px 72px #1939a544;
+      padding: 2.3em 2.1em 2em 2.1em;
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 1.2em;
-      min-width: 270px;
-      animation: popup 0.22s;
+      min-width: 240px;
+      animation: popup 0.25s;
     }
     .modal-content img {
-      width: 320px;
-      max-width: 90vw;
-      border-radius: 13px;
+      width: 330px;
+      max-width: 85vw;
+      border-radius: 10px;
       object-fit: cover;
-      margin-bottom: 1.1em;
-      box-shadow: 0 2px 24px #1939a515;
+      margin-bottom: 1.0em;
+      box-shadow: 0 2px 14px #1939a515;
     }
     .modal-title {
       font-family: 'Forum', serif;
-      color: var(--blue);
-      font-size: 1.41em;
+      color: var(--bogoroditsa-blue);
+      font-size: 2em;
       font-weight: 700;
-      margin-bottom: 0.21em;
+      margin-bottom: 0.2em;
       text-align: center;
+      text-shadow: 0 1px 5px #fff8;
     }
     .modal-close {
       position: absolute;
-      top: 0.8em;
-      right: 1.2em;
-      font-size: 2.3em;
+      top: 1.2em;
+      right: 1.4em;
+      font-size: 2.2em;
       color: #bbb;
       background: none;
       border: none;
       cursor: pointer;
-      transition: color 0.2s;
-      z-index: 100;
+      transition: color 0.18s;
+      z-index: 1400;
     }
     .modal-close:hover {
-      color: var(--blue);
+      color: var(--bogoroditsa-blue);
     }
-    /* FOOTER */
-    .footer {
-      margin-top: 2.5em;
-      margin-bottom: 0.5em;
-      font-size: 1.03em;
-      color: #666;
-      text-align: center;
-      letter-spacing: 0.01em;
-      padding-bottom: 1.2em;
-      font-family: 'Open Sans', sans-serif;
-    }
-    .footer a {
-      color: var(--blue);
-      text-decoration: underline;
-    }
-    /* Адаптив */
-    @media (max-width: 1200px) {
-      .main-blocks-row { gap: 1.1em; }
-      .schedule-box { padding-left: 1.3em; padding-right: 1.3em;}
-    }
-    @media (max-width: 820px) {
-      .main-blocks-row { gap: 0.6em; }
-      .schedule-box { padding-left: 0.7em; padding-right: 0.7em;}
-      .logo-block img { margin: 0 0.3em;}
-    }
-    @media (max-width: 650px) {
-      .logo-block { gap: 0.5em;}
-      .main-blocks-row { flex-direction: column; gap: 0.6em;}
-      .card-block { width: 95vw; min-width: 80vw; }
-      .modal-content img { width: 96vw; }
-      .main-header { margin-top: 2.8em;}
-    }
-    @media (max-width: 500px) {
-      .schedule-box { padding-left: 0.33em; padding-right: 0.33em;}
-      .logo-text { font-size: 1em;}
-      .logo-block img { height: 37px; width: 37px; min-width: 36px;}
+    @media (max-width: 700px) {
+      .modal-content img { width: 99vw; }
+      .modal-title { font-size: 1.25em;}
+      .modal-content { padding: 1.2em 0.3em 1em 0.3em; }
     }
     @keyframes fadeIn { from {opacity:0} to {opacity:1} }
     @keyframes popup { from {transform:scale(0.95)} to {transform:scale(1)} }
+
+    /* Footer */
+    .footer {
+      margin: 2.6em 0 1.6em 0;
+      font-size: 1.08em;
+      color: #675;
+      text-align: center;
+      letter-spacing: 0.01em;
+    }
+    .footer a { color: var(--bogoroditsa-blue-light); text-decoration: underline dotted; }
+    .footer a:hover { color: var(--bogoroditsa-blue); }
   </style>
 </head>
 <body>
-  <!-- Языковая панель -->
-  <div class="lang-bar">
-    <div class="lang-switch" role="group" aria-label="Переключение языков">
-      <span class="active" data-lang="ru">RU</span>
-      <span data-lang="fr">FR</span>
-      <span data-lang="by">BY</span>
-      <span data-lang="ua">UA</span>
-    </div>
+  <!-- Языки -->
+  <div class="lang-bar" role="group" aria-label="Переключение языков">
+    <span class="active" data-lang="ru">RU</span>
+    <span data-lang="fr">FR</span>
+    <span data-lang="by">BY</span>
+    <span data-lang="ua">UA</span>
   </div>
-  <!-- Хедер -->
-  <header class="main-header">
-    <div class="logo-block header-center">
-      <div class="logo-text left" id="logo-left">
-        <span>Храм</span>
-        <span>Знамения</span>
+  <!-- Шапка -->
+  <header class="site-header">
+    <div class="header-wrap">
+      <div class="header-top">
+        <div class="logo-title" id="logo-left"><span>Храм</span><span>Знамения</span></div>
+        <img src="assets/icon2.gif" alt="Икона Богородицы" class="logo-icon" />
+        <div class="logo-title right" id="logo-right"><span>Пресвятой</span><span>Богородицы</span></div>
       </div>
-      <img src="assets/icon2.gif" alt="Икона Богородицы" />
-      <div class="logo-text right" id="logo-right">
-        <span>Пресвятой</span>
-        <span>Богородицы</span>
+      <div class="header-desc" id="subheading">
+        Викариат имени Святых Марии Парижской и Алексия Южинского — Вселенский Патриархат
       </div>
-    </div>
-    <div class="subheading" id="subheading">
-      Викариат имени Святых Марии Парижской и Алексия Южинского — Вселенский Патриархат
     </div>
   </header>
-  <!-- Блок расписания -->
-  <div class="schedule-outer" id="scheduleOuter">
-    <div class="schedule-box">
-      <div class="schedule-box-inner">
-        <div class="schedule-border"></div>
-        <ul class="schedule-list" id="scheduleList">
-          <!-- Строки расписания сюда -->
-        </ul>
-        <button class="schedule-toggle" id="scheduleToggle" title="Открыть полное расписание" aria-expanded="false">
-          <span class="schedule-arrow"></span>
-        </button>
-        <div class="schedule-all" id="scheduleAll"></div>
-        <div class="schedule-overlay"></div>
-      </div>
+  <!-- Расписание -->
+  <div class="schedule-main" id="schedule-main">
+    <div class="schedule-main-inner" id="schedule-main-inner">
+      <!-- Вставляется через JS -->
     </div>
+    <div class="schedule-arrow" id="schedule-arrow" title="Показать все">
+      <svg viewBox="0 0 20 12"><path d="M2 2l8 8 8-8"/></svg>
+    </div>
+    <div class="extra" id="schedule-extra"></div>
   </div>
   <!-- Карточки -->
-  <div class="main-blocks-row" id="mainBlocks">
+  <div class="blocks-row" id="main-blocks">
     <div class="card-block" data-block="history">
       <img src="assets/church_outside.jpg" alt="Вид храма" />
       <div class="card-title">История прихода</div>
@@ -517,136 +438,146 @@
       <div class="card-title">Богослужения</div>
       <div class="card-desc">Как устроено расписание, ответы на вопросы.</div>
     </div>
-    <div class="card-block" data-block="community">
-      <img src="assets/movement_blanc.jpg" alt="Белое движение" />
-      <div class="card-title">Приходская жизнь</div>
-      <div class="card-desc">О нашей общине, жизни вне богослужений.</div>
-    </div>
-  </div>
-  <!-- Модальное окно для карточек -->
-  <div class="modal-full" id="modalFull">
-    <div class="modal-content" id="modalContent">
-      <button class="modal-close" id="modalClose" title="Закрыть">&times;</button>
-      <!-- Динамически вставляется содержимое -->
-    </div>
   </div>
   <!-- Footer -->
   <div class="footer" id="footer">
-    87, boulevard Exelmans, Paris 75016<br />
-    Métро: Exelmans (ligne 9)<br />
+    87, boulevard Exelmans, Paris 75016<br>
+    Метро: Exelmans (ligne 9)<br>
     ✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>
   </div>
-  <!-- JS -->
+
+  <!-- Модалка карточек -->
+  <div class="modal-full" id="modalFull">
+    <div class="modal-content" id="modalContent">
+      <button class="modal-close" id="modalClose" title="Закрыть">&times;</button>
+      <!-- Динамически -->
+    </div>
+  </div>
+
   <script>
-    // --- ТВОЁ РАСПИСАНИЕ ---
-    const scheduleData = [
-      { date: "2024-08-16T18:00:00", text: "<span class='strong'>16 суббота, 18:00</span> – Всенощная (Неделя 10-я по Пятидесятнице) Глас 1-й" },
-      { date: "2024-08-17T10:30:00", text: "<span class='strong'>17 воскресенье, 10:30</span> – Литургия (Свв. семи отроков, иже во Ефесе)" },
-      { date: "2024-08-18T18:00:00", text: "<span class='strong'>18 понедельник, 18:00</span> – Всенощная (Преображение Господне)" },
-      { date: "2024-08-19T10:00:00", text: "<span class='strong'>19 вторник, 10:00</span> – Литургия/Освящение воды и фруктов (Преображение Господне – Второй Спас)" },
-      { date: "2024-08-27T18:00:00", text: "<span class='strong'>27 среда, 18:00</span> – Всенощная (Успение Пресвятой Богородицы)" },
-      { date: "2024-08-28T10:00:00", text: "<span class='strong'>28 четверг, 10:00</span> – Литургия (Успение Пресвятой Богородицы)" }
-    ];
-    // Показать первые N, остальные — в спойлере
-    const VISIBLE_COUNT = 2;
-    function getUpcoming() {
-      // Оставляем только службы, которые не прошли (полтора часа от начала)
+    // ------ ТЕКСТЫ И РАСПИСАНИЕ (только ru для примера, можно расширить) ------
+    const translations = {
+      ru: {
+        logoLeft: ["Храм", "Знамения"],
+        logoRight: ["Пресвятой", "Богородицы"],
+        subheading: "Викариат имени Святых Марии Парижской и Алексия Южинского — Вселенский Патриархат",
+        footer: `87, boulevard Exelmans, Paris 75016<br>Метро: Exelmans (ligne 9)<br>✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`,
+        schedule: [
+          { date: "16 суббота, 18:00", desc: "Всенощная (Неделя 10-я по Пятидесятнице) Глас 1-й" },
+          { date: "17 воскресенье, 10:30", desc: "Литургия (Свв. семи отроков, иже во Ефесе)" },
+          { date: "18 понедельник, 18:00", desc: "Всенощная (Преображение Господне)" },
+          { date: "19 вторник, 10:00", desc: "Литургия/Освящение воды и фруктов (Преображение Господне — Второй Спас)" },
+          { date: "27 среда, 18:00", desc: "Всенощная (Успение Пресвятой Богородицы)" },
+          { date: "28 четверг, 10:00", desc: "Литургия (Успение Пресвятой Богородицы)" }
+        ]
+      }
+      // Добавь остальные языки аналогично
+    };
+
+    // ----- Языки -----
+    let currentLang = 'ru';
+    const langSwitchers = document.querySelectorAll('.lang-bar span');
+    function setLang(lang) {
+      currentLang = lang;
+      langSwitchers.forEach(s => s.classList.remove('active'));
+      document.querySelector(`.lang-bar span[data-lang="${lang}"]`).classList.add('active');
+      document.getElementById('logo-left').innerHTML = translations[lang].logoLeft.map(x=>`<span>${x}</span>`).join('');
+      document.getElementById('logo-right').innerHTML = translations[lang].logoRight.map(x=>`<span>${x}</span>`).join('');
+      document.getElementById('subheading').innerHTML = translations[lang].subheading;
+      document.getElementById('footer').innerHTML = translations[lang].footer;
+      renderSchedule();
+    }
+    langSwitchers.forEach(s => {
+      s.onclick = () => setLang(s.dataset.lang);
+    });
+
+    // ----- Расписание -----
+    function isFuture(dateStr) {
+      // dateStr: "16 суббота, 18:00"
+      const months = [7]; // август (0 - январь)
       const now = new Date();
-      return scheduleData.filter(item => {
-        const dt = new Date(item.date);
-        return now.getTime() < dt.getTime() + 90 * 60000;
-      });
+      const match = dateStr.match(/(\d+)\s\D+,\s*(\d{1,2}):(\d{2})/);
+      if (!match) return true;
+      let [_, day, hour, min] = match;
+      let d = new Date(now.getFullYear(), months[0], parseInt(day), parseInt(hour), parseInt(min));
+      return d.getTime() - now.getTime() > -90*60*1000;
     }
     function renderSchedule() {
-      const upcoming = getUpcoming();
-      const visible = upcoming.slice(0, VISIBLE_COUNT);
-      const hidden = upcoming.slice(VISIBLE_COUNT);
-      document.getElementById('scheduleList').innerHTML = visible.map(e => `<li>${e.text}</li>`).join('');
-      document.getElementById('scheduleAll').innerHTML = hidden.length
-        ? `<ul class="schedule-list">${hidden.map(e => `<li>${e.text}</li>`).join('')}</ul>` : "";
-      // Показываем стрелку только если есть скрытые
-      document.getElementById('scheduleToggle').style.display = hidden.length ? "flex" : "none";
+      const data = translations[currentLang].schedule || [];
+      let rows = [];
+      let extra = [];
+      let shown = 0;
+      for (let i = 0; i < data.length; ++i) {
+        if (isFuture(data[i].date)) {
+          if (shown < 2) {
+            rows.push(`<div class="row"><span class="date">${data[i].date}</span> <span class="desc">${data[i].desc}</span></div>`);
+            shown++;
+          } else {
+            extra.push(`<div class="row"><span class="date">${data[i].date}</span> <span class="desc">${data[i].desc}</span></div>`);
+          }
+        }
+      }
+      document.getElementById('schedule-main-inner').innerHTML = rows.join('');
+      document.getElementById('schedule-extra').innerHTML = extra.join('');
+      document.getElementById('schedule-main').classList.remove('open');
     }
-    // Анимация и overlay
-    const scheduleToggle = document.getElementById('scheduleToggle');
-    const scheduleAll = document.getElementById('scheduleAll');
-    const scheduleOuter = document.getElementById('scheduleOuter');
-    const mainBlocks = document.getElementById('mainBlocks');
-    let expanded = false;
-    function toggleSchedule(e) {
-      expanded = !expanded;
-      scheduleToggle.classList.toggle('open', expanded);
-      scheduleAll.classList.toggle('open', expanded);
-      scheduleOuter.classList.toggle('expanded', expanded);
-      mainBlocks.classList.toggle('overlayed', expanded);
-      scheduleToggle.setAttribute('aria-expanded', expanded ? "true" : "false");
-    }
-    scheduleToggle.addEventListener('click', toggleSchedule);
-    // Языки (добавь расширение для других языков по аналогии)
-    const langSwitchers = document.querySelectorAll('.lang-switch span');
-    langSwitchers.forEach(s => {
-      s.onclick = () => {
-        langSwitchers.forEach(el => el.classList.remove('active'));
-        s.classList.add('active');
-        // setLang(s.dataset.lang); // поддержка мультиязычности
-      };
-    });
-    // MODAL для карточек
+    // Arrow и анимация "наезда"
+    const scheduleMain = document.getElementById('schedule-main');
+    const scheduleArrow = document.getElementById('schedule-arrow');
+    scheduleArrow.onclick = () => {
+      scheduleMain.classList.toggle('open');
+    };
+
+    // ----- Модалки карточек -----
+    const cardBlocks = document.querySelectorAll('.card-block');
+    const modalFull = document.getElementById('modalFull');
+    const modalContent = document.getElementById('modalContent');
+    // Пример наполнения
     const cardDetails = {
       history: {
         img: "assets/church_outside.jpg",
         title: "История прихода",
-        text: `<p>Приход во имя Знамения Пресвятой Богородицы основан в 19XX году...</p>`
+        text: `<p>Приход во имя Знамения Пресвятой Богородицы основан в 19XX году. Здесь служили выдающиеся священнослужители, здесь совершаются таинства и продолжается молитвенная традиция.</p><p>Подробнее о наших святынях, настоятелях, событиях — на этой странице.</p>`
       },
       icon: {
         img: "assets/icon_inside.jpg",
         title: "Икона Знамения",
-        text: `<p>Главная святыня храма — икона Божией Матери "Знамение". История, почитание, чудеса...</p>`
+        text: `<p>Главная святыня храма — икона Божией Матери "Знамение". История, почитание, чудеса, связанные с ней.</p><p>Здесь вы узнаете о празднике, особенностях и молитвах перед этой иконой.</p>`
       },
       schedule: {
         img: "assets/service.jpg",
         title: "Богослужения",
-        text: `<p>В храме совершаются все основные богослужения...</p>`
-      },
-      community: {
-        img: "assets/community.jpg",
-        title: "Приходская жизнь",
-        text: `<p>Наш приход — это не только молитва, но и дружба, совместные праздники...</p>`
+        text: `<p>В храме совершаются все основные богослужения: Литургии, Всенощные, молебны и панихиды. Расписание обновляется ежемесячно.</p><p>О правилах посещения, особенностях службы — здесь.</p>`
       }
     };
-    const cardBlocks = document.querySelectorAll('.card-block');
-    const modalFull = document.getElementById('modalFull');
-    const modalContent = document.getElementById('modalContent');
-    function openModal(key) {
-      const data = cardDetails[key];
-      if (!data) return;
-      modalContent.innerHTML = `
-        <button class="modal-close" id="modalClose" title="Закрыть">&times;</button>
-        <img src="${data.img}" alt="${data.title}">
-        <div class="modal-title">${data.title}</div>
-        <div>${data.text}</div>
-      `;
-      modalFull.classList.add('open');
-      document.body.style.overflow = 'hidden';
-      document.getElementById('modalClose').onclick = closeModal;
-    }
+    cardBlocks.forEach(card => {
+      card.onclick = () => {
+        const key = card.getAttribute('data-block');
+        if (!cardDetails[key]) return;
+        modalContent.innerHTML = `
+          <button class="modal-close" id="modalClose" title="Закрыть">&times;</button>
+          <img src="${cardDetails[key].img}" alt="${cardDetails[key].title}">
+          <div class="modal-title">${cardDetails[key].title}</div>
+          <div>${cardDetails[key].text}</div>
+        `;
+        modalFull.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        document.getElementById('modalClose').onclick = closeModal;
+      };
+    });
     function closeModal() {
       modalFull.classList.remove('open');
       document.body.style.overflow = '';
     }
-    cardBlocks.forEach(card => {
-      card.onclick = () => openModal(card.getAttribute('data-block'));
-    });
     modalFull.onclick = function(e) {
       if (e.target === modalFull) closeModal();
     }
     document.addEventListener('keydown', function(e) {
       if (e.key === "Escape") closeModal();
     });
-    // Начальный рендер
-    renderSchedule();
-    // Обновлять расписание раз в минуту
-    setInterval(renderSchedule, 60000);
+
+    // --- Инициализация ---
+    setLang('ru');
   </script>
 </body>
 </html>
