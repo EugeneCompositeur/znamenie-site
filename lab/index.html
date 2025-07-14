@@ -5,301 +5,256 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Храм Знамения Пресвятой Богородицы в Париже</title>
   <link rel="icon" href="assets/icon2.gif" type="image/gif" />
-  <link href="https://fonts.googleapis.com/css2?family=Forum&family=Open+Sans&family=Roboto+Mono&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Forum&family=Open+Sans:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bogoroditsa-blue: #1939A5;
-      --bogoroditsa-blue-light: #4062bf;
-      --main-bg: #e8decd;
-      --header-bg: #e8decd;
+      --main-bg: #ece1d0;
+      --footer-bg: #dbccaf;
+      --footer-text: #7d7361;
       --menu-color: #988c7c;
-      --menu-hover: #675;
-      --menu-active: #1939A5;
-      --menu-donate: #e15f41;
-      --menu-donate-bg: #f8e8e0;
-      --lang-inactive: #988c7c;
-      --block-radius: 8px;
-      --block-radius-mob: 6px;
-      --box-shadow: 0 2px 32px #1939a519;
-      --modal-bg: rgba(25, 57, 165, 0.08);
-    }
-    body, .header-bar, .site-header, .header-wrap, .header-top {
-      background: var(--main-bg) !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      border: none !important;
+      --menu-active: #2d3051;
+      --block-radius: 13px;
+      --card-min-width: 240px;
+      --card-max-width: 340px;
+      --transition: 0.36s cubic-bezier(.62,-0.13,.4,1.13);
     }
     body {
+      margin: 0; padding: 0;
       font-family: 'Open Sans', sans-serif;
+      background: var(--main-bg);
       color: #2f2f2f;
       min-height: 100vh;
-    }
-
-    /* Верхний бар с меню и языками */
-    .header-bar {
-      width: 100vw;
-      background: var(--header-bg);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: 'Roboto Mono', monospace;
-      font-size: 1.28em;
-      padding: 0.32em 2em 0.18em 2em;
       box-sizing: border-box;
+    }
+    /* ----------- ХЭДЕР, МЕНЮ, ЯЗЫКИ ---------- */
+    .header-bar {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 0.5em 2.5em 0.5em 2.5em;
+      font-family: 'Roboto Mono', monospace;
+      background: var(--main-bg);
+      min-height: 51px;
       position: relative;
-      z-index: 42;
-      letter-spacing: 0.03em;
-      min-height: 54px;
+      z-index: 101;
     }
-    .header-bar-left, .header-bar-right {
-      display: flex;
-      align-items: center;
-      gap: 1.3em;
+    .header-bar-left {
+      display: flex; gap: 1.4em; align-items: center;
+      margin-left: 0.8em;
     }
-    .header-bar-left a, .header-bar-left .menu-link {
-      color: var(--menu-color);
+    .header-bar-left a {
       text-decoration: none;
-      font-weight: 400;
-      padding: 0.16em 0.25em;
-      border-radius: 7px;
-      transition: color 0.2s, background 0.18s;
-      cursor: pointer;
+      color: var(--menu-color);
+      font-weight: 500;
+      font-size: 1.08em;
+      transition: color .19s, background .15s;
+      border-radius: 5px;
+      padding: 0.09em 0.21em;
     }
-    .header-bar-left a:hover, .header-bar-left .menu-link:hover {
-      color: var(--menu-hover);
-      background: #ece5d7;
-    }
-    .header-bar-left .menu-link.active {
+    .header-bar-left a:hover,
+    .header-bar-left a.active {
       color: var(--menu-active);
-      font-weight: 700;
-      background: #ede6d3;
+      background: #e5dcc6;
     }
-    .header-bar-left .menu-link.donate {
-      color: var(--menu-donate);
-      background: var(--menu-donate-bg);
-      font-weight: 700;
-      border-radius: 7px;
-      border: none;
-      padding: 0.16em 0.41em;
+    .header-bar-right {
+      display: flex; gap: 0.9em; align-items: center;
+      margin-right: 0.6em;
     }
-    .header-bar-left .menu-link.donate:hover {
-      background: #f6d8cd;
-      color: #b04422;
-    }
-    /* Языки */
-    .header-bar-right span {
-      color: var(--lang-inactive);
-      margin-left: 1.2em;
-      font-size: 0.97em;
-      font-weight: 400;
+    .header-bar-right .lang {
+      color: var(--menu-color);
+      font-weight: 500;
+      font-size: 1.08em;
       cursor: pointer;
-      transition: color 0.17s;
-      user-select: none;
-    }
-    .header-bar-right span.active {
-      color: var(--bogoroditsa-blue);
-      font-weight: 700;
-      background: #f2ede0;
+      padding: 0.07em 0.26em;
       border-radius: 4px;
-      padding: 0 0.18em;
+      transition: color .16s, background .13s;
     }
-
-    /* Мобильное меню */
+    .header-bar-right .lang.active {
+      color: var(--bogoroditsa-blue);
+      background: #ece7de;
+    }
+    /* --- ГАМБУРГЕР --- */
     .hamburger {
       display: none;
       flex-direction: column;
-      gap: 5px;
+      gap: 6px;
       cursor: pointer;
-      margin-right: 0.5em;
-      z-index: 1010;
+      margin-left: auto;
+      margin-right: 0.7em;
+      z-index: 1200;
     }
     .hamburger span {
+      width: 29px; height: 4px;
+      background: #a49a8b;
+      border-radius: 3px;
+      transition: all .2s;
       display: block;
-      width: 30px;
-      height: 4px;
-      background: #888;
-      border-radius: 4px;
-      transition: all 0.25s;
     }
-    @media (max-width: 820px) {
-      .header-bar { font-size: 1.08em; padding-left: 0.5em; padding-right: 0.5em;}
-      .header-bar-left { gap: 0.8em; }
-      .header-bar-right span { margin-left: 0.65em;}
-    }
-    @media (max-width: 650px) {
-      .header-bar { font-size: 0.98em; min-height: 48px;}
-      .header-bar-left { display: none; }
-      .hamburger { display: flex; }
-      .header-bar-right { margin-left: auto; }
-    }
-
-    /* Мобильное боковое меню */
+    /* --- МОБИЛЬНОЕ МЕНЮ (выезжает справа) --- */
     .mobile-menu {
-      position: fixed;
-      top: 0; right: -100vw;
-      width: 72vw; max-width: 360px;
-      height: 100vh;
-      background: #f7f2e8;
-      box-shadow: -7px 0 38px #1939a513;
-      z-index: 1200;
-      display: flex;
-      flex-direction: column;
-      padding: 2em 1.2em 1.4em 1.2em;
-      gap: 1.4em;
-      transition: right 0.33s cubic-bezier(.67,-0.01,.42,.99);
+      position: fixed; top: 0; right: -101vw;
+      width: 74vw; max-width: 340px; height: 100vh;
+      background: #f8f3ea;
+      box-shadow: -7px 0 38px #1939a511;
+      z-index: 1300;
+      display: flex; flex-direction: column;
+      padding: 2.4em 1.4em 1.7em 1.3em;
+      gap: 1.5em;
+      transition: right .38s cubic-bezier(.62,-0.13,.4,1.13);
     }
     .mobile-menu.open { right: 0; }
-    .mobile-menu .mobile-menu-link {
-      font-size: 1.18em;
-      color: var(--menu-color);
-      text-decoration: none;
-      margin-bottom: 1em;
-      font-family: 'Roboto Mono', monospace;
-      font-weight: 500;
-      letter-spacing: 0.01em;
-      border-radius: 7px;
-      padding: 0.23em 0.12em;
-      transition: color 0.18s, background 0.19s;
-      cursor: pointer;
-    }
-    .mobile-menu .mobile-menu-link:hover,
-    .mobile-menu .mobile-menu-link.active {
-      color: var(--menu-active);
-      background: #f3eae0;
-      font-weight: 700;
-    }
-    .mobile-menu .mobile-menu-link.donate {
-      color: var(--menu-donate);
-      background: var(--menu-donate-bg);
-      font-weight: 700;
-      padding: 0.19em 0.41em;
-    }
-    .mobile-menu .mobile-menu-link.donate:hover { background: #f5d8cd; color: #b04422;}
     .mobile-menu-close {
-      position: absolute;
-      top: 1.0em; right: 1.2em;
-      font-size: 2.7em;
-      color: #b8a99e;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
+      position: absolute; top: 1.1em; right: 1.3em;
+      font-size: 2.5em; color: #b8a99e; background: none;
+      border: none; cursor: pointer;
       z-index: 1400;
     }
     .mobile-menu-close:hover { color: #be6a45;}
-    .mobile-menu-langs {
-      margin-top: 2.8em;
-      display: flex;
-      gap: 1.3em;
-      font-size: 1.09em;
+    .mobile-menu-link {
+      font-size: 1.14em;
+      color: var(--menu-color);
+      text-decoration: none;
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      border-radius: 6px;
+      padding: 0.23em 0.14em;
+      transition: color .14s, background .15s;
+      cursor: pointer;
+      display: block;
+      margin-bottom: 0.35em;
     }
-    .mobile-menu-langs span { color: var(--lang-inactive); cursor: pointer; }
-    .mobile-menu-langs span.active { color: var(--bogoroditsa-blue); font-weight: 700; background: #f2ede0; border-radius: 4px; padding: 0 0.18em;}
-
-    /* Заголовок с иконой — без лишних отступов! */
+    .mobile-menu-link:hover,
+    .mobile-menu-link.active {
+      color: var(--menu-active);
+      background: #ede6d3;
+      font-weight: 700;
+    }
+    .mobile-menu-langs {
+      margin-top: 2.2em; display: flex; gap: 1.1em; font-size: 1.08em;
+    }
+    .mobile-menu-langs .lang {
+      color: var(--menu-color); cursor: pointer;
+      font-weight: 500; border-radius: 3px;
+      padding: 0 0.15em;
+      transition: color .13s, background .12s;
+    }
+    .mobile-menu-langs .lang.active {
+      color: var(--bogoroditsa-blue); background: #ece7de;
+    }
+    /* ---------- ЛОГО + НАЗВАНИЕ ----------- */
     .site-header {
-      background: var(--main-bg);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin: 0;
-      padding: 0 0 0.1em 0;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--main-bg); margin: 0; padding: 0;
       box-shadow: none;
     }
     .header-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      margin: 0;
-      padding-top: 2.5em;
-      padding-bottom: 2.5em;
-    }
-    .header-top {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin: 0;
-      padding: 0;
+      width: 100%; max-width: 980px;
+      margin: 0 auto; display: flex;
+      align-items: center; justify-content: center;
+      padding-top: 2.2em;
+      padding-bottom: 0.9em;
     }
     .logo-title {
       font-family: 'Forum', serif;
-      font-size: 2.8em;
+      font-size: 2.42em;
       color: var(--bogoroditsa-blue);
       text-shadow: 0 1px 6px #fff8, 0 1px 8px #fff5;
       font-weight: 400;
       letter-spacing: 0.01em;
-      text-align: center;
-      margin: 0 0 0.19em 0;
       white-space: pre-line;
-      line-height: 1.05;
+      line-height: 1.04;
+      max-width: 8.3em;
+      min-width: 6em;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      margin-right: 1.09em;
+      text-align: right;
+    }
+    .logo-title.right {
+      align-items: flex-start;
+      margin-left: 1.09em;
+      margin-right: 0;
+      text-align: left;
     }
     .logo-icon {
-      height: 144px;
-      width: 132px;
-      margin: 0.15em 0 0.11em 0;
-      display: block;
-      z-index: 3;
+      height: 124px; width: 102px;
+      display: block; z-index: 3;
+      margin: 0;
+    }
+    @media (max-width: 650px) {
+      .header-wrap { padding-top: 1.18em; padding-bottom: 0.6em;}
+      .logo-title, .logo-title.right { font-size: 1.09em; min-width: 4.8em; }
+      .logo-icon { height: 54px; width: 43px;}
     }
     .header-desc {
       font-family: 'Forum', serif;
-      font-size: 1em;
-      color: #988c7c;
+      font-size: 1.06em; color: #988c7c;
       text-align: center;
-      margin-top: 0.23em;
-      margin-bottom: 0.07em;
-      letter-spacing: 0.01em;
-      font-weight: 400;
+      width: 100%;
+      margin-top: 0.31em; margin-bottom: 0.9em;
+      letter-spacing: 0.01em; font-weight: 400;
     }
     @media (max-width: 650px) {
-      .logo-title { font-size: 1.41em; margin-bottom: 0.05em;}
-      .logo-icon { height: 66px; width: 62px;}
-      .header-desc { font-size: 0.95em; margin-top: 0.07em;}
-      .header-wrap { padding-top: 1.1em; padding-bottom: 1.1em; }
+      .header-desc { font-size: 0.88em; margin-top: 0.14em; margin-bottom: 0.47em;}
     }
-    @media (max-width: 480px) {
-      .logo-title { font-size: 1.03em;}
-      .logo-icon { height: 50px; width: 47px;}
-      .header-desc { font-size: 0.81em; }
-      .header-wrap { padding-top: 0.7em; padding-bottom: 0.7em; }
+    /* ---- МОБИЛЬНАЯ ВЕРСИЯ ХЭДЕРА ---- */
+    @media (max-width: 820px) {
+      .header-bar { padding-left: 0.8em; padding-right: 0.8em;}
+      .header-bar-left { gap: 0.64em; }
+      .header-bar-right { gap: 0.44em; }
     }
-
-    /* Расписание и карточки – упрощённо, для примера */
+    @media (max-width: 600px) {
+      .header-bar-left, .header-bar-right { display: none !important; }
+      .hamburger { display: flex !important; }
+      .header-wrap { flex-direction: row; }
+      .logo-title, .logo-title.right { font-size: 0.92em; min-width: 3.8em; }
+      .logo-icon { height: 36px; width: 29px;}
+    }
+    @media (max-width: 600px) {
+      .logo-title { margin-right: 0.6em;}
+      .logo-title.right { margin-left: 0.6em;}
+    }
+    /* ---------- РАСПИСАНИЕ ---------- */
     .schedule-main {
-      background: var(--bogoroditsa-blue);
-      color: #fff;
       width: 100vw;
       margin: 0 auto;
-      padding: 1.1em 0 0.06em 0;
+      padding: 0.78em 0 0.08em 0;
       box-sizing: border-box;
       position: relative;
       z-index: 20;
       min-height: 48px;
-      transition: box-shadow 0.28s;
-      overflow: visible;
+      transition: box-shadow .26s, background .32s, opacity .38s;
+      background: var(--bogoroditsa-blue);
+      opacity: 1;
+      cursor: pointer;
+    }
+    .schedule-main.open {
+      opacity: 0.82;
+      box-shadow: 0 8px 55px #1939a54c;
+      background: var(--bogoroditsa-blue);
+      /* Карточки видны, эффект наложения */
     }
     .schedule-main-inner {
       margin-left: 13vw;
-      margin-right: 8vw;
+      margin-right: 13vw;
       min-width: 190px;
       max-width: 820px;
     }
     .schedule-main .row {
       font-family: 'Open Sans', sans-serif;
-      font-size: 1.17em;
-      margin-bottom: 0.16em;
+      font-size: 1.07em;
+      margin-bottom: 0.17em;
       text-align: left;
       display: flex;
       align-items: baseline;
       gap: 0.45em;
+      margin-left: 2.4em; /* строка сдвинута вправо */
     }
     .schedule-main .date {
       font-weight: 700;
       font-size: 1.13em;
-      letter-spacing: 0.01em;
       color: #fff;
       margin-right: 0.28em;
       white-space: nowrap;
@@ -324,240 +279,272 @@
     }
     .schedule-arrow svg {
       width: 21px; height: 15px; fill: #fff;
-      transition: transform .24s;
+      transition: transform .22s;
     }
-    .schedule-main.open .schedule-arrow svg {
-      transform: rotate(180deg);
-    }
-    .schedule-main.open {
-      box-shadow: 0 12px 66px #1939a530;
-    }
+    .schedule-main.open .schedule-arrow { display: none; }
     .schedule-main .extra {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.42s cubic-bezier(.45,.12,.52,1.02), opacity 0.38s;
+      transition: max-height .5s var(--transition), opacity .36s;
       opacity: 0.91;
     }
     .schedule-main.open .extra {
       max-height: 380px;
       opacity: 1;
-      background: #233a9057;
+      background: none;
       position: absolute;
       left: 0; right: 0; 
       z-index: 25;
-      box-shadow: 0 12px 52px #1939a54d;
       pointer-events: auto;
-      padding-bottom: 1.1em;
-      backdrop-filter: blur(2.5px);
-      border-radius: 0 0 0 0;
+      padding-bottom: 0.6em;
+      backdrop-filter: none;
     }
-    @media (max-width: 750px) {
+    @media (max-width: 900px) {
       .schedule-main-inner { margin-left: 2vw; margin-right: 2vw;}
-      .schedule-main .row { font-size: 1.02em; }
     }
     @media (max-width: 480px) {
-      .schedule-main-inner { margin-left: 0.4em; margin-right: 0.4em;}
+      .schedule-main-inner { margin-left: 0.5em; margin-right: 0.5em;}
       .schedule-main .row { font-size: 0.95em; }
     }
+    /* ---- КАРТОЧКИ ---- */
     .blocks-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 2em;
+      gap: 1.3em;
       justify-content: center;
       margin: 2.1em auto 0 auto;
       position: relative;
       z-index: 5;
       max-width: 1200px;
-      transition: filter .28s;
+      transition: filter .29s;
     }
     .schedule-main.open ~ .blocks-row {
-      filter: blur(1.6px) brightness(0.88);
-      pointer-events: none;
-      user-select: none;
+      filter: none;
+      pointer-events: auto;
+      user-select: auto;
     }
     .card-block {
       background: #fff;
       border-radius: var(--block-radius);
-      box-shadow: var(--box-shadow);
-      width: 310px;
-      min-height: 270px;
-      cursor: pointer;
-      transition: transform 0.23s, box-shadow 0.24s;
-      overflow: hidden;
+      box-shadow: 0 4px 30px #b6a78217;
+      min-width: var(--card-min-width);
+      max-width: var(--card-max-width);
+      width: 25vw;
+      min-height: 265px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: flex-start;
+      margin-bottom: 1em;
+      overflow: hidden;
+      cursor: pointer;
+      transition: box-shadow .19s, transform .17s, min-height .2s;
     }
     .card-block:hover {
-      transform: scale(1.033);
-      box-shadow: 0 14px 64px #1939a527;
+      transform: scale(1.035);
+      box-shadow: 0 10px 48px #1939a527;
     }
-    .card-block img {
-      width: 100%;
-      height: 144px;
+    .card-img {
+      width: 100%; height: 80%;
+      max-height: 240px;
       object-fit: cover;
-      border-radius: var(--block-radius) var(--block-radius) 0 0;
+      flex-shrink: 0;
+      border-radius: 0;
+    }
+    .card-body {
+      width: 100%;
+      padding: 0.6em 1em 0.9em 1em;
+      display: flex; flex-direction: column; align-items: center;
     }
     .card-title {
       font-family: 'Forum', serif;
-      font-size: 1.17em;
+      font-size: 1.11em;
       color: var(--bogoroditsa-blue);
-      margin: 1.0em 0 0.6em 0;
       font-weight: 700;
       letter-spacing: 0.01em;
+      margin-bottom: 0.29em;
+      margin-top: 0.18em;
       text-align: center;
-      text-shadow: 0 1px 3px #fff7;
     }
     .card-desc {
-      font-size: 1.03em;
+      font-size: 0.98em;
       color: #474747;
-      margin-bottom: 1em;
-      padding: 0 1em;
+      font-weight: 400;
       text-align: center;
+      opacity: 0.94;
     }
     @media (max-width: 900px) {
-      .blocks-row { flex-direction: column; gap: 1.1em; }
-      .card-block { width: 99vw; min-height: 160px;}
-      .card-block img { height: 110px;}
+      .card-block { width: 96vw; min-width: 180px; max-width: 420px; }
+      .card-img { height: 165px; }
     }
     @media (max-width: 600px) {
-      .blocks-row { gap: 0.7em; }
-      .card-block { border-radius: var(--block-radius-mob); }
-      .card-block img { border-radius: var(--block-radius-mob) var(--block-radius-mob) 0 0; }
+      .blocks-row { gap: 0.4em; }
+      .card-block { border-radius: 8px; }
+      .card-img { border-radius: 0; }
+      .card-block { min-width: 120px; }
     }
-    /* Footer */
+    /* ---- ФУТЕР ---- */
     .footer {
-      margin: 2.6em 0 1.6em 0;
-      font-size: 1.08em;
-      color: #675;
+      background: var(--footer-bg);
+      margin: 2.2em 0 0 0;
+      padding: 1.5em 0 1.2em 0;
+      font-size: 1.07em;
+      color: var(--footer-text);
       text-align: center;
       letter-spacing: 0.01em;
+      width: 100vw;
     }
-    .footer a { color: var(--bogoroditsa-blue-light); text-decoration: underline dotted; }
-    .footer a:hover { color: var(--bogoroditsa-blue); }
+    .footer a { color: var(--bogoroditsa-blue); text-decoration: underline dotted;}
+    .footer a:hover { color: #654;}
   </style>
 </head>
 <body>
-  <!-- Верхний бар: меню и языки -->
+  <!-- ======= ХЭДЕР: меню + языки + гамбургер ======= -->
   <div class="header-bar">
     <div class="header-bar-left">
-      <a class="menu-link" href="#">Подкаст</a>
-      <a class="menu-link" href="#">Интернет-магазин</a>
-      <a class="menu-link donate" href="#">Пожертвования</a>
+      <a href="#" class="menu-link">Подкаст</a>
+      <a href="#" class="menu-link">Интернет-магазин</a>
+      <a href="#" class="menu-link">Пожертвования</a>
     </div>
-    <div class="hamburger" id="hamburger" aria-label="Открыть меню">
+    <div class="hamburger" id="hamburger" aria-label="Открыть меню" style="display:none;">
       <span></span><span></span><span></span>
     </div>
     <div class="header-bar-right">
-      <span class="active" data-lang="ru">RU</span>
-      <span data-lang="fr">FR</span>
-      <span data-lang="by">BY</span>
-      <span data-lang="ua">UA</span>
+      <span class="lang active" data-lang="ru">RU</span>
+      <span class="lang" data-lang="fr">FR</span>
+      <span class="lang" data-lang="by">BY</span>
+      <span class="lang" data-lang="ua">UA</span>
     </div>
   </div>
-  <!-- Мобильное меню -->
+  <!-- ==== МОБИЛЬНОЕ МЕНЮ ==== -->
   <div class="mobile-menu" id="mobileMenu">
     <button class="mobile-menu-close" id="mobileMenuClose" title="Закрыть меню">&times;</button>
     <a class="mobile-menu-link" href="#">Подкаст</a>
     <a class="mobile-menu-link" href="#">Интернет-магазин</a>
-    <a class="mobile-menu-link donate" href="#">Пожертвования</a>
+    <a class="mobile-menu-link" href="#">Пожертвования</a>
     <div class="mobile-menu-langs">
-      <span class="active" data-lang="ru">RU</span>
-      <span data-lang="fr">FR</span>
-      <span data-lang="by">BY</span>
-      <span data-lang="ua">UA</span>
+      <span class="lang active" data-lang="ru">RU</span>
+      <span class="lang" data-lang="fr">FR</span>
+      <span class="lang" data-lang="by">BY</span>
+      <span class="lang" data-lang="ua">UA</span>
     </div>
   </div>
-  <!-- Заголовок + икона + подпись -->
+  <!-- ======= ЛОГО И НАЗВАНИЕ ======= -->
   <header class="site-header">
     <div class="header-wrap">
-      <div class="header-top">
-        <div class="logo-title" id="logo-title">Храм<br>Знамения<br>Пресвятой<br>Богородицы</div>
-        <img src="assets/icon2.gif" alt="Икона Богородицы" class="logo-icon" />
-      </div>
-      <div class="header-desc" id="subheading">
-        Викариат имени Святых Марии Парижской и Алексия Южинского — Вселенский Патриархат
-      </div>
+      <div class="logo-title" id="logo-left"><span>Храм</span><span>Знамения</span></div>
+      <img src="assets/icon2.gif" alt="Икона Богородицы" class="logo-icon" />
+      <div class="logo-title right" id="logo-right"><span>Пресвятой</span><span>Богородицы</span></div>
     </div>
   </header>
-  <!-- Расписание -->
+  <div class="header-desc" id="subheading">
+    Викариат имени Святых Марии Парижской и Алексия Южинского — Вселенский Патриархат
+  </div>
+  <!-- ======= РАСПИСАНИЕ ======= -->
   <div class="schedule-main" id="schedule-main">
-    <div class="schedule-main-inner" id="schedule-main-inner">
-      <!-- Вставляется через JS -->
-    </div>
+    <div class="schedule-main-inner" id="schedule-main-inner"></div>
     <div class="schedule-arrow" id="schedule-arrow" title="Показать все">
       <svg viewBox="0 0 20 12"><path d="M2 2l8 8 8-8"/></svg>
     </div>
     <div class="extra" id="schedule-extra"></div>
   </div>
-  <!-- Карточки -->
+  <!-- ======= КАРТОЧКИ ======= -->
   <div class="blocks-row" id="main-blocks">
     <div class="card-block" data-block="history">
-      <img src="assets/church_outside.jpg" alt="Вид храма" />
-      <div class="card-title">История прихода</div>
-      <div class="card-desc">Краткая история и основание.</div>
+      <img src="assets/church_outside.jpg" alt="Вид храма" class="card-img" />
+      <div class="card-body">
+        <div class="card-title">История прихода</div>
+        <div class="card-desc">Краткая история и основные этапы жизни прихода.</div>
+      </div>
     </div>
-    <div class="card-block" data-block="clergy">
-      <img src="assets/priest.jpg" alt="Клирики храма" />
-      <div class="card-title">Клирики храма</div>
-      <div class="card-desc">Список, биографии, контакты.</div>
+    <div class="card-block" data-block="priests">
+      <img src="assets/priests.jpg" alt="Клирики храма" class="card-img" />
+      <div class="card-body">
+        <div class="card-title">Клирики храма</div>
+        <div class="card-desc">Священники, дьяконы, причт, служившие и служащие храму.</div>
+      </div>
     </div>
-    <div class="card-block" data-block="reading">
-      <img src="assets/lection.jpg" alt="Чтение дня" />
-      <div class="card-title">Чтение дня</div>
-      <div class="card-desc">Сегодняшние евангельские и апостольские чтения.</div>
+    <div class="card-block" data-block="lection">
+      <img src="assets/lection.jpg" alt="Чтение дня" class="card-img" />
+      <div class="card-body">
+        <div class="card-title">Чтение дня</div>
+        <div class="card-desc">Евангельское и апостольское чтения на текущий день.</div>
+      </div>
     </div>
     <div class="card-block" data-block="library">
-      <img src="assets/library.jpg" alt="Библиотека" />
-      <div class="card-title">Библиотека</div>
-      <div class="card-desc">Книги, статьи, материалы для чтения.</div>
+      <img src="assets/library.jpg" alt="Библиотека" class="card-img" />
+      <div class="card-body">
+        <div class="card-title">Библиотека</div>
+        <div class="card-desc">Книги, материалы и ресурсы для прихожан и гостей.</div>
+      </div>
     </div>
-    <div class="card-block" data-block="school">
-      <img src="assets/school.jpg" alt="Воскресная школа" />
-      <div class="card-title">Воскресная школа</div>
-      <div class="card-desc">Занятия для детей и взрослых.</div>
+    <div class="card-block" data-block="sundayschool">
+      <img src="assets/sundayschool.jpg" alt="Воскресная школа" class="card-img" />
+      <div class="card-body">
+        <div class="card-title">Воскресная школа</div>
+        <div class="card-desc">Занятия, расписание, информация для родителей и детей.</div>
+      </div>
     </div>
     <div class="card-block" data-block="white">
-      <img src="assets/white_movement.jpg" alt="Белое движение" />
-      <div class="card-title">Белое движение</div>
-      <div class="card-desc">История, связь с храмом, памятные даты.</div>
+      <img src="assets/white.jpg" alt="Белое движение" class="card-img" />
+      <div class="card-body">
+        <div class="card-title">Белое движение</div>
+        <div class="card-desc">История и память Белого движения в приходе.</div>
+      </div>
     </div>
     <div class="card-block" data-block="icons">
-      <img src="assets/icons.jpg" alt="Иконы" />
-      <div class="card-title">Иконы</div>
-      <div class="card-desc">Святыни храма, их история.</div>
+      <img src="assets/icons.jpg" alt="Иконы" class="card-img" />
+      <div class="card-body">
+        <div class="card-title">Иконы</div>
+        <div class="card-desc">Описание и фотографии храмовых икон.</div>
+      </div>
     </div>
     <div class="card-block" data-block="choir">
-      <img src="assets/choir.jpg" alt="Хор" />
-      <div class="card-title">Хор</div>
-      <div class="card-desc">История, состав, репертуар, записи.</div>
+      <img src="assets/choir.jpg" alt="Хор" class="card-img" />
+      <div class="card-body">
+        <div class="card-title">Хор</div>
+        <div class="card-desc">История, участники и новости приходского хора.</div>
+      </div>
     </div>
   </div>
-  <!-- Footer -->
+  <!-- ======= ФУТЕР ======= -->
   <div class="footer" id="footer">
     87, boulevard Exelmans, Paris 75016<br>
     Метро: Exelmans (ligne 9)<br>
     ✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>
   </div>
+  <!-- ======= JS ======= -->
   <script>
-    // Мобильное меню гамбургер
+    // ===== МОБИЛЬНОЕ МЕНЮ =====
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
     const mobileMenuClose = document.getElementById('mobileMenuClose');
+    function updateHeaderForMobile() {
+      if (window.innerWidth < 650) {
+        hamburger.style.display = "flex";
+        if (!mobileMenu.classList.contains('js-inited')) {
+          mobileMenu.classList.add('js-inited');
+        }
+      } else {
+        hamburger.style.display = "none";
+        mobileMenu.classList.remove('open');
+      }
+    }
+    updateHeaderForMobile();
+    window.addEventListener('resize', updateHeaderForMobile);
     hamburger.onclick = () => mobileMenu.classList.add('open');
     mobileMenuClose.onclick = () => mobileMenu.classList.remove('open');
     mobileMenu.onclick = e => { if (e.target === mobileMenu) mobileMenu.classList.remove('open'); };
-
-    // Языки (переключение синхронизировано)
+    // ===== ЯЗЫКИ =====
     function setLangAll(lang) {
       document.querySelectorAll('[data-lang]').forEach(el => el.classList.toggle('active', el.dataset.lang === lang));
-      // ... логика смены языка здесь ...
+      // Логика смены языка — смотри дальше
     }
     document.querySelectorAll('[data-lang]').forEach(el => {
       el.onclick = () => setLangAll(el.dataset.lang);
     });
-
-    // Расписание (пример, только RU, дополни при желании)
+    // ===== РАСПИСАНИЕ =====
+    // Пример расписания на русском, для смены языка см. translations
     const translations = {
       ru: {
         schedule: [
@@ -568,45 +555,93 @@
           { date: "27 среда, 18:00", desc: "Всенощная (Успение Пресвятой Богородицы)" },
           { date: "28 четверг, 10:00", desc: "Литургия (Успение Пресвятой Богородицы)" }
         ]
-      }
+      },
+      fr: { schedule: [
+        { date: "16 samedi, 18:00", desc: "Vêpres (10e dimanche après la Pentecôte), ton 1" },
+        { date: "17 dimanche, 10:30", desc: "Liturgie (Sept jeunes saints d'Éphèse)" },
+        { date: "18 lundi, 18:00", desc: "Vêpres (Transfiguration du Seigneur)" },
+        { date: "19 mardi, 10:00", desc: "Liturgie / Bénédiction de l'eau et des fruits (Transfiguration, Second Sauveur)" },
+        { date: "27 mercredi, 18:00", desc: "Vêpres (Dormition de la Vierge Marie)" },
+        { date: "28 jeudi, 10:00", desc: "Liturgie (Dormition de la Vierge Marie)" }
+      ]},
+      by: { schedule: [
+        { date: "16 субота, 18:00", desc: "Усяночная (10-я нядзеля пасля Троцы). Голас 1." },
+        { date: "17 нядзеля, 10:30", desc: "Літургія (Святыя сем юнакоў, што ў Эфесе)" },
+        { date: "18 панядзелак, 18:00", desc: "Усяночная (Преображэнне Госпада)" },
+        { date: "19 аўторак, 10:00", desc: "Літургія/Асвячэнне вады і садавіны (Преображэнне — Другі Спас)" },
+        { date: "27 серада, 18:00", desc: "Усяночная (Успенне Прасвятой Багародзіцы)" },
+        { date: "28 чацвер, 10:00", desc: "Літургія (Успенне Прасвятой Багародзіцы)" }
+      ]},
+      ua: { schedule: [
+        { date: "16 субота, 18:00", desc: "Всенічна (10-та неділя після П’ятидесятниці), Глас 1" },
+        { date: "17 неділя, 10:30", desc: "Літургія (Сім святих отроків, що в Ефесі)" },
+        { date: "18 понеділок, 18:00", desc: "Всенічна (Преображення Господнє)" },
+        { date: "19 вівторок, 10:00", desc: "Літургія/Освячення води та фруктів (Преображення — Другий Спас)" },
+        { date: "27 середа, 18:00", desc: "Всенічна (Успіння Пресвятої Богородиці)" },
+        { date: "28 четвер, 10:00", desc: "Літургія (Успіння Пресвятої Богородиці)" }
+      ]}
     };
-    function isFuture(dateStr) {
-      const months = [7]; // август (0 - январь)
-      const now = new Date();
-      const match = dateStr.match(/(\d+)\s\D+,\s*(\d{1,2}):(\d{2})/);
-      if (!match) return true;
-      let [_, day, hour, min] = match;
-      let d = new Date(now.getFullYear(), months[0], parseInt(day), parseInt(hour), parseInt(min));
-      return d.getTime() - now.getTime() > -90*60*1000;
-    }
+    let currentLang = "ru";
     function renderSchedule() {
-      const data = translations.ru.schedule || [];
+      const sched = translations[currentLang].schedule;
       let rows = [];
       let extra = [];
       let shown = 0;
-      for (let i = 0; i < data.length; ++i) {
-        if (isFuture(data[i].date)) {
-          if (shown < 2) {
-            rows.push(`<div class="row"><span class="date">${data[i].date}</span> <span class="desc">${data[i].desc}</span></div>`);
-            shown++;
-          } else {
-            extra.push(`<div class="row"><span class="date">${data[i].date}</span> <span class="desc">${data[i].desc}</span></div>`);
-          }
+      for (let i = 0; i < sched.length; ++i) {
+        if (shown < 2) {
+          rows.push(`<div class="row"><span class="date">${sched[i].date}</span> <span class="desc">${sched[i].desc}</span></div>`);
+          shown++;
+        } else {
+          extra.push(`<div class="row"><span class="date">${sched[i].date}</span> <span class="desc">${sched[i].desc}</span></div>`);
         }
       }
       document.getElementById('schedule-main-inner').innerHTML = rows.join('');
       document.getElementById('schedule-extra').innerHTML = extra.join('');
-      document.getElementById('schedule-main').classList.remove('open');
     }
-    // Arrow и анимация "наезда"
+    // Языки — смена языка + обновление расписания
+    document.querySelectorAll('.lang').forEach(el => {
+      el.onclick = () => {
+        currentLang = el.dataset.lang;
+        setLangAll(currentLang);
+        renderSchedule();
+      }
+    });
+    renderSchedule();
+    // ---- Расписание: раскрытие на всё поле с анимацией и наложением ----
     const scheduleMain = document.getElementById('schedule-main');
     const scheduleArrow = document.getElementById('schedule-arrow');
-    scheduleArrow.onclick = () => {
-      scheduleMain.classList.toggle('open');
-    };
-
-    // --- Инициализация ---
-    renderSchedule();
+    let open = false;
+    function toggleSchedule() {
+      open = !open;
+      if (open) {
+        scheduleMain.classList.add('open');
+        scheduleArrow.style.display = 'none';
+        document.getElementById('schedule-extra').style.display = 'block';
+      } else {
+        scheduleMain.classList.remove('open');
+        scheduleArrow.style.display = '';
+        document.getElementById('schedule-extra').style.display = '';
+      }
+    }
+    scheduleMain.onclick = toggleSchedule;
+    // Кликабельна вся область расписания!
+    scheduleArrow.onclick = function(e) { e.stopPropagation(); toggleSchedule(); };
+    // ----- Карточки вытягиваются, чтобы h >= w -----
+    function updateCards() {
+      document.querySelectorAll('.card-block').forEach(card => {
+        const w = card.offsetWidth, h = card.offsetHeight;
+        if (h < w) card.style.minHeight = w + "px";
+        else card.style.minHeight = "";
+        // Фото 4/5 карточки
+        const img = card.querySelector('.card-img');
+        if (img) img.style.height = (card.offsetHeight * 0.8) + "px";
+      });
+    }
+    window.addEventListener('resize', updateCards);
+    window.addEventListener('DOMContentLoaded', updateCards);
+    setTimeout(updateCards, 200);
+    // --- Гамбургер для мобилы ---
+    updateHeaderForMobile();
   </script>
 </body>
 </html>
