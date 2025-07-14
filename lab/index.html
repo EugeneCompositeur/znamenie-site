@@ -158,7 +158,7 @@
       background: var(--schedule-spoiler-bg);
       border-radius: 5px;
       padding: 0.6em 1em;
-      margin-top: 0.7em;
+      margin: 0.7em auto 0 auto;
       text-align: center;
       cursor: pointer;
       color: var(--bogoroditsa-blue);
@@ -169,9 +169,16 @@
       transition: background 0.3s;
       user-select: none;
       border: none;
+      max-width: 300px;
+      box-shadow: 0 0 0 #fff0;
+      display: block;
     }
     .schedule-spoiler:hover {
       background: #e5eafc;
+    }
+    .hidden-schedule-list {
+      display: none;
+      margin-top: 0.5em;
     }
     .blocks-row {
       display: flex;
@@ -331,12 +338,12 @@
     <div class="schedule">
       <div class="schedule-label" id="schedule-label-1">Расписание богослужений</div>
       <div class="schedule-month" id="current-label">ИЮЛЬ</div>
-      <ul id="schedule-current"></ul>
+      <div id="schedule-current"></div>
       <div class="schedule-month" id="next-label">АВГУСТ</div>
-      <ul id="schedule-next"></ul>
+      <div id="schedule-next"></div>
     </div>
 
-    <!-- Карточки-блоки (пример: меняй под себя) -->
+    <!-- Карточки-блоки -->
     <div class="blocks-row" id="main-blocks">
       <div class="card-block" data-block="history">
         <img src="assets/church_outside.jpg" alt="Вид храма" />
@@ -376,7 +383,6 @@
   </div>
 
   <script>
-    // --- translations, полный как в твоём шаблоне ---
     const translations = {
       ru: {
         logoLeft: ["Храм", "Знамения"],
@@ -409,8 +415,43 @@
           "<strong>28 четверг, 10:00</strong>&nbsp;&ndash; Литургия (Успение Пресвятой Богородицы)"
         ],
         footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (ligne 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
+      },
+      fr: {
+        logoLeft: ["Église", "Orthodoxe"],
+        logoRight: ["Notre-Dame", "du Signe"],
+        subheading: "Vicariat Sainte-Marie-de-Paris et Saint-Alexis-d’Ugine – Patriarcat Œcuménique",
+        notice: "Site en développement",
+        scheduleLabel1: "Horaires des offices",
+        currentLabel: "JUILLET",
+        nextLabel: "AOÛT",
+        scheduleCurrent: [],
+        scheduleNext: [],
+        footer: `87, boulevard Exelmans, Paris 75016<br />Métro : Exelmans (ligne 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
+      },
+      by: {
+        logoLeft: ["Храм", "Знамення"],
+        logoRight: ["Прасвятой", "Багародзіцы"],
+        subheading: "Вікарыят імені Святых Марыі Парыжскай і Аляксея Южынскага — Сусветны Патрыярхат",
+        notice: "Сайт у распрацоўцы",
+        scheduleLabel1: "Расклад набажэнстваў",
+        currentLabel: "ЛІПЕНЬ",
+        nextLabel: "ЖНІВЕНЬ",
+        scheduleCurrent: [],
+        scheduleNext: [],
+        footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (лінія 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
+      },
+      ua: {
+        logoLeft: ["Храм", "Знамення"],
+        logoRight: ["Пресвятої", "Богородиці"],
+        subheading: "Вікаріат імені Святих Марії Паризької та Олексія Южинського — Вселенський Патріархат",
+        notice: "Сайт у розробці",
+        scheduleLabel1: "Розклад богослужінь",
+        currentLabel: "ЛИПЕНЬ",
+        nextLabel: "СЕРПЕНЬ",
+        scheduleCurrent: [],
+        scheduleNext: [],
+        footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (лінія 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
       }
-      // Остальные языки как обычно...
     };
 
     const langSwitchers = document.querySelectorAll('.lang-switch span');
@@ -425,11 +466,9 @@
     const scheduleNext = document.getElementById('schedule-next');
     const footer = document.getElementById('footer');
 
-    // ---- Автоматическое "серение" по дате и времени ----
     function parseDateTime(text, monthLabel) {
       const months = {
-        'ЯНВАРЬ': 0, 'ФЕВРАЛЬ': 1, 'МАРТ': 2, 'АПРЕЛЬ': 3, 'МАЙ': 4, 'ИЮНЬ': 5, 'ИЮЛЬ': 6, 'АВГУСТ': 7,
-        'СЕНТЯБРЬ': 8, 'ОКТЯБРЬ': 9, 'НОЯБРЬ': 10, 'ДЕКАБРЬ': 11
+        'ЯНВАРЬ': 0, 'ФЕВРАЛЬ': 1, 'МАРТ': 2, 'АПРЕЛЬ': 3, 'МАЙ': 4, 'ИЮНЬ': 5, 'ИЮЛЬ': 6, 'АВГУСТ': 7
       };
       const m = text.match(/<strong>(\d+)[^\d]*(?:, )?(\d{1,2}):(\d{2})<\/strong>/i);
       if (!m) return null;
@@ -440,28 +479,30 @@
       return new Date(year, month, day, hour, minute);
     }
 
-    // ------- Спойлер для расписания --------
+    // Рендер блока расписания: первые 4 строки, остальные спрятаны
     function renderSchedule(list, monthLabel) {
+      if (!list || !list.length) return `<div style="color:#aaa;text-align:center;padding:1em 0 0.5em 0;">Расписание недоступно</div>`;
       const now = new Date();
-      // первые 4 строки, остальные под спойлер
       const visible = list.slice(0, 4);
       const hidden = list.slice(4);
-      let html = visible.map(text => {
+
+      let html = `<ul>${visible.map(text => {
         if (text.startsWith("__custom__")) return text.replace("__custom__", "");
         let dt = parseDateTime(text, monthLabel), isPast = false;
         if (dt) isPast = (now.getTime() - dt.getTime()) > 2 * 60 * 60 * 1000;
         return `<li${isPast ? ' class="past"' : ''}>${text}</li>`;
-      }).join('');
+      }).join('')}</ul>`;
+
       if (hidden.length > 0) {
-        html += `<div class="schedule-spoiler" id="showMore-${monthLabel}">Показать все службы</div>
-        <ul id="hiddenSchedule-${monthLabel}" style="display:none;">
-          ${hidden.map(text => {
-            if (text.startsWith("__custom__")) return text.replace("__custom__", "");
-            let dt = parseDateTime(text, monthLabel), isPast = false;
-            if (dt) isPast = (now.getTime() - dt.getTime()) > 2 * 60 * 60 * 1000;
-            return `<li${isPast ? ' class="past"' : ''}>${text}</li>`;
-          }).join('')}
-        </ul>`;
+        html += `<button class="schedule-spoiler" id="showMore-${monthLabel}">Показать все службы</button>
+          <ul class="hidden-schedule-list" id="hiddenSchedule-${monthLabel}">
+            ${hidden.map(text => {
+              if (text.startsWith("__custom__")) return text.replace("__custom__", "");
+              let dt = parseDateTime(text, monthLabel), isPast = false;
+              if (dt) isPast = (now.getTime() - dt.getTime()) > 2 * 60 * 60 * 1000;
+              return `<li${isPast ? ' class="past"' : ''}>${text}</li>`;
+            }).join('')}
+          </ul>`;
       }
       return html;
     }
@@ -482,19 +523,25 @@
 
       // Подключить спойлеры после отрисовки
       setTimeout(() => {
-        setupSpoilers(translations[lang].currentLabel);
-        setupSpoilers(translations[lang].nextLabel);
+        setupSpoiler(translations[lang].currentLabel);
+        setupSpoiler(translations[lang].nextLabel);
       }, 50);
     }
 
-    function setupSpoilers(monthLabel) {
+    function setupSpoiler(monthLabel) {
       const btn = document.getElementById(`showMore-${monthLabel}`);
       const ul = document.getElementById(`hiddenSchedule-${monthLabel}`);
       if (!btn || !ul) return;
       btn.onclick = function () {
-        ul.style.display = (ul.style.display === "none") ? "block" : "none";
-        btn.innerText = ul.style.display === "block" ? "Скрыть дополнительные" : "Показать все службы";
+        if (ul.style.display !== "block") {
+          ul.style.display = "block";
+          btn.innerText = "Скрыть дополнительные";
+        } else {
+          ul.style.display = "none";
+          btn.innerText = "Показать все службы";
+        }
       };
+      ul.style.display = "none";
     }
 
     langSwitchers.forEach(s => {
@@ -507,9 +554,7 @@
     const cardBlocks = document.querySelectorAll('.card-block');
     const modalFull = document.getElementById('modalFull');
     const modalContent = document.getElementById('modalContent');
-    const modalClose = document.getElementById('modalClose');
 
-    // Пример наполнения — меняй по вкусу!
     const cardDetails = {
       history: {
         img: "assets/church_outside.jpg",
