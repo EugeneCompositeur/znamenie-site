@@ -101,7 +101,6 @@
       color: var(--menu-active);
       font-weight: 700;
       background: #f2ede0;
-      /* outline: none; */
       box-shadow: none;
     }
     .lang-btn:focus { background: #f2ede0; }
@@ -190,17 +189,16 @@
       flex-direction: row;
       align-items: center;
       justify-content: center;
-      margin-top: 3vw;
-      margin-bottom: 1.3vw;
       width: 100%;
       max-width: 1140px;
       gap: 2vw;
       min-height: 142px;
       position: relative;
+      box-sizing: border-box;
     }
     .logo-title {
       font-family: 'Forum', Georgia, serif;
-      font-size: clamp(2.7em, 5vw, 5em);
+      font-size: clamp(2.3em, 5vw, 5em);
       color: var(--bogoroditsa-blue);
       text-shadow: 0 1px 10px #fff7;
       font-weight: 400;
@@ -210,8 +208,11 @@
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      min-width: 7em;
+      min-width: 0;
+      max-width: 45vw;
       margin-right: 0.7vw;
+      word-break: break-word;
+      overflow-wrap: anywhere;
     }
     .logo-title.right {
       align-items: flex-start;
@@ -220,11 +221,12 @@
       margin-left: 0.7vw;
     }
     .logo-icon {
-      height: clamp(120px, 18vw, 194px);
-      width: clamp(94px, 15vw, 174px);
+      height: clamp(110px, 15vw, 180px);
+      width: clamp(80px, 13vw, 150px);
       margin: 0 0.15em;
       display: block;
       z-index: 3;
+      flex-shrink: 0;
     }
     .header-desc {
       font-family: 'Forum', Georgia, serif;
@@ -235,12 +237,15 @@
       margin-bottom: 1.12em;
       letter-spacing: 0.01em;
       font-weight: 400;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      padding: 0 10px;
+      box-sizing: border-box;
     }
 
-    /* ========== Schedule with animation ========== */
+    /* SCHEDULE */
     .schedule-main {
       width: 100%;
-      margin: 0 auto;
       background: var(--bogoroditsa-blue);
       display: flex;
       flex-direction: column;
@@ -256,15 +261,16 @@
       transition: box-shadow 0.2s;
     }
     .schedule-main-inner {
-      margin-left: 32px;
-      margin-right: 32px;
+      margin: 0;
+      padding: 1.15em 24px 0.35em 24px;
       max-width: 740px;
-      padding: 1.15em 0 0.35em 0;
-      transition: padding 0.3s, margin 0.3s;
+      box-sizing: border-box;
+      width: 100%;
+      transition: padding 0.3s;
     }
     .schedule-row {
       font-family: 'Open Sans', Arial, sans-serif;
-      font-size: clamp(1.14em, 2.7vw, 1.36em);
+      font-size: clamp(1.1em, 2.7vw, 1.36em);
       margin-bottom: 0.18em;
       text-align: left;
       display: flex;
@@ -295,7 +301,6 @@
       margin-bottom: 2px;
       position: relative;
       pointer-events: none;
-      /* стрелка всегда видна, но не перехватывает клик */
     }
     .schedule-arrow {
       width: 26px;
@@ -319,8 +324,6 @@
       transition: transform .25s;
       display: block;
     }
-
-    /* ========== SCHEDULE COLLAPSE/EXPAND (overlay gone, animation here) ========== */
     .schedule-expanded {
       box-shadow: 0 4px 36px #1939a522;
     }
@@ -338,18 +341,19 @@
       margin-bottom: 0.6em;
     }
 
-    /* ========== Cards row ========== */
+    /* CARDS */
     .blocks-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 2em;
+      gap: 1em;
       justify-content: center;
       margin: 2.1em auto 0 auto;
       position: relative;
       z-index: 5;
       max-width: 1200px;
       width: 100%;
-      padding: 0 16px;
+      padding: 0 12px;
+      box-sizing: border-box;
     }
     .card-block {
       background: #fff;
@@ -366,10 +370,11 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      margin-bottom: 0.1em;
+      margin: 0; /* убрано всё! */
       border: none;
       outline: none;
       position: relative;
+      box-sizing: border-box;
     }
     .card-block:focus { outline: none; }
     .card-block:hover {
@@ -493,45 +498,46 @@
     .footer a { color: var(--bogoroditsa-blue); text-decoration: underline dotted; }
     .footer a:hover { color: #e15f41; }
 
-    /* ОТСТУП между блоками и футером */
     .footer-spacer { height: 3em; }
 
     /* MEDIA =================== */
     @media (max-width: 950px) {
       .header-wrap { gap: 0.7vw; min-height: 110px;}
-      .logo-title { font-size: clamp(1.9em, 5vw, 3.5em);}
-      .logo-icon { height: clamp(80px, 20vw, 120px); width: clamp(62px, 13vw, 94px);}
-      .blocks-row { gap: 1.1em; }
+      .logo-title { font-size: clamp(1.7em, 5vw, 3em);}
+      .logo-icon { height: clamp(70px, 13vw, 100px); width: clamp(50px, 10vw, 80px);}
+      .blocks-row { gap: 0.7em; }
     }
     @media (max-width: 720px) {
       nav { font-size: 1.02em; padding-left: 0.5em; padding-right: 0.5em;}
       .nav-left, .nav-right { gap: 0.6em; }
       .header-wrap { gap: 2vw; }
-      .blocks-row { gap: 0.6em; }
-      .schedule-main-inner { margin-left: 10px; margin-right: 10px; padding-left: 0; padding-right: 0;}
+      .blocks-row { gap: 0.5em; }
+      .schedule-main-inner { padding-left: 7px; padding-right: 7px;}
+      .header-desc { padding: 0 3px; }
     }
     @media (max-width: 650px) {
       nav { font-size: 0.94em; min-height: 44px;}
       .nav-left, .nav-right { display: none; }
       .hamburger { display: flex; margin-left: auto; }
-      .blocks-row { flex-direction: column; gap: 0.7em; padding: 0 2px; }
+      .blocks-row { flex-direction: column; gap: 0.5em; padding: 0 2px; }
       .card-block { width: 99vw; min-width: 100px; }
-      .schedule-main-inner { margin-left: 0; margin-right: 0; padding-left: 0; padding-right: 0;}
+      .schedule-main-inner { padding-left: 2px; padding-right: 2px; }
     }
-    @media (max-width: 600px) {
-      .header-desc { font-size: 0.99em; margin-top: 0.26em; margin-bottom: 0.77em; }
-      .card-block { border-radius: 9px; }
-      .card-img { border-radius: 0; }
+    @media (max-width: 500px) {
       .logo-title, .logo-title.right {
-        font-size: clamp(1.47em, 9vw, 3.15em);
-        min-width: unset;
+        font-size: clamp(1.08em, 6vw, 2em);
+        max-width: 43vw;
+        min-width: 0;
         margin: 0;
       }
-      .logo-icon {
-        height: clamp(85px, 42vw, 155px);
-        width: clamp(50px, 31vw, 112px);
-        margin: 0 0.7vw;
-      }
+      .logo-icon { height: clamp(55px, 14vw, 90px); width: clamp(32px, 9vw, 64px);}
+      .header-wrap { gap: 0.6vw; min-height: 60px;}
+      .blocks-row { gap: 0.38em; padding: 0 1px;}
+    }
+    @media (max-width: 400px) {
+      .blocks-row { gap: 0.2em; padding: 0 0;}
+      .card-block { width: 99vw; }
+      .header-wrap { min-height: 44px; }
     }
   </style>
 </head>
@@ -689,14 +695,13 @@
 
     // ------------ UNIFIED LANGUAGE SWITCHER ----------------
     function getAllLangButtons() { return [...document.querySelectorAll('.lang-btn')]; }
-    const i18n = { /* ... (смотри выше — содержимое осталось прежним, ради экономии места не вставляю сюда заново, оставь как было) ... */ };
-    const schedules = { /* ... (оставь как было, без изменений) ... */ };
+    const i18n = { /* ...оставь как было, не меняется... */ };
+    const schedules = { /* ...оставь как было, не меняется... */ };
     let currentLang = "ru";
     function renderSchedule(lang) {
       lang = lang || currentLang;
       currentLang = lang;
       const schedule = schedules[lang] || schedules['ru'];
-      // Первые 2 службы
       let rows = [], extra = [];
       for (let i = 0; i < schedule.length; ++i) {
         const row = `<div class="schedule-row"><span class="schedule-date">${schedule[i].date}</span> <span class="schedule-desc">${schedule[i].desc}</span></div>`;
@@ -730,7 +735,7 @@
     renderSchedule(currentLang);
     renderBlocks(currentLang);
 
-    // =========== SCHEDULE EXPAND/COLLAPSE ==========
+    // =========== SCHEDULE EXPAND/COLLAPSE ==============
     const scheduleMain = document.getElementById('schedule-main');
     const scheduleArrow = document.getElementById('schedule-arrow');
     const extraRows = document.getElementById('schedule-extra-rows-wrap');
@@ -748,13 +753,19 @@
       extraRows.classList.remove('open');
       scheduleArrow.querySelector('svg').style.transform = 'rotate(0deg)';
     }
-    // По клику на расписание — везде кликабельно
+    // Вся поверхность расписания кликабельна
     scheduleMain.addEventListener('click', function(e) {
-      // если клик был по стрелке или по зоне расписания
+      // не раскрываем по клику на стрелку, если уже раскрыто
+      if (e.target.closest('.schedule-arrow')) {
+        if (!scheduleExpanded) openSchedule();
+        else closeSchedule();
+        return;
+      }
+      // клики по всей области — для UX
       if (!scheduleExpanded) openSchedule();
       else closeSchedule();
     });
-    // Не даём кнопке-стрелке перехватывать клик
+    // Кнопка-стрелка не перехватывает клик отдельно
     scheduleArrow.addEventListener('click', e => { e.preventDefault(); });
 
     // ========== MODAL CARD =============
@@ -793,7 +804,6 @@
     }
     blocks.forEach(card => {
       card.addEventListener('click', function(e) {
-        // чтобы не конфликтовать с расписанием на мобиле:
         if(!card.classList.contains('card-block')) return;
         openCardModal(card);
       });
