@@ -39,6 +39,8 @@
       flex-direction: column;
       align-items: center;
       width: 100%;
+      margin: 0;
+      padding: 0;
     }
     nav {
       width: 100%;
@@ -60,8 +62,6 @@
       align-items: center;
       gap: 1.3em;
     }
-    .nav-left { margin-left: 0; }
-    .nav-right { margin-right: 0; }
     .menu-link {
       color: var(--menu-color);
       text-decoration: none;
@@ -100,11 +100,9 @@
     .lang-btn.active {
       color: var(--menu-active);
       font-weight: 700;
-      background: #f2ede0;
-      box-shadow: none;
+      background: transparent;
     }
     .lang-btn:focus { background: #f2ede0; }
-
     .hamburger {
       display: none;
       flex-direction: column;
@@ -125,7 +123,6 @@
       border-radius: 4px;
       transition: all 0.25s;
     }
-
     .mobile-menu {
       position: fixed;
       top: 0; right: -100vw;
@@ -183,7 +180,6 @@
       font-size: 1.09em;
     }
     .mobile-menu-langs .lang-btn { padding: 0 0.18em; }
-
     .header-wrap {
       display: flex;
       flex-direction: row;
@@ -193,12 +189,14 @@
       max-width: 1140px;
       gap: 2vw;
       min-height: 142px;
-      position: relative;
+      margin: 0 auto;
+      padding: 0 16px;
       box-sizing: border-box;
+      overflow: hidden;
     }
     .logo-title {
       font-family: 'Forum', Georgia, serif;
-      font-size: clamp(2.3em, 5vw, 5em);
+      font-size: clamp(2.1em, 4vw, 5em);
       color: var(--bogoroditsa-blue);
       text-shadow: 0 1px 10px #fff7;
       font-weight: 400;
@@ -208,21 +206,19 @@
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      min-width: 0;
-      max-width: 45vw;
-      margin-right: 0.7vw;
+      min-width: 6em;
+      max-width: 43vw;
+      overflow: hidden;
       word-break: break-word;
-      overflow-wrap: anywhere;
     }
     .logo-title.right {
       align-items: flex-start;
       text-align: left;
-      margin-right: 0;
       margin-left: 0.7vw;
     }
     .logo-icon {
-      height: clamp(110px, 15vw, 180px);
-      width: clamp(80px, 13vw, 150px);
+      height: clamp(90px, 16vw, 194px);
+      width: clamp(66px, 14vw, 174px);
       margin: 0 0.15em;
       display: block;
       z-index: 3;
@@ -237,15 +233,15 @@
       margin-bottom: 1.12em;
       letter-spacing: 0.01em;
       font-weight: 400;
+      max-width: 97vw;
       word-break: break-word;
-      overflow-wrap: anywhere;
-      padding: 0 10px;
-      box-sizing: border-box;
+      padding: 0 12px;
     }
 
-    /* SCHEDULE */
+    /* Schedule + animation */
     .schedule-main {
       width: 100%;
+      margin: 0 auto;
       background: var(--bogoroditsa-blue);
       display: flex;
       flex-direction: column;
@@ -261,16 +257,16 @@
       transition: box-shadow 0.2s;
     }
     .schedule-main-inner {
-      margin: 0;
-      padding: 1.15em 24px 0.35em 24px;
+      margin: 0 auto;
+      padding: 1.05em 22px 0.3em 22px;
       max-width: 740px;
-      box-sizing: border-box;
       width: 100%;
-      transition: padding 0.3s;
+      box-sizing: border-box;
+      transition: padding 0.3s, margin 0.3s;
     }
     .schedule-row {
       font-family: 'Open Sans', Arial, sans-serif;
-      font-size: clamp(1.1em, 2.7vw, 1.36em);
+      font-size: clamp(1.14em, 2.7vw, 1.36em);
       margin-bottom: 0.18em;
       text-align: left;
       display: flex;
@@ -278,6 +274,7 @@
       gap: 0.7em;
       color: #fff;
       border: none;
+      word-break: break-word;
     }
     .schedule-date {
       font-weight: 700;
@@ -331,7 +328,7 @@
       overflow: hidden;
       max-height: 0;
       opacity: 0;
-      transition: max-height 0.45s cubic-bezier(.64,.11,.58,1), opacity 0.27s;
+      transition: max-height 0.42s cubic-bezier(.64,.11,.58,1), opacity 0.22s;
       margin-bottom: 0;
       will-change: max-height, opacity;
     }
@@ -341,16 +338,16 @@
       margin-bottom: 0.6em;
     }
 
-    /* CARDS */
+    /* Карточки */
     .blocks-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 1em;
+      gap: 1.25em;
       justify-content: center;
       margin: 2.1em auto 0 auto;
       position: relative;
       z-index: 5;
-      max-width: 1200px;
+      max-width: 1240px;
       width: 100%;
       padding: 0 12px;
       box-sizing: border-box;
@@ -360,7 +357,7 @@
       border-radius: var(--block-radius);
       box-shadow: var(--box-shadow);
       width: clamp(240px, 25vw, 320px);
-      min-width: 140px;
+      min-width: 120px;
       min-height: 240px;
       aspect-ratio: 0.8/1;
       cursor: pointer;
@@ -370,13 +367,12 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      margin: 0; /* убрано всё! */
+      margin-bottom: 0;
       border: none;
       outline: none;
       position: relative;
       box-sizing: border-box;
     }
-    .card-block:focus { outline: none; }
     .card-block:hover {
       transform: scale(1.027);
       box-shadow: 0 14px 48px #1939a523;
@@ -388,6 +384,7 @@
       height: 80%;
       max-height: 80%;
       border-radius: 0;
+      display: block;
     }
     .card-content {
       flex: 1 1 20%;
@@ -409,6 +406,7 @@
       letter-spacing: 0.01em;
       text-shadow: 0 1px 3px #fff7;
       line-height: 1.08;
+      word-break: break-word;
     }
     .card-desc {
       font-size: 0.97em;
@@ -417,8 +415,8 @@
       padding: 0 0.5em;
       text-align: center;
       font-weight: 400;
+      word-break: break-word;
     }
-
     /* MODAL CARD */
     .modal-card {
       position: fixed;
@@ -434,8 +432,8 @@
       background: #fff;
       border-radius: 20px;
       box-shadow: 0 10px 44px #1939a529;
-      max-width: 96vw;
-      width: 400px;
+      max-width: 98vw;
+      width: 430px;
       max-height: 92vh;
       padding: 2em 1.5em 1.6em 1.5em;
       display: flex;
@@ -452,6 +450,7 @@
       border-radius: 12px;
       margin-bottom: 1em;
       background: #f4f4f4;
+      display: block;
     }
     .modal-card-title {
       font-family: 'Forum', Georgia, serif;
@@ -480,7 +479,8 @@
     @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
     @keyframes popUp { from { transform:scale(0.93); opacity:0; } to { transform:scale(1); opacity:1; } }
 
-    /* ========== Footer ========== */
+    /* Footer + spacer */
+    .footer-spacer { height: 3em; }
     footer.footer {
       margin: 0;
       padding: 2em 0 1.4em 0;
@@ -498,50 +498,61 @@
     .footer a { color: var(--bogoroditsa-blue); text-decoration: underline dotted; }
     .footer a:hover { color: #e15f41; }
 
-    .footer-spacer { height: 3em; }
-
-    /* MEDIA =================== */
     @media (max-width: 950px) {
       .header-wrap { gap: 0.7vw; min-height: 110px;}
-      .logo-title { font-size: clamp(1.7em, 5vw, 3em);}
-      .logo-icon { height: clamp(70px, 13vw, 100px); width: clamp(50px, 10vw, 80px);}
-      .blocks-row { gap: 0.7em; }
+      .logo-title { font-size: clamp(1.6em, 4vw, 3.2em);}
+      .logo-icon { height: clamp(65px, 18vw, 110px); width: clamp(48px, 14vw, 90px);}
+      .blocks-row { gap: 0.95em; }
     }
     @media (max-width: 720px) {
       nav { font-size: 1.02em; padding-left: 0.5em; padding-right: 0.5em;}
       .nav-left, .nav-right { gap: 0.6em; }
-      .header-wrap { gap: 2vw; }
-      .blocks-row { gap: 0.5em; }
+      .header-wrap { gap: 1vw; }
+      .blocks-row { gap: 0.47em; padding: 0 3px; }
       .schedule-main-inner { padding-left: 7px; padding-right: 7px;}
-      .header-desc { padding: 0 3px; }
+      .footer-spacer { height: 2.3em; }
     }
     @media (max-width: 650px) {
-      nav { font-size: 0.94em; min-height: 44px;}
+      nav { font-size: 0.93em; min-height: 44px;}
       .nav-left, .nav-right { display: none; }
       .hamburger { display: flex; margin-left: auto; }
-      .blocks-row { flex-direction: column; gap: 0.5em; padding: 0 2px; }
-      .card-block { width: 99vw; min-width: 100px; }
-      .schedule-main-inner { padding-left: 2px; padding-right: 2px; }
-    }
-    @media (max-width: 500px) {
-      .logo-title, .logo-title.right {
-        font-size: clamp(1.08em, 6vw, 2em);
-        max-width: 43vw;
-        min-width: 0;
-        margin: 0;
-      }
-      .logo-icon { height: clamp(55px, 14vw, 90px); width: clamp(32px, 9vw, 64px);}
-      .header-wrap { gap: 0.6vw; min-height: 60px;}
-      .blocks-row { gap: 0.38em; padding: 0 1px;}
+      .blocks-row { flex-direction: column; gap: 0.7em; padding: 0 1px; }
+      .card-block { width: 99vw; min-width: 98vw; max-width: 100vw; }
+      .header-wrap { min-height: 78px; padding: 0 5px; }
+      .logo-title { min-width: unset; max-width: 46vw; font-size: clamp(1.1em, 8vw, 2.2em);}
+      .logo-icon { height: clamp(44px, 20vw, 68px); width: clamp(29px, 18vw, 52px);}
+      .schedule-main-inner { padding-left: 0px; padding-right: 0px;}
+      .footer-spacer { height: 1.4em; }
     }
     @media (max-width: 400px) {
-      .blocks-row { gap: 0.2em; padding: 0 0;}
-      .card-block { width: 99vw; }
-      .header-wrap { min-height: 44px; }
+      .blocks-row { gap: 0.2em;}
+      .card-block { width: 99vw; min-width: 99vw; max-width: 99vw; }
+      .header-wrap { min-height: 54px; }
+      .logo-title, .logo-title.right { font-size: clamp(0.7em, 11vw, 1.05em); min-width: unset; max-width: 45vw; }
+      .logo-icon { height: 34px; width: 29px;}
+      .footer-spacer { height: 0.7em; }
+    }
+    @media (max-width: 600px) {
+      .header-desc { font-size: 0.99em; margin-top: 0.22em; margin-bottom: 0.77em; }
+      .card-block { border-radius: 9px; }
+      .card-img { border-radius: 0; }
+      .logo-title, .logo-title.right {
+        font-size: clamp(1.05em, 9vw, 2.05em);
+        min-width: unset;
+        max-width: 45vw;
+        margin: 0;
+      }
+      .logo-icon {
+        height: clamp(35px, 25vw, 78px);
+        width: clamp(19px, 19vw, 48px);
+        margin: 0 0.7vw;
+      }
+      .footer-spacer { height: 0.8em; }
     }
   </style>
 </head>
 <body>
+  <!-- Навигация -->
   <nav role="navigation" aria-label="Главное меню">
     <div class="nav-left" id="desktop-menu">
       <a class="menu-link" href="#" data-link="podcast">Подкаст</a>
@@ -560,6 +571,7 @@
       </div>
     </div>
   </nav>
+  <!-- Мобильное меню -->
   <aside class="mobile-menu" id="mobileMenu" aria-modal="true" aria-hidden="true" role="dialog">
     <button class="mobile-menu-close" id="mobileMenuClose" title="Закрыть меню" aria-label="Закрыть меню">&times;</button>
     <a class="mobile-menu-link" href="#" data-link="podcast">Подкаст</a>
@@ -573,6 +585,7 @@
     </div>
   </aside>
 
+  <!-- Хедер: логотип и название -->
   <header class="site-header" role="banner">
     <div class="header-wrap">
       <div class="logo-title" id="logo-left"><span>Храм</span><span>Знамения</span></div>
@@ -668,7 +681,7 @@
   <!-- MODAL CARD CONTAINER -->
   <div id="modal-card-root" style="display:none"></div>
   <script>
-    // ---------- MOBILE MENU -----------
+    // Мобильное меню
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
     const mobileMenuClose = document.getElementById('mobileMenuClose');
@@ -693,15 +706,89 @@
       if (e.key === "Escape" && mobileMenu.classList.contains('open')) closeMobileMenu();
     });
 
-    // ------------ UNIFIED LANGUAGE SWITCHER ----------------
+    // Языки и переводы
     function getAllLangButtons() { return [...document.querySelectorAll('.lang-btn')]; }
-    const i18n = { /* ...оставь как было, не меняется... */ };
-    const schedules = { /* ...оставь как было, не меняется... */ };
+    const i18n = {
+      ru: {
+        history_title: "История прихода", history_desc: "Как всё начиналось. Кратко о главном.",
+        clergy_title: "Клирики храма", clergy_desc: "Служащие, настоятели, диаконы и псаломщики.",
+        reading_title: "Чтение дня", reading_desc: "Слово на каждый день, молитвы, отрывки Евангелия.",
+        library_title: "Библиотека", library_desc: "Книги, статьи, аудио и видео для всех возрастов.",
+        school_title: "Воскресная школа", school_desc: "Обучение детей и взрослых, творческие мастер-классы.",
+        white_title: "Белое движение", white_desc: "История и наследие Белого движения во Франции.",
+        icons_title: "Иконы", icons_desc: "Иконописные традиции, чудеса, галерея образов.",
+        choir_title: "Хор", choir_desc: "Профессиональное и любительское хоровое служение."
+      },
+      fr: {
+        history_title: "Histoire de la paroisse", history_desc: "Comment tout a commencé. L’essentiel en bref.",
+        clergy_title: "Clergé de l'église", clergy_desc: "Prêtres, responsables, diacres et psalmistes.",
+        reading_title: "Lecture du jour", reading_desc: "Parole du jour, prières, passages de l'Évangile.",
+        library_title: "Bibliothèque", library_desc: "Livres, articles, audio et vidéo pour tous âges.",
+        school_title: "École du dimanche", school_desc: "Éducation enfants/adultes, ateliers créatifs.",
+        white_title: "Mouvement blanc", white_desc: "Histoire et héritage du mouvement blanc en France.",
+        icons_title: "Icônes", icons_desc: "Tradition iconographique, miracles, galerie d’images.",
+        choir_title: "Chœur", choir_desc: "Service choral professionnel et amateur."
+      },
+      by: {
+        history_title: "Гісторыя прыходу", history_desc: "Як усё пачыналася. Каротка пра галоўнае.",
+        clergy_title: "Клірыкі храма", clergy_desc: "Святары, настаяцелі, дыяканы і псалмісты.",
+        reading_title: "Чытанне дня", reading_desc: "Слова на кожны дзень, малітвы, урыўкі Евангелля.",
+        library_title: "Бібліятэка", library_desc: "Кнігі, артыкулы, аўдыё і відэа для ўсіх.",
+        school_title: "Нядзельная школа", school_desc: "Навучанне дзяцей і дарослых, творчыя майстар-класы.",
+        white_title: "Белы рух", white_desc: "Гісторыя і спадчына Белага руху ў Францыі.",
+        icons_title: "Іконы", icons_desc: "Іканапіс, цуды, галерэя вобразаў.",
+        choir_title: "Хор", choir_desc: "Прафесійнае і аматарскае хорам служэнне."
+      },
+      ua: {
+        history_title: "Історія парафії", history_desc: "Як усе починалося. Коротко про головне.",
+        clergy_title: "Клірики храму", clergy_desc: "Священики, настоятелі, диякони і псалмисти.",
+        reading_title: "Читання дня", reading_desc: "Слово на кожен день, молитви, уривки Євангелія.",
+        library_title: "Бібліотека", library_desc: "Книги, статті, аудіо й відео для всіх вікових груп.",
+        school_title: "Недільна школа", school_desc: "Навчання дітей та дорослих, творчі майстер-класи.",
+        white_title: "Білий рух", white_desc: "Історія і спадщина Білого руху у Франції.",
+        icons_title: "Ікони", icons_desc: "Іконописні традиції, чудеса, галерея образів.",
+        choir_title: "Хор", choir_desc: "Професійне і аматорське хорове служіння."
+      }
+    };
+    const schedules = {
+      ru: [
+        { date: "16 суббота, 18:00", desc: "Всенощная (Неделя 10-я по Пятидесятнице) Глас 1-й" },
+        { date: "17 воскресенье, 10:30", desc: "Литургия (Свв. семи отроков, иже во Ефесе)" },
+        { date: "18 понедельник, 18:00", desc: "Всенощная (Преображение Господне)" },
+        { date: "19 вторник, 10:00", desc: "Литургия/Освящение воды и фруктов (Преображение Господне — Второй Спас)" },
+        { date: "27 среда, 18:00", desc: "Всенощная (Успение Пресвятой Богородицы)" },
+        { date: "28 четверг, 10:00", desc: "Литургия (Успение Пресвятой Богородицы)" }
+      ],
+      fr: [
+        { date: "16 samedi, 18:00", desc: "Vêpres (10e semaine après la Pentecôte) Ton 1" },
+        { date: "17 dimanche, 10:30", desc: "Liturgie (Sept Jeunes Saints d'Éphèse)" },
+        { date: "18 lundi, 18:00", desc: "Vêpres (Transfiguration du Seigneur)" },
+        { date: "19 mardi, 10:00", desc: "Liturgie/Bénédiction de l'eau et des fruits (Transfiguration)" },
+        { date: "27 mercredi, 18:00", desc: "Vêpres (Dormition de la Mère de Dieu)" },
+        { date: "28 jeudi, 10:00", desc: "Liturgie (Dormition de la Mère de Dieu)" }
+      ],
+      by: [
+        { date: "16 субота, 18:00", desc: "Усяночная (10-ая Нядзеля пасля Тройцы) Галас 1" },
+        { date: "17 нядзеля, 10:30", desc: "Літургія (Сямі отрокаў, што ў Эфесе)" },
+        { date: "18 панядзелак, 18:00", desc: "Усяночная (Ператварэнне Гасподняе)" },
+        { date: "19 аўторак, 10:00", desc: "Літургія/Асвячэнне вады і пладоў (Ператварэнне — Другі Спас)" },
+        { date: "27 серада, 18:00", desc: "Усяночная (Успенне Маці Божай)" },
+        { date: "28 чацвер, 10:00", desc: "Літургія (Успенне Маці Божай)" }
+      ],
+      ua: [
+        { date: "16 субота, 18:00", desc: "Всенічна (10-та Неділя після П'ятидесятниці) Глас 1" },
+        { date: "17 неділя, 10:30", desc: "Літургія (Сім отроків, що в Ефесі)" },
+        { date: "18 понеділок, 18:00", desc: "Всенічна (Преображення Господнє)" },
+        { date: "19 вівторок, 10:00", desc: "Літургія/Освячення води і фруктів (Преображення — Другий Спас)" },
+        { date: "27 середа, 18:00", desc: "Всенічна (Успіння Пресвятої Богородиці)" },
+        { date: "28 четвер, 10:00", desc: "Літургія (Успіння Пресвятої Богородиці)" }
+      ]
+    };
     let currentLang = "ru";
     function renderSchedule(lang) {
       lang = lang || currentLang;
       currentLang = lang;
-      const schedule = schedules[lang] || schedules['ru'];
+      const schedule = (schedules[lang] && schedules[lang].length > 0) ? schedules[lang] : schedules['ru'];
       let rows = [], extra = [];
       for (let i = 0; i < schedule.length; ++i) {
         const row = `<div class="schedule-row"><span class="schedule-date">${schedule[i].date}</span> <span class="schedule-desc">${schedule[i].desc}</span></div>`;
@@ -735,12 +822,11 @@
     renderSchedule(currentLang);
     renderBlocks(currentLang);
 
-    // =========== SCHEDULE EXPAND/COLLAPSE ==============
+    // Расписание: раскрытие/скрытие
     const scheduleMain = document.getElementById('schedule-main');
     const scheduleArrow = document.getElementById('schedule-arrow');
     const extraRows = document.getElementById('schedule-extra-rows-wrap');
     let scheduleExpanded = false;
-
     function openSchedule() {
       scheduleExpanded = true;
       scheduleMain.classList.add('schedule-expanded');
@@ -753,22 +839,13 @@
       extraRows.classList.remove('open');
       scheduleArrow.querySelector('svg').style.transform = 'rotate(0deg)';
     }
-    // Вся поверхность расписания кликабельна
     scheduleMain.addEventListener('click', function(e) {
-      // не раскрываем по клику на стрелку, если уже раскрыто
-      if (e.target.closest('.schedule-arrow')) {
-        if (!scheduleExpanded) openSchedule();
-        else closeSchedule();
-        return;
-      }
-      // клики по всей области — для UX
+      // Открыть/закрыть расписание при клике в любой точке
       if (!scheduleExpanded) openSchedule();
       else closeSchedule();
     });
-    // Кнопка-стрелка не перехватывает клик отдельно
     scheduleArrow.addEventListener('click', e => { e.preventDefault(); });
-
-    // ========== MODAL CARD =============
+    // ----------- MODAL CARD -----------
     const blocks = document.querySelectorAll('.card-block');
     const modalRoot = document.getElementById('modal-card-root');
     function openCardModal(card) {
@@ -804,6 +881,7 @@
     }
     blocks.forEach(card => {
       card.addEventListener('click', function(e) {
+        // не конфликтует с расписанием
         if(!card.classList.contains('card-block')) return;
         openCardModal(card);
       });
