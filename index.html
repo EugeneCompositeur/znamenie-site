@@ -292,7 +292,7 @@
         ],
         nextLabel: "SEPTEMBRE",
         scheduleNext: [
-          "<strong>6 samedi<!--06/09-->, 18:00</strong>&nbsp;&ndash; Vigiles<br>13<sup>ème</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 4<sup>ème</sup>&nbsp;ton",
+          "<strong>6 samedi, 18:00</strong>&nbsp;&ndash; Vigiles<br>13<sup>ème</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 4<sup>ème</sup>&nbsp;ton",
 "<strong>7 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie<br>Saints Bartholomée et&nbsp;Tite",
 "<strong>13 samedi, 18:00</strong>&nbsp;&ndash; Vigiles<br>14<sup>ème</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 5<sup>ème</sup>&nbsp;ton",
 "<strong>14 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie<br>Nouvel an ecclésial&nbsp;&ndash; St&nbsp;Syméon le&nbsp;Stylite",
@@ -386,11 +386,22 @@
       // Пример: "<strong>5 суббота, 18:00</strong>..." → [5, 18, 0]
       // monthLabel: ИЮЛЬ / АВГУСТ и т.п.
       const months = {
-        'ЯНВАРЬ': 0, 'ФЕВРАЛЬ': 1, 'МАРТ': 2, 'АПРЕЛЬ': 3, 'МАЙ': 4, 'ИЮНЬ': 5, 'ИЮЛЬ': 6, 'АВГУСТ': 7,
-        'СЕНТЯБРЬ': 8, 'ОКТЯБРЬ': 9, 'НОЯБРЬ': 10, 'ДЕКАБРЬ': 11,
-        'JANVIER': 0, 'FÉVRIER': 1, 'MARS': 2, 'AVRIL': 3, 'MAI': 4, 'JUIN': 5, 'JUILLET': 6, 'AOÛT': 7,
-        'ЛІПЕНЬ': 6, 'ЖНІВЕНЬ': 7, 'ЛИПЕНЬ': 6, 'СЕРПЕНЬ': 7
-      };
+  // Русский
+  'ЯНВАРЬ': 0, 'ФЕВРАЛЬ': 1, 'МАРТ': 2, 'АПРЕЛЬ': 3, 'МАЙ': 4, 'ИЮНЬ': 5, 'ИЮЛЬ': 6, 'АВГУСТ': 7,
+  'СЕНТЯБРЬ': 8, 'ОКТЯБРЬ': 9, 'НОЯБРЬ': 10, 'ДЕКАБРЬ': 11,
+  
+  // Французский
+  'JANVIER': 0, 'FÉVRIER': 1, 'MARS': 2, 'AVRIL': 3, 'MAI': 4, 'JUIN': 5, 'JUILLET': 6, 'AOÛT': 7,
+  'SEPTEMBRE': 8, 'OCTOBRE': 9, 'NOVEMBRE': 10, 'DÉCEMBRE': 11,
+
+  // Беларуская
+  'СТУДЗЕНЬ': 0, 'ЛЮТЫ': 1, 'САКАВІК': 2, 'КРАСАВІК': 3, 'МАЙ': 4, 'ЧЭРВЕНЬ': 5, 'ЛІПЕНЬ': 6, 'ЖНІВЕНЬ': 7,
+  'ВЕРАСЕНЬ': 8, 'КАСТРЫЧНІК': 9, 'ЛІСТАПАД': 10, 'СНЕЖАНЬ': 11,
+
+  // Українська
+  'СІЧЕНЬ': 0, 'ЛЮТИЙ': 1, 'БЕРЕЗЕНЬ': 2, 'КВІТЕНЬ': 3, 'ТРАВЕНЬ': 4, 'ЧЕРВЕНЬ': 5, 'ЛИПЕНЬ': 6, 'СЕРПЕНЬ': 7,
+  'ВЕРЕСЕНЬ': 8, 'ЖОВТЕНЬ': 9, 'ЛИСТОПАД': 10, 'ГРУДЕНЬ': 11
+};
       // Получаем дату и время (находим <strong>....</strong>)
       const m = text.match(/<strong>(\d+)[^\d]*(?:, )?(\d{1,2}):(\d{2})<\/strong>/i);
       if (!m) return null;
