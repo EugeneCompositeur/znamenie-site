@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Админ — Расписание</title>
+  <link href="https://fonts.googleapis.com/css2?family=Forum&family=Open+Sans&family=Roboto+Mono&display=swap" rel="stylesheet" />
+  <style>
+    body{margin:0;padding:0;background:#ede6d9;font-family:'Open Sans',sans-serif;color:#2f2f2f}
+    .overlay{padding:2em;max-width:960px;margin:auto;margin-top:5vh;position:relative}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1em}
+    header h1{font-family:'Forum',serif;font-size:2em;margin:0}
+    header a.back{text-decoration:none;color:#666;border:1px solid #bfb29a;padding:.4em .8em;border-radius:6px}
+    header a.back:hover{background:rgba(0,0,0,.06);color:#2f2f2f}
+    header .right{display:flex;gap:10px;align-items:center}
+    header .logout{cursor:pointer;border:1px solid #bfb29a;background:#fff;padding:.4em .8em;border-radius:6px}
+    header .logout:hover{background:rgba(0,0,0,.06)}
+    .lang-switch{display:flex;gap:.8em;align-items:center;user-select:none}
+    .lang-switch span{cursor:pointer;color:#666;font-weight:600;letter-spacing:.1em;padding:.1em .2em;border-radius:2px}
+    .lang-switch span.active{color:#2f2f2f;font-weight:700}
+    .lang-switch span:hover{color:#a2906f}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    @media(max-width:900px){.grid{grid-template-columns:1fr}}
+    :root{--card-pad:16px; --gap-to-border:8px}
+    .card{position:relative;background:#fff;padding:var(--card-pad);border-radius:5px}
+    .card::before{content:"";position:absolute;inset:calc(var(--card-pad) - var(--gap-to-border));border:3px double #a2906f;pointer-events:none;border-radius:5px;box-sizing:border-box}
+    .card h2{font-family:'Forum',serif;margin:0 0 .6em}
+    label{display:block;font-weight:700;margin-top:.8em}
+    input[type="text"],textarea{width:100%;padding:.6em .7em;border:1px solid #d8cfc0;border-radius:6px;box-sizing:border-box;display:block;max-width:100%}
+    textarea{min-height:120px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Roboto Mono",monospace}
+    .hint{color:#666;font-size:.9em;margin:.3em 0 0}
+    .small{color:#666;font-size:.85em}
+    .actions{display:flex;gap:12px;margin-top:1em;flex-wrap:wrap}
+    button{padding:.6em 1em;border-radius:8px;border:1px solid #bfb29a;background:#fff;cursor:pointer}
+    button.primary{background:#d6b36a;border-color:#c8a55c;color:#251a00;font-weight:800}
+    button.danger{background:#ffe9e7;border-color:#e0b4ad;color:#7a1f14}
+    .preview .schedule-label,.preview .schedule-month{font-size:1.2em;font-family:'Forum',serif;font-weight:bold;text-align:center}
+    .preview .schedule-month{margin:1em 0 .8em}
+    .preview .notice{font-family:'Roboto Mono',monospace;font-size:1.05em;margin:.6em 0 .2em;font-weight:900;letter-spacing:.02em;color:#222;text-align:center}
+    .preview ul{margin:0;padding-left:1.7em;padding-bottom:1em}
+    .preview ul li{text-indent:.9em}
+    .preview .footer{margin-top:1em;font-size:.9em;color:#555}
+    .notice-box{background:#fff9e9;border:1px dashed #e6e0d8;border-radius:12px;padding:12px;color:#8a5b00;margin:.6em 0}
+    .pair-grid{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:center}
+    .pair-grid .del{background:#7a1f14;color:#fff;border:1px solid #7a1f14} /* инвертировано */
+    .pair-grid .del:hover{filter:brightness(1.05)}
+    .muted{color:#666}
+    .row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:900px){.row-2{grid-template-columns:1fr}}
+
+    /* === LOCK SCREEN === */
+    .lock{position:fixed;inset:0;background:rgba(237,230,217,.96);display:flex;align-items:center;justify-content:center;z-index:9999}
+    .lock .box{background:#fff;border-radius:12px;padding:22px 20px;min-width:320px;max-width:360px;position:relative}
+    .lock .box::before{content:"";position:absolute;inset:10px;border:3px double #a2906f;border-radius:10px;pointer-events:none}
+    .lock h2{font-family:'Forum',serif;margin:.1em 0 .6em;text-align:center}
+    .lock .row{display:flex;gap:8px}
+    .lock input[type="password"]{flex:1;padding:.6em .7em;border:1px solid #d8cfc0;border-radius:8px;box-sizing:border-box}
+    .lock .submit{padding:.6em 1em;border-radius:8px;border:1px solid #bfb29a;background:#d6b36a;color:#251a00;font-weight:800;cursor:pointer}
+    .lock .msg{color:#7a1f14;margin-top:.5em;min-height:1.2em;text-align:center}
+  </style>
+</head>
+<body>
+  <!-- LOCK overlay (скрывается после ввода кода) -->
+  <div class="lock" id="lock">
+    <div class="box">
+      <h2>Доступ в админку</h2>
+      <div class="row">
+        <input id="lock-pass" type="password" placeholder="Код доступа" autocomplete="current-password" />
+        <button id="lock-ok" class="submit" type="button">Войти</button>
+      </div>
+      <div class="msg" id="lock-msg"></div>
+    </div>
+  </div>
+
+  <div class="overlay" id="app" style="visibility:hidden">
+    <header>
+      <h1>Админка — Расписание</h1>
+      <div class="right">
+        <a class="back" href="index.html">← На сайт</a>
+        <button class="logout" id="btnLogout" title="Завершить сессию">Выйти</button>
+      </div>
+    </header>
+
+    <div class="lang-switch" role="group" aria-label="Выбор языка данных">
+      <span class="active" data-lang="ru">RU</span>
+      <span data-lang="fr">FR</span>
+      <span data-lang="by">BY</span>
+      <span data-lang="ua">UA</span>
+    </div>
+
+    <div class="grid" style="margin-top:1em;">
+      <!-- Редактирование -->
+      <div class="card">
+        <h2>Редактирование</h2>
+
+        <!-- 1) Заголовок раздела -->
+        <label for="scheduleLabel1">Заголовок раздела</label>
+        <input id="scheduleLabel1" type="text" placeholder="Расписание богослужений" />
+
+        <!-- 2) Текущий месяц и строки -->
+        <label for="currentLabel" style="margin-top:1.2em;">Название текущего месяца</label>
+        <input id="currentLabel" type="text" placeholder="СЕНТЯБРЬ / SEPTEMBRE / ВЕРАСЕНЬ / ВЕРЕСЕНЬ" />
+
+        <label for="scheduleCurrent">Строки текущего месяца (по одной на строку)</label>
+        <textarea id="scheduleCurrent" placeholder="&lt;strong&gt;6 суббота, 18:00&lt;/strong&gt;&nbsp;&ndash; Всенощное бдение..."></textarea>
+        <p class="hint">Как в index.html: &lt;strong&gt;, &amp;nbsp;, &amp;ndash;, &amp;mdash;, &lt;sup&gt; и т.п.</p>
+
+        <!-- 3) Следующий месяц и строки -->
+        <label for="nextLabel" style="margin-top:1.2em;">Название следующего месяца</label>
+        <input id="nextLabel" type="text" placeholder="ОКТЯБРЬ / OCTOBRE / КАСТРЫЧНІК / ЖОВТЕНЬ" />
+
+        <label for="scheduleNext">Строки следующего месяца (по одной на строку)</label>
+        <textarea id="scheduleNext" placeholder="&lt;strong&gt;4 суббота, 18:00&lt;/strong&gt;&nbsp;&ndash; Всенощное бдение..."></textarea>
+
+        <!-- 4) Уведомление -->
+        <label for="notice" style="margin-top:1.2em;">Уведомление (notice)</label>
+        <input id="notice" type="text" placeholder="Сайт в разработке" />
+
+        <!-- 5) Подвал — в самом низу -->
+        <label for="footer" style="margin-top:1.2em;">Подвал (footer, HTML)</label>
+        <textarea id="footer" placeholder="87, boulevard Exelmans, Paris 75016…"></textarea>
+        <p class="hint">HTML разрешён (ссылки, <br>, и т.д.).</p>
+
+        <div class="actions">
+          <button class="primary" id="btnSave" type="button">Сохранить</button>
+          <button id="btnReset" type="button">Сбросить к заводским</button>
+          <button class="danger" id="btnClear" type="button">Очистить localStorage (текущий язык)</button>
+        </div>
+      </div>
+
+      <!-- Предпросмотр -->
+      <div class="card preview">
+        <h2>Предпросмотр</h2>
+        <div class="schedule-label" id="pv-scheduleLabel1">Расписание богослужений</div>
+        <div class="schedule-month" id="pv-currentLabel">СЕНТЯБРЬ</div>
+        <ul id="pv-scheduleCurrent"><li>—</li></ul>
+        <div class="schedule-month" id="pv-nextLabel">ОКТЯБРЬ</div>
+        <ul id="pv-scheduleNext"><li>—</li></ul>
+        <div class="notice" id="pv-notice">Сайт в разработке</div>
+        <div class="footer" id="pv-footer" style="margin-top:1em;">
+          87, boulevard Exelmans, Paris 75016<br />
+          Métro: Exelmans (ligne 9)<br />
+          ✉️ <a href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Автозамены BY / UA -->
+    <div class="card" style="margin-top:18px;">
+      <h2>Автозамены (BY / UA)</h2>
+      <p class="muted">Каждая строка — <b>что</b> → <b>на что</b>. Применяются при сохранении соответствующего языка.</p>
+
+      <div class="lang-switch" style="margin:.4em 0 1em 0;">
+        <span class="active" data-rules-lang="by">BY</span>
+        <span data-rules-lang="ua">UA</span>
+      </div>
+
+      <div id="rulesList" class="pair-grid"></div>
+
+      <div class="actions">
+        <button id="addRule" type="button">+ Добавить правило</button>
+        <button class="primary" id="saveRules" type="button">Сохранить правила</button>
+        <button id="resetRules" type="button">Сбросить к заводским</button>
+      </div>
+
+      <div class="notice-box" style="margin-top:12px;">
+        Заводские (BY): «Усенашная→Усяночная», «Узвіжанне→Уздвіжанне», «Чэснага→Пачэснага», «вел.→вял.». Для UA — пусто.
+      </div>
+    </div>
+
+    <!-- Экспорт / импорт JSON -->
+    <div class="card" style="margin-top:18px;">
+      <h2>Экспорт / Импорт (текущий язык)</h2>
+      <div class="actions">
+        <button id="btnExport" type="button">Экспортировать .json</button>
+        <input type="file" id="fileImport" accept="application/json" />
+        <button id="btnImport" type="button">Импортировать из файла</button>
+      </div>
+      <p class="hint">Экспортит/импортит весь блок языка: notice, заголовки и списки, footer. (Subheading не редактируется.)</p>
+    </div>
+  </div>
+
+  <script>
+    /* ============ ПРОСТОЙ ДОСТУП ПО КОДУ ============
+       1) Поменяй PASS_HASH на SHA-256 твоего кода (hex).
+       2) Можешь оставить "демо" и потом заменить.
+       Пример генерации хеша в консоли:
+       await crypto.subtle.digest('SHA-256', new TextEncoder().encode('мой_код'))
+         .then(b=>Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join(''))
+    */
+    const PASS_HASH = 'd83196f81aec613fb99ab3caa249d4d24c670a125167d115b79328b992043ef2'; // код: pokrov-paris
+    const SESSION_KEY = 'admin.session.ok';
+    const MAX_TRIES = 5;
+    let tries = 0;
+
+    const lock = document.getElementById('lock');
+    const app = document.getElementById('app');
+    const passInput = document.getElementById('lock-pass');
+    const passBtn = document.getElementById('lock-ok');
+    const lockMsg = document.getElementById('lock-msg');
+    const btnLogout = document.getElementById('btnLogout');
+
+    function showApp(){ lock.style.display='none'; app.style.visibility='visible'; }
+    function sha256Hex(str){
+      const enc=new TextEncoder();
+      return crypto.subtle.digest('SHA-256', enc.encode(str))
+        .then(buf=>Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join(''));
+    }
+    async function tryLogin(){
+  const val = passInput.value || '';
+  const hex = await sha256Hex(val);
+  if (hex === PASS_HASH) {
+    sessionStorage.setItem(SESSION_KEY, '1');
+    showApp();
+
+// ← сразу рисуем данные и правила, чтобы не было «пустого» экрана
+    renderForm(currentLang);
+    renderRules();
+
+      }else{
+        tries++;
+        lockMsg.textContent = `Неверно. Осталось попыток: ${Math.max(0, MAX_TRIES - tries)}`;
+        if(tries>=MAX_TRIES){ passBtn.disabled=true; passInput.disabled=true; lockMsg.textContent='Слишком много попыток. Обновите страницу.'; }
+      }
+    }
+    passBtn.addEventListener('click', tryLogin);
+    passInput.addEventListener('keydown', e=>{ if(e.key==='Enter') tryLogin(); });
+    btnLogout.addEventListener('click', ()=>{ sessionStorage.removeItem(SESSION_KEY); location.reload(); });
+
+    if(sessionStorage.getItem(SESSION_KEY)==='1'){ showApp(); }
+    else{ lock.style.display='flex'; app.style.visibility='hidden'; }
+
+    /* ===== Ключи хранилища, дефолты, утилиты ===== */
+    const STORAGE_KEYS = { ru:'schedule.ru', fr:'schedule.fr', by:'schedule.by', ua:'schedule.ua' };
+    const RULES_KEYS_MAP = { by:'rules.by', ua:'rules.ua' };
+    const DEFAULT_RULES = {
+      by: [["Усенашная","Усяночная"],["Узвіжанне","Уздвіжанне"],["Узвіжання","Уздвіжання"],["Чэснага","Пачэснага"],["вел.","вял."]],
+      ua: []
+    };
+    const DEFAULTS_MIN = {
+      ru:{ notice:"Сайт в разработке", scheduleLabel1:"Расписание богослужений", currentLabel:"СЕНТЯБРЬ", nextLabel:"ОКТЯБРЬ",
+           scheduleCurrent:[], scheduleNext:[],
+           footer:`87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (ligne 9)<br />✉️ <a href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>` },
+      fr:{ notice:"Site en développement", scheduleLabel1:"Horaires des offices", currentLabel:"SEPTEMBRE", nextLabel:"OCTOBRE",
+           scheduleCurrent:[], scheduleNext:[],
+           footer:`87, boulevard Exelmans, Paris 75016<br />Métro : Exelmans (ligne 9)<br />✉️ <a href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>` },
+      by:{ notice:"Сайт у распрацоўцы", scheduleLabel1:"Расклад набажэнстваў", currentLabel:"ВЕРАСЕНЬ", nextLabel:"КАСТРЫЧНІК",
+           scheduleCurrent:[], scheduleNext:[],
+           footer:`87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (лінія 9)<br />✉️ <a href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>` },
+      ua:{ notice:"Сайт у розробці", scheduleLabel1:"Розклад богослужінь", currentLabel:"ВЕРЕСЕНЬ", nextLabel:"ЖОВТЕНЬ",
+           scheduleCurrent:[], scheduleNext:[],
+           footer:`87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (лінія 9)<br />✉️ <a href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>` }
+    };
+
+    const qs=s=>document.querySelector(s), qsa=s=>document.querySelectorAll(s);
+    const arrToTextarea=a=>(a||[]).join('\n');
+    const textareaToArr=t=>(t||'').split('\n').map(s=>s.trim()).filter(Boolean);
+
+    // элементы формы
+    const langBtns=qsa('.lang-switch span[data-lang]');
+    const scheduleLabel1El=qs('#scheduleLabel1');
+    const currentLabelEl=qs('#currentLabel');
+    const scheduleCurrentEl=qs('#scheduleCurrent');
+    const nextLabelEl=qs('#nextLabel');
+    const scheduleNextEl=qs('#scheduleNext');
+    const noticeEl=qs('#notice');
+    const footerEl=qs('#footer');
+
+    // предпросмотр
+    const pvScheduleLabel1=qs('#pv-scheduleLabel1');
+    const pvCurrentLabel=qs('#pv-currentLabel');
+    const pvScheduleCurrent=qs('#pv-scheduleCurrent');
+    const pvNextLabel=qs('#pv-nextLabel');
+    const pvScheduleNext=qs('#pv-scheduleNext');
+    const pvNotice=qs('#pv-notice');
+    const pvFooter=qs('#pv-footer');
+
+    // кнопки
+    const btnSave=qs('#btnSave'), btnReset=qs('#btnReset'), btnClear=qs('#btnClear');
+    const btnExport=qs('#btnExport'), fileImport=qs('#fileImport'), btnImport=qs('#btnImport');
+
+    let currentLang='ru';
+
+    function loadData(lang){
+      try{ const raw=localStorage.getItem(STORAGE_KEYS[lang]);
+        if(!raw) return {...DEFAULTS_MIN[lang]};
+        const parsed=JSON.parse(raw); return {...DEFAULTS_MIN[lang], ...parsed};
+      }catch{ return {...DEFAULTS_MIN[lang]}; }
+    }
+    function saveData(lang,data){ localStorage.setItem(STORAGE_KEYS[lang], JSON.stringify(data)); }
+    function resetData(lang){ saveData(lang, {...DEFAULTS_MIN[lang]}); }
+
+    function loadRules(lang){
+      try{ const raw=localStorage.getItem(RULES_KEYS_MAP[lang]);
+        if(!raw) return DEFAULT_RULES[lang].map(p=>[...p]);
+        const arr=JSON.parse(raw); return Array.isArray(arr)?arr:DEFAULT_RULES[lang].map(p=>[...p]);
+      }catch{ return DEFAULT_RULES[lang].map(p=>[...p]); }
+    }
+    function saveRules(lang,arr){ localStorage.setItem(RULES_KEYS_MAP[lang], JSON.stringify(arr)); }
+    function applyRules(lines,rules){
+      return (lines||[]).map(line=>{
+        let out=line;
+        rules.forEach(([from,to])=>{
+          if(!from) return;
+          out=out.split(from).join(to);
+          out=out.split(from.replace(' ','&nbsp;')).join(to.replace(' ','&nbsp;'));
+        });
+        return out;
+      });
+    }
+
+    function renderForm(lang){
+      const d=loadData(lang);
+      scheduleLabel1El.value=d.scheduleLabel1||'';
+      currentLabelEl.value=d.currentLabel||'';
+      scheduleCurrentEl.value=arrToTextarea(d.scheduleCurrent);
+      nextLabelEl.value=d.nextLabel||'';
+      scheduleNextEl.value=arrToTextarea(d.scheduleNext);
+      noticeEl.value=d.notice||'';
+      footerEl.value=d.footer||'';
+      renderPreview();
+    }
+    function renderPreview(){
+      pvScheduleLabel1.textContent=scheduleLabel1El.value.trim()||'—';
+      pvCurrentLabel.textContent=currentLabelEl.value.trim()||'—';
+      pvNextLabel.textContent=nextLabelEl.value.trim()||'—';
+      const cur=textareaToArr(scheduleCurrentEl.value), nxt=textareaToArr(scheduleNextEl.value);
+      pvScheduleCurrent.innerHTML=cur.length?cur.map(x=>`<li>${x}</li>`).join(''):'<li>—</li>';
+      pvScheduleNext.innerHTML=nxt.length?nxt.map(x=>`<li>${x}</li>`).join(''):'<li>—</li>';
+      pvNotice.textContent=noticeEl.value.trim()||'';
+      pvFooter.innerHTML=footerEl.value.trim()||'';
+    }
+    [scheduleLabel1El,currentLabelEl,scheduleCurrentEl,nextLabelEl,scheduleNextEl,noticeEl,footerEl]
+      .forEach(el=>el.addEventListener('input',renderPreview));
+
+    langBtns.forEach(btn=>btn.addEventListener('click',()=>{
+      langBtns.forEach(b=>b.classList.remove('active')); btn.classList.add('active');
+      currentLang=btn.dataset.lang; renderForm(currentLang);
+    }));
+
+    btnSave.addEventListener('click',()=>{
+      let data={
+        scheduleLabel1: scheduleLabel1El.value.trim()||DEFAULTS_MIN[currentLang].scheduleLabel1,
+        currentLabel:   currentLabelEl.value.trim()  ||DEFAULTS_MIN[currentLang].currentLabel,
+        scheduleCurrent: textareaToArr(scheduleCurrentEl.value),
+        nextLabel:      nextLabelEl.value.trim()     ||DEFAULTS_MIN[currentLang].nextLabel,
+        scheduleNext:   textareaToArr(scheduleNextEl.value),
+        notice:         noticeEl.value.trim()        ||DEFAULTS_MIN[currentLang].notice,
+        footer:         footerEl.value.trim()        ||DEFAULTS_MIN[currentLang].footer
+      };
+      if(currentLang==='by'||currentLang==='ua'){
+        const rules=loadRules(currentLang);
+        data.scheduleCurrent=applyRules(data.scheduleCurrent,rules);
+        data.scheduleNext=applyRules(data.scheduleNext,rules);
+      }
+      saveData(currentLang,data); alert('Сохранено! Обнови главную страницу.');
+    });
+    btnReset.addEventListener('click',()=>{ if(!confirm('Сбросить блок текущего языка к заводским?'))return; resetData(currentLang); renderForm(currentLang); });
+    btnClear.addEventListener('click',()=>{ if(!confirm('Удалить данные текущего языка из localStorage?'))return; localStorage.removeItem(STORAGE_KEYS[currentLang]); renderForm(currentLang); });
+
+    // Правила BY/UA — UI
+    let rulesLang='by';
+    const rulesSwitch=qsa('.lang-switch span[data-rules-lang]');
+    const rulesList=document.getElementById('rulesList');
+    const addRuleBtn=document.getElementById('addRule');
+    const saveRulesBtn=document.getElementById('saveRules');
+    const resetRulesBtn=document.getElementById('resetRules');
+
+    function renderRules(){
+      const rules=loadRules(rulesLang);
+      rulesList.innerHTML='';
+      rules.forEach((pair,idx)=>{
+        const row=document.createElement('div');
+        row.className='pair-grid';
+        row.innerHTML=`
+          <input type="text" class="from" placeholder="что" value="${(pair[0]||'').replace(/"/g,'&quot;')}" />
+          <input type="text" class="to" placeholder="на что" value="${(pair[1]||'').replace(/"/g,'&quot;')}" />
+          <button type="button" class="del">Удалить</button>`;
+        row.querySelector('.del').onclick=()=>{ const arr=loadRules(rulesLang); arr.splice(idx,1); saveRules(rulesLang,arr); renderRules(); };
+        rulesList.appendChild(row);
+      });
+    }
+    rulesSwitch.forEach(btn=>btn.addEventListener('click',()=>{
+      rulesSwitch.forEach(b=>b.classList.remove('active')); btn.classList.add('active');
+      rulesLang=btn.dataset.rulesLang; renderRules();
+    }));
+    addRuleBtn.addEventListener('click',()=>{ const arr=loadRules(rulesLang); arr.push(['','']); saveRules(rulesLang,arr); renderRules(); });
+    saveRulesBtn.addEventListener('click',()=>{
+      const rows=rulesList.querySelectorAll('.pair-grid');
+      const arr=Array.from(rows).map(row=>{
+        const from=row.querySelector('.from').value.trim();
+        const to=row.querySelector('.to').value.trim();
+        return (from&&to)?[from,to]:null;
+      }).filter(Boolean);
+      saveRules(rulesLang,arr); alert('Правила сохранены.');
+    });
+    resetRulesBtn.addEventListener('click',()=>{ if(!confirm('Сбросить правила к заводским?'))return; saveRules(rulesLang, DEFAULT_RULES[rulesLang].map(p=>[...p])); renderRules(); });
+
+    // init
+    if(sessionStorage.getItem(SESSION_KEY)==='1'){ renderForm(currentLang); renderRules(); }
+  </script>
+</body>
+</html>
