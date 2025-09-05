@@ -4,197 +4,59 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Храм Знамения Пресвятой Богородицы в Париже</title>
-  <!-- SEO: Описание страницы -->
-  <meta name="description" content="Официальный сайт Храма Знамения Пресвятой Богородицы в Париже. Православное расписание богослужений, адрес, контакты, расписание служб. Église Orthodoxe Notre-Dame Du Signe à Paris." />
-  <!-- SEO: Ключевые слова -->
+
+  <!-- SEO -->
+  <meta name="description" content="Официальный сайт Храма Знамения Пресвятой Богородицы в Париже. Православное расписание богослужений, адрес, контакты. Église Orthodoxe Notre-Dame Du Signe à Paris." />
   <meta name="keywords" content="храм, православие, Париж, Богородица, Église Orthodoxe, Notre-Dame du Signe, Paris, богослужение, расписание, православный приход, церковь" />
-  <!-- SEO: Альтернативные языки -->
   <link rel="alternate" href="https://znamenie.fr/" hreflang="ru" />
   <link rel="alternate" href="https://znamenie.fr/" hreflang="fr" />
   <link rel="alternate" href="https://znamenie.fr/" hreflang="be" />
   <link rel="alternate" href="https://znamenie.fr/" hreflang="uk" />
-  <!-- SEO: Open Graph для соцсетей -->
   <meta property="og:title" content="Храм Знамения Пресвятой Богородицы в Париже" />
   <meta property="og:description" content="Официальный сайт прихода. Актуальное расписание богослужений, контакты, адрес." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://znamenie.fr/" />
   <meta property="og:image" content="https://znamenie.fr/assets/icon.gif" />
-  <!-- SEO: Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Храм Знамения Пресвятой Богородицы в Париже" />
   <meta name="twitter:description" content="Официальный сайт прихода. Актуальное расписание богослужений, контакты, адрес." />
   <meta name="twitter:image" content="https://znamenie.fr/assets/icon.gif" />
+
   <link rel="icon" href="assets/icon.gif" type="image/gif" />
   <link href="https://fonts.googleapis.com/css2?family=Forum&family=Open+Sans&family=Roboto+Mono&display=swap" rel="stylesheet" />
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #ede6d9;
-      font-family: 'Open Sans', sans-serif;
-      color: #2f2f2f;
-      text-align: center;
-      position: relative;
-    }
-    .overlay {
-      padding: 2em;
-      max-width: 960px;
-      margin: auto;
-      margin-top: 5vh;
-      position: relative;
-    }
-    .lang-switch {
-      position: absolute;
-      top: 1em;
-      right: 1em;
-      font-family: 'Open Sans', sans-serif;
-      font-size: 0.9em;
-      user-select: none;
-      display: flex;
-      gap: 0.8em;
-      justify-content: center;
-      align-items: center;
-      z-index: 100;
-    }
-    .lang-switch span {
-      cursor: pointer;
-      color: #666;
-      font-weight: 600;
-      transition: color 0.3s;
-      letter-spacing: 0.1em;
-      padding: 0.1em 0.2em;
-      border-radius: 2px;
-      background: none;
-    }
-    .lang-switch span.active {
-      color: #2f2f2f;
-      font-weight: 700;
-      background: none;
-    }
-    .lang-switch span:hover {
-      color: #a2906f;
-    }
-    header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 2em;
-      position: relative;
-    }
-    .logo-block {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      width: 100%;
-      align-items: center;
-    }
-    .logo-text {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      font-family: 'Forum', serif;
-      font-size: 2.5em;
-      flex: 1;
-    }
-    .logo-text.left {
-      text-align: right;
-    }
-    .logo-text.right {
-      text-align: left;
-    }
-    .logo-text span {
-      display: block;
-    }
-    .logo-block img {
-      height: 160px;
-      margin: 0 1em;
-    }
-    .subheading {
-      font-size: 1em;
-      margin-top: 1em;
-      font-family: 'Forum', serif;
-    }
-    .notice {
-      font-family: 'Roboto Mono', monospace;
-      font-size: 3em;
-      margin: 2em 0;
-      font-weight: 900;
-      letter-spacing: 0.02em;
-      color: #222;
-      user-select: none;
-    }
-    .schedule {
-      text-align: left;
-      background: #fff;
-      padding: 1.5em;
-      border-radius: 5px;
-      font-size: 1em;
-      position: relative;
-      margin: 0 auto 3em auto;
-      max-width: 600px;
-    }
-    .schedule::before {
-      content: "";
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      right: 10px;
-      bottom: 10px;
-      border: 3px double #a2906f;
-      pointer-events: none;
-      border-radius: 5px;
-      box-sizing: border-box;
-    }
-    .schedule-label {
-      font-size: 1.5em;
-      font-family: 'Forum', serif;
-      font-weight: bold;
-      text-align: center;
-      margin-top: 1.5em;
-      margin-bottom: 0;
-    }
-    .schedule-label:first-child {
-      margin-top: 1.5em;
-    }
-    .schedule-month {
-      font-size: 1.5em;
-      font-family: 'Forum', serif;
-      font-weight: bold;
-      text-align: center;
-      margin-top: 1.5em;
-      margin-bottom: 1.2em;
-    }
-    .schedule ul {
-      margin-top: 0;
-      margin-bottom: 0;
-      padding-left: 1.7em;
-      padding-bottom: 1.5em;
-    }
-    .schedule ul li {
-      text-indent: 0.9em;
-      transition: color 0.5s, opacity 0.5s;
-    }
-    .schedule ul li.past {
-      color: #b2b2b2 !important;
-      opacity: 0.8;
-    }
-    .footer {
-      margin-top: 2em;
-      font-size: 0.9em;
-      color: #555;
-    }
-    @media (max-width: 768px) {
-      .logo-block {
-        flex-direction: column;
-        text-align: center;
-      }
-      .logo-block img {
-        margin: 1em 0;
-      }
-      .logo-text.left, .logo-text.right {
-        text-align: center;
-      }
-    }
+    body { margin:0; padding:0; background:#ede6d9; font-family:'Open Sans',sans-serif; color:#2f2f2f; text-align:center; position:relative; }
+    .overlay { padding:2em; max-width:960px; margin:auto; margin-top:5vh; position:relative; }
+
+    .lang-switch { position:absolute; top:1em; right:1em; font-size:.9em; display:flex; gap:.8em; z-index:100; }
+    .lang-switch span { cursor:pointer; color:#666; font-weight:600; letter-spacing:.1em; padding:.1em .2em; border-radius:2px; }
+    .lang-switch span.active { color:#2f2f2f; font-weight:700; }
+    .lang-switch span:hover { color:#a2906f; }
+
+    header { display:flex; flex-direction:column; align-items:center; margin-bottom:2em; position:relative; }
+    .logo-block { display:flex; flex-direction:row; justify-content:space-between; width:100%; align-items:center; }
+    .logo-text { display:flex; flex-direction:column; justify-content:center; font-family:'Forum',serif; font-size:2.5em; flex:1; }
+    .logo-text.left { text-align:right; } .logo-text.right { text-align:left; }
+    .logo-text span { display:block; }
+    .logo-block img { height:160px; margin:0 1em; }
+    .subheading { font-size:1em; margin-top:1em; font-family:'Forum',serif; }
+
+    .notice { font-family:'Roboto Mono',monospace; font-size:3em; margin:2em 0; font-weight:900; letter-spacing:.02em; color:#222; user-select:none; }
+
+    .schedule { text-align:left; background:#fff; padding:1.5em; border-radius:5px; font-size:1em; position:relative; margin:0 auto 3em auto; max-width:600px; }
+    .schedule::before { content:""; position:absolute; top:10px; left:10px; right:10px; bottom:10px; border:3px double #a2906f; pointer-events:none; border-radius:5px; box-sizing:border-box; }
+    .schedule-label, .schedule-month { font-size:1.5em; font-family:'Forum',serif; font-weight:bold; text-align:center; }
+    .schedule-label { margin-top:1.5em; margin-bottom:0; }
+    .schedule-month { margin-top:1.5em; margin-bottom:1.2em; }
+    .schedule ul { margin:0; padding-left:1.7em; padding-bottom:1.5em; }
+    .schedule ul li { text-indent:.9em; transition: color .5s, opacity .5s; }
+    .schedule ul li.past { color:#b2b2b2 !important; opacity:.8; }
+
+    .footer { margin-top:2em; font-size:.9em; color:#555; }
+    .footer .admin-gear { text-decoration:none; margin-left:.35em; font-size:1em; color:#666; padding:.05em .35em; border-radius:6px; }
+    .footer .admin-gear:hover { background:rgba(0,0,0,.06); color:#2f2f2f; }
+
+    @media (max-width:768px){ .logo-block{flex-direction:column;text-align:center} .logo-block img{margin:1em 0} .logo-text.left,.logo-text.right{text-align:center} }
   </style>
 </head>
 <body>
@@ -240,148 +102,152 @@
       ✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>
     </div>
   </div>
+
   <script>
-    // --- ПОЛНЫЙ translations, четыре языка, как обычно ---
+    /* ===================== Переводы ===================== */
     const translations = {
       ru: {
-  logoLeft: ["Храм", "Знамения"],
-  logoRight: ["Пресвятой", "Богородицы"],
-  subheading: "Викариат имени Святых Марии Парижской и Алексия Южинского — Вселенский Патриархат",
-  notice: "Сайт в разработке",
-  scheduleLabel1: "Расписание богослужений",
-  currentLabel: "СЕНТЯБРЬ",
-  scheduleCurrent: [
-    "<strong>6 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 13-я Неделя по Пятидесятнице, глас 4-й",
-    "<strong>7 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Апостолов Варфоломея и&nbsp;Тита. После литургии – молебен учащимся",
-    "<strong>13 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 14-я Неделя по Пятидесятнице, глас 5-й",
-    "<strong>14 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Церковное новолетие, прп.&nbsp;Симеон Столпник",
-    "<strong>20 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 15-я Неделя по Пятидесятнице, глас 6-й",
-    "<strong>21 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Рождество Пресвятой Богородицы",
-    "<strong>26 пятница, 18:00</strong>&nbsp;&ndash; Всенощное бдение. Канун Воздвижения Креста Господня",
-    "<strong>27 суббота, 10:00</strong>&nbsp;&ndash; Литургия. Воздвижение Честного и Животворящего Креста Господня",
-    "<strong>27 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 16-я Неделя по Пятидесятнице, глас 7-й",
-    "<strong>28 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Неделя после Воздвижения, вмч.&nbsp;Никиты"
-  ],
-  nextLabel: "ОКТЯБРЬ",
-  scheduleNext: [
-    "<strong>4 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 17-я Неделя по Пятидесятнице, глас 8-й",
-    "<strong>5 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Апостола Кодрата",
-    "<strong>11 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 18-я Неделя по Пятидесятнице, глас 1-й",
-    "<strong>12 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Прп.&nbsp;Кириака Отшельника",
-    "<strong>13 понедельник, 18:00</strong>&nbsp;&ndash; Всенощное бдение. Канун Покрова Пресвятой Богородицы",
-    "<strong>14 вторник, 10:00</strong>&nbsp;&ndash; Литургия. Покров Пресвятой Богородицы",
-    "<strong>18 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 19-я Неделя по Пятидесятнице, глас 2-й",
-    "<strong>19 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Апостола Фомы",
-    "<strong>25 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 20-я Неделя по Пятидесятнице, глас 3-й",
-    "<strong>26 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Иверской иконы Божией Матери"
-  ],
-  footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (ligne 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
-},
+        logoLeft: ["Храм","Знамения"],
+        logoRight: ["Пресвятой","Богородицы"],
+        subheading: "Викариат имени Святых Марии Парижской и Алексия Южинского — Вселенский Патриархат",
+        notice: "Сайт в разработке",
+        scheduleLabel1: "Расписание богослужений",
+        currentLabel: "СЕНТЯБРЬ",
+        scheduleCurrent: [
+          "<strong>6 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 13-я Неделя по Пятидесятнице, глас 4-й",
+          "<strong>7 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Апостолов Варфоломея и&nbsp;Тита. После литургии – молебен учащимся",
+          "<strong>13 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 14-я Неделя по Пятидесятнице, глас 5-й",
+          "<strong>14 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Церковное новолетие, прп.&nbsp;Симеон Столпник",
+          "<strong>20 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 15-я Неделя по Пятидесятнице, глас 6-й",
+          "<strong>21 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Рождество Пресвятой Богородицы",
+          "<strong>26 пятница, 18:00</strong>&nbsp;&ndash; Всенощное бдение. Канун Воздвижения Креста Господня",
+          "<strong>27 суббота, 10:00</strong>&nbsp;&ndash; Литургия. Воздвижение Честного и Животворящего Креста Господня",
+          "<strong>27 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 16-я Неделя по Пятидесятнице, глас 7-й",
+          "<strong>28 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Неделя после Воздвижения, вмч.&nbsp;Никиты"
+        ],
+        nextLabel: "ОКТЯБРЬ",
+        scheduleNext: [
+          "<strong>4 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 17-я Неделя по Пятидесятнице, глас 8-й",
+          "<strong>5 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Апостола Кодрата",
+          "<strong>11 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 18-я Неделя по Пятидесятнице, глас 1-й",
+          "<strong>12 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Прп.&nbsp;Кириака Отшельника",
+          "<strong>13 понедельник, 18:00</strong>&nbsp;&ndash; Всенощное бдение. Канун Покрова Пресвятой Богородицы",
+          "<strong>14 вторник, 10:00</strong>&nbsp;&ndash; Литургия. Покров Пресвятой Богородицы",
+          "<strong>18 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 19-я Неделя по Пятидесятнице, глас 2-й",
+          "<strong>19 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Апостола Фомы",
+          "<strong>25 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 20-я Неделя по Пятидесятнице, глас 3-й",
+          "<strong>26 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Иверской иконы Божией Матери"
+        ],
+        footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (ligne 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
+      },
 
-fr: {
-  logoLeft: ["Paroisse", "Orthodoxe"],
-  logoRight: ["Notre-Dame", "du Signe"],
-  subheading: "Vicariat Sainte-Marie-de-Paris et Saint-Alexis-d’Ugine – Patriarcat Œcuménique",
-  notice: "Site en développement",
-  scheduleLabel1: "Horaires des offices",
-  currentLabel: "SEPTEMBRE",
-  scheduleCurrent: [
-    "<strong>6 samedi, 18:00</strong>&nbsp;&ndash; Vigiles<br>13<sup>e</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 4<sup>e</sup>&nbsp;ton",
-    "<strong>7 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie<br>Saints Bartholomée et&nbsp;Tite. Prière pour la rentrée scolaire",
-    "<strong>13 samedi, 18:00</strong>&nbsp;&ndash; Vigiles<br>14<sup>e</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 5<sup>e</sup>&nbsp;ton",
-    "<strong>14 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie<br>Nouvel an ecclésial&nbsp;&ndash; St&nbsp;Syméon le Stylite",
-    "<strong>20 samedi, 18:00</strong>&nbsp;&ndash; Vigiles<br>15<sup>e</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 6<sup>e</sup>&nbsp;ton",
-    "<strong>21 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie<br>Nativité de la Très-Sainte Mère de Dieu",
-    "<strong>26 vendredi, 18:00</strong>&nbsp;&ndash; Vigiles<br>Veille de l’Elévation de la Sainte Croix",
-    "<strong>27 samedi, 10:00</strong>&nbsp;&ndash; Liturgie<br>Elévation de la Sainte et Vivifiante Croix",
-    "<strong>27 samedi, 18:00</strong>&nbsp;&ndash; Vigiles<br>16<sup>e</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 7<sup>e</sup>&nbsp;ton",
-    "<strong>28 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie<br>Dimanche après l’Elévation – St Nicétas (Nikita)"
-  ],
-  nextLabel: "OCTOBRE",
-  scheduleNext: [
-    "<strong>4 samedi, 18:00</strong>&nbsp;&ndash; Vigiles<br>17<sup>e</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 8<sup>e</sup>&nbsp;ton",
-    "<strong>5 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie<br>Saint Apôtre Codrat",
-    "<strong>11 samedi, 18:00</strong>&nbsp;&ndash; Vigiles<br>18<sup>e</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 1<sup>er</sup>&nbsp;ton",
-    "<strong>12 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie<br>Saint Cyriaque l’ermite",
-    "<strong>13 lundi, 18:00</strong>&nbsp;&ndash; Vigiles<br>Protection de la Très Sainte Mère de Dieu",
-    "<strong>14 mardi, 10:00</strong>&nbsp;&ndash; Liturgie<br>Protection de la Très Sainte Mère de Dieu",
-    "<strong>18 samedi, 18:00</strong>&nbsp;&ndash; Vigiles<br>19<sup>e</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 2<sup>e</sup>&nbsp;ton",
-    "<strong>19 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie<br>Saint Apôtre Thomas",
-    "<strong>25 samedi, 18:00</strong>&nbsp;&ndash; Vigiles<br>20<sup>e</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 3<sup>e</sup>&nbsp;ton",
-    "<strong>26 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie<br>Icône de la Mère de Dieu Iverskaya"
-  ],
-  footer: `87, boulevard Exelmans, Paris 75016<br />Métro : Exelmans (ligne 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
-},
-     by: {
-  logoLeft: ["Храм", "Знамення"],
-  logoRight: ["Прасвятой", "Багародзіцы"],
-  subheading: "Вікарыят імя Святых Марыі Парыжскай і Аляксея Южынскага — Сусветны Патрыярхат",
-  notice: "Сайт у распрацоўцы",
-  scheduleLabel1: "Расклад набажэнстваў",
-  currentLabel: "ВЕРАСЕНЬ",
-  scheduleCurrent: [
-    "<strong>6 субота, 18:00</strong>&nbsp;&ndash; Усяночная. 13-я Нядзеля пасля Пяцідзясятніцы, тон 4-ты",
-    "<strong>7 нядзеля, 10:30</strong>&nbsp;&ndash; Боская Літургія. Апосталы Варфаламей і&nbsp;Ціт. Пасля літургіі&nbsp;&mdash; малебен вучням",
-    "<strong>13 субота, 18:00</strong>&nbsp;&ndash; Усяночная. 14-я Нядзеля пасля Пяцідзясятніцы, тон 5-ты",
-    "<strong>14 нядзеля, 10:30</strong>&nbsp;&ndash; Боская Літургія. Царкоўны Новы год, прп.&nbsp;Сімеон Стаўпнік",
-    "<strong>20 субота, 18:00</strong>&nbsp;&ndash; Усяночная. 15-я Нядзеля пасля Пяцідзясятніцы, тон 6-ты",
-    "<strong>21 нядзеля, 10:30</strong>&nbsp;&ndash; Боская Літургія. Нараджэнне Прасвятой Багародзіцы",
-    "<strong>26 пятніца, 18:00</strong>&nbsp;&ndash; Усяночная. Напярэдадні Уздвіжання Крыжа Гасподняга",
-    "<strong>27 субота, 10:00</strong>&nbsp;&ndash; Боская Літургія. Уздвіжанне Пачэснага і&nbsp;Жыватворчага Крыжа Гасподняга",
-    "<strong>27 субота, 18:00</strong>&nbsp;&ndash; Усяночная. 16-я Нядзеля пасля Пяцідзясятніцы, тон 7-мы",
-    "<strong>28 нядзеля, 10:30</strong>&nbsp;&ndash; Боская Літургія. Нядзеля пасля Уздвіжання, вял.&nbsp;муч.&nbsp;Мікіта"
-  ],
-  nextLabel: "КАСТРЫЧНІК",
-  scheduleNext: [
-    "<strong>4 субота, 18:00</strong>&nbsp;&ndash; Усяночная. 17-я Нядзеля пасля Пяцідзясятніцы, тон 8-мы",
-    "<strong>5 нядзеля, 10:30</strong>&nbsp;&ndash; Боская Літургія. Апостал Кодрат",
-    "<strong>11 субота, 18:00</strong>&nbsp;&ndash; Усяночная. 18-я Нядзеля пасля Пяцідзясятніцы, тон 1-шы",
-    "<strong>12 нядзеля, 10:30</strong>&nbsp;&ndash; Боская Літургія. прп.&nbsp;Кірыяк Пустэльнік",
-    "<strong>13 панядзелак, 18:00</strong>&nbsp;&ndash; Усяночная. Напярэдадні Пакрову Прасвятой Багародзіцы",
-    "<strong>14 аўторак, 10:00</strong>&nbsp;&ndash; Боская Літургія. Пакров Прасвятой Багародзіцы",
-    "<strong>18 субота, 18:00</strong>&nbsp;&ndash; Усяночная. 19-я Нядзеля пасля Пяцідзясятніцы, тон 2-гі",
-    "<strong>19 нядзеля, 10:30</strong>&nbsp;&ndash; Боская Літургія. Апостал Фама",
-    "<strong>25 субота, 18:00</strong>&nbsp;&ndash; Усяночная. 20-я Нядзеля пасля Пяцідзясятніцы, тон 3-ці",
-    "<strong>26 нядзеля, 10:30</strong>&nbsp;&ndash; Боская Літургія. Іверская ікона Божай Маці"
-  ],
-  footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (лінія 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
-},
-ua: {
-  logoLeft: ["Храм", "Знамення"],
-  logoRight: ["Пресвятої", "Богородиці"],
-  subheading: "Вікаріат імені Святих Марії Паризької та Олексія Южинського — Вселенський Патріархат",
-  notice: "Сайт у розробці",
-  scheduleLabel1: "Розклад богослужінь",
-  currentLabel: "ВЕРЕСЕНЬ",
-  scheduleCurrent: [
-    "<strong>6 субота, 18:00</strong>&nbsp;&ndash; Всеношна. 13-та Неділя після П’ятидесятниці, глас 4-й",
-    "<strong>7 неділя, 10:30</strong>&nbsp;&ndash; Божественна Літургія. Апостоли Варфоломій і&nbsp;Тит. Після літургії&nbsp;&mdash; молебень учням",
-    "<strong>13 субота, 18:00</strong>&nbsp;&ndash; Всеношна. 14-та Неділя після П’ятидесятниці, глас 5-й",
-    "<strong>14 неділя, 10:30</strong>&nbsp;&ndash; Божественна Літургія. Церковне новоліття, прп.&nbsp;Симеон Стовпник",
-    "<strong>20 субота, 18:00</strong>&nbsp;&ndash; Всеношна. 15-та Неділя після П’ятидесятниці, глас 6-й",
-    "<strong>21 неділя, 10:30</strong>&nbsp;&ndash; Божественна Літургія. Різдво Пресвятої Богородиці",
-    "<strong>26 п’ятниця, 18:00</strong>&nbsp;&ndash; Всеношна. Навечір’я Воздвиження Хреста Господнього",
-    "<strong>27 субота, 10:00</strong>&nbsp;&ndash; Божественна Літургія. Воздвиження Чесного і&nbsp;Животворящого Хреста Господнього",
-    "<strong>27 субота, 18:00</strong>&nbsp;&ndash; Всеношна. 16-та Неділя після П’ятидесятниці, глас 7-й",
-    "<strong>28 неділя, 10:30</strong>&nbsp;&ndash; Божественна Літургія. Неділя після Воздвиження, вмч.&nbsp;Микити"
-  ],
-  nextLabel: "ЖОВТЕНЬ",
-  scheduleNext: [
-    "<strong>4 субота, 18:00</strong>&nbsp;&ndash; Всеношна. 17-та Неділя після П’ятидесятниці, глас 8-й",
-    "<strong>5 неділя, 10:30</strong>&nbsp;&ndash; Божественна Літургія. Апостол Кодрат",
-    "<strong>11 субота, 18:00</strong>&nbsp;&ndash; Всеношна. 18-та Неділя після П’ятидесятниці, глас 1-й",
-    "<strong>12 неділя, 10:30</strong>&nbsp;&ndash; Божественна Літургія. прп.&nbsp;Киріак Самітник",
-    "<strong>13 понеділок, 18:00</strong>&nbsp;&ndash; Всеношна. Навечір’я Покрову Пресвятої Богородиці",
-    "<strong>14 вівторок, 10:00</strong>&nbsp;&ndash; Божественна Літургія. Покров Пресвятої Богородиці",
-    "<strong>18 субота, 18:00</strong>&nbsp;&ndash; Всеношна. 19-та Неділя після П’ятидесятниці, глас 2-й",
-    "<strong>19 неділя, 10:30</strong>&nbsp;&ndash; Божественна Літургія. Апостол Фома",
-    "<strong>25 субота, 18:00</strong>&nbsp;&ndash; Всеношна. 20-та Неділя після П’ятидесятниці, глас 3-й",
-    "<strong>26 неділя, 10:30</strong>&nbsp;&ndash; Божественна Літургія. Іверська ікона Божої Матері"
-  ],
-  footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (лінія 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
-}
+      fr: {
+        logoLeft: ["Paroisse","Orthodoxe"],
+        logoRight: ["Notre-Dame","du Signe"],
+        subheading: "Vicariat Sainte-Marie-de-Paris et Saint-Alexis-d’Ugine – Patriarcat Œcuménique",
+        notice: "Site en développement",
+        scheduleLabel1: "Horaires des offices",
+        currentLabel: "SEPTEMBRE",
+        scheduleCurrent: [
+          "<strong>6 samedi, 18:00</strong>&nbsp;&ndash; Vigiles<br>13<sup>e</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 4<sup>e</sup>&nbsp;ton",
+          "<strong>7 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie<br>Saints Bartholomée et&nbsp;Tite. Prière pour la rentrée scolaire",
+          "<strong>13 samedi, 18:00</strong>&nbsp;&ndash; Vigiles<br>14<sup>e</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 5<sup>e</sup>&nbsp;ton",
+          "<strong>14 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie<br>Nouvel an ecclésial&nbsp;&ndash; St&nbsp;Syméon le Stylite",
+          "<strong>20 samedi, 18:00</strong>&nbsp;&ndash; Vigiles<br>15<sup>e</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 6<sup>e</sup>&nbsp;ton",
+          "<strong>21 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie<br>Nativité de la Très-Sainte Mère de Dieu",
+          "<strong>26 vendredi, 18:00</strong>&nbsp;&ndash; Vigiles<br>Veille de l’Elévation de la Sainte Croix",
+          "<strong>27 samedi, 10:00</strong>&nbsp;&ndash; Liturgie<br>Elévation de la Sainte et Vivifiante Croix",
+          "<strong>27 samedi, 18:00</strong>&nbsp;&ndash; Vigiles<br>16<sup>e</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 7<sup>e</sup>&nbsp;ton",
+          "<strong>28 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie<br>Dimanche après l’Elévation – St Nicétas (Nikita)"
+        ],
+        nextLabel: "OCTOBRE",
+        scheduleNext: [
+          "<strong>4 samedi, 18:00</strong>&nbsp;&ndash; Vigiles<br>17<sup>e</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 8<sup>e</sup>&nbsp;ton",
+          "<strong>5 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie<br>Saint Apôtre Codrat",
+          "<strong>11 samedi, 18:00</strong>&nbsp;&ndash; Vigiles<br>18<sup>e</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 1<sup>er</sup>&nbsp;ton",
+          "<strong>12 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie<br>Saint Cyriaque l’ermite",
+          "<strong>13 lundi, 18:00</strong>&nbsp;&ndash; Vigiles<br>Protection de la Très Sainte Mère de Dieu",
+          "<strong>14 mardi, 10:00</strong>&nbsp;&ndash; Liturgie<br>Protection de la Très Sainte Mère de Dieu",
+          "<strong>18 samedi, 18:00</strong>&nbsp;&ndash; Vigiles<br>19<sup>e</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 2<sup>e</sup>&nbsp;ton",
+          "<strong>19 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie<br>Saint Apôtre Thomas",
+          "<strong>25 samedi, 18:00</strong>&nbsp;&ndash; Vigiles<br>20<sup>e</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 3<sup>e</sup>&nbsp;ton",
+          "<strong>26 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie<br>Icône de la Mère de Dieu Iverskaya"
+        ],
+        footer: `87, boulevard Exelmans, Paris 75016<br />Métро : Exelmans (ligne 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
+      },
+
+      by: {
+        logoLeft: ["Храм","Знамення"],
+        logoRight: ["Прасвятой","Багародзіцы"],
+        subheading: "Вікарыят імя Святых Марыі Парыжскай і Аляксея Южынскага — Сусветны Патрыярхат",
+        notice: "Сайт у распрацоўцы",
+        scheduleLabel1: "Расклад набажэнстваў",
+        currentLabel: "ВЕРАСЕНЬ",
+        scheduleCurrent: [
+          "<strong>6 субота, 18:00</strong>&nbsp;&ndash; Усяночная. 13-я Нядзеля пасля Пяцідзясятніцы, тон 4-ты",
+          "<strong>7 нядзеля, 10:30</strong>&nbsp;&ndash; Боская Літургія. Апосталы Варфаламей і&nbsp;Ціт. Пасля літургіі&nbsp;&mdash; малебен вучням",
+          "<strong>13 субота, 18:00</strong>&nbsp;&ndash; Усяночная. 14-я Нядзеля пасля Пяцідзясятніцы, тон 5-ты",
+          "<strong>14 нядзеля, 10:30</strong>&nbsp;&ndash; Боская Літургія. Царкоўны Новы год, прп.&nbsp;Сімеон Стаўпнік",
+          "<strong>20 субота, 18:00</strong>&nbsp;&ndash; Усяночная. 15-я Нядзеля пасля Пяцідзясятніцы, тон 6-ты",
+          "<strong>21 нядзеля, 10:30</strong>&nbsp;&ndash; Боская Літургія. Нараджэнне Прасвятой Багародзіцы",
+          "<strong>26 пятніца, 18:00</strong>&nbsp;&ndash; Усяночная. Напярэдадні Уздвіжання Крыжа Гасподняга",
+          "<strong>27 субота, 10:00</strong>&nbsp;&ndash; Боская Літургія. Уздвіжанне Пачэснага і&nbsp;Жыватворчага Крыжа Гасподняга",
+          "<strong>27 субота, 18:00</strong>&nbsp;&ndash; Усяночная. 16-я Нядзеля пасля Пяцідзясятніцы, тон 7-мы",
+          "<strong>28 нядзеля, 10:30</strong>&nbsp;&ndash; Боская Літургія. Нядзеля пасля Уздвіжання, вял.&nbsp;муч.&nbsp;Мікіта"
+        ],
+        nextLabel: "КАСТРЫЧНІК",
+        scheduleNext: [
+          "<strong>4 субота, 18:00</strong>&nbsp;&ndash; Усяночная. 17-я Нядзеля пасля Пяцідзясятніцы, тон 8-мы",
+          "<strong>5 нядзеля, 10:30</strong>&nbsp;&ndash; Боская Літургія. Апостал Кодрат",
+          "<strong>11 субота, 18:00</strong>&nbsp;&ndash; Усяночная. 18-я Нядзеля пасля Пяцідзясятніцы, тон 1-шы",
+          "<strong>12 нядзеля, 10:30</strong>&nbsp;&ndash; Боская Літургія. прп.&nbsp;Кірыяк Пустэльнік",
+          "<strong>13 панядзелак, 18:00</strong>&nbsp;&ndash; Усяночная. Напярэдадні Пакрову Прасвятой Багародзіцы",
+          "<strong>14 аўторак, 10:00</strong>&nbsp;&ndash; Боская Літургія. Пакров Прасвятой Багародзіцы",
+          "<strong>18 субота, 18:00</strong>&nbsp;&ndash; Усяночная. 19-я Нядзеля пасля Пяцідзясятніцы, тон 2-гі",
+          "<strong>19 нядзеля, 10:30</strong>&nbsp;&ndash; Боская Літургія. Апостал Фама",
+          "<strong>25 субота, 18:00</strong>&nbsp;&ndash; Усяночная. 20-я Нядзеля пасля Пяцідзясятніцы, тон 3-ці",
+          "<strong>26 нядзеля, 10:30</strong>&nbsp;&ndash; Боская Літургія. Іверская ікона Божай Маці"
+        ],
+        footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (лінія 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
+      },
+
+      ua: {
+        logoLeft: ["Храм","Знамення"],
+        logoRight: ["Пресвятої","Богородиці"],
+        subheading: "Вікаріат імені Святих Марії Паризької та Олексія Южинського — Вселенський Патріархат",
+        notice: "Сайт у розробці",
+        scheduleLabel1: "Розклад богослужінь",
+        currentLabel: "ВЕРЕСЕНЬ",
+        scheduleCurrent: [
+          "<strong>6 субота, 18:00</strong>&nbsp;&ndash; Всеношна. 13-та Неділя після П’ятидесятниці, глас 4-й",
+          "<strong>7 неділя, 10:30</strong>&nbsp;&ndash; Божественна Літургія. Апостоли Варфоломій і&nbsp;Тит. Після літургії&nbsp;&mdash; молебень учням",
+          "<strong>13 субота, 18:00</strong>&nbsp;&ndash; Всеношна. 14-та Неділя після П’ятидесятниці, глас 5-й",
+          "<strong>14 неділя, 10:30</strong>&nbsp;&ndash; Божественна Літургія. Церковне новоліття, прп.&nbsp;Симеон Стовпник",
+          "<strong>20 субота, 18:00</strong>&nbsp;&ndash; Всеношна. 15-та Неділя після П’ятидесятниці, глас 6-й",
+          "<strong>21 неділя, 10:30</strong>&nbsp;&ndash; Божественна Літургія. Різдво Пресвятої Богородиці",
+          "<strong>26 п’ятниця, 18:00</strong>&nbsp;&ndash; Всеношна. Навечір’я Воздвиження Хреста Господнього",
+          "<strong>27 субота, 10:00</strong>&nbsp;&ndash; Божественна Літургія. Воздвиження Чесного і&nbsp;Животворящого Хреста Господнього",
+          "<strong>27 субота, 18:00</strong>&nbsp;&ndash; Всеношна. 16-та Неділя після П’ятидесятниці, глас 7-й",
+          "<strong>28 неділя, 10:30</strong>&nbsp;&ndash; Божественна Літургія. Неділя після Воздвиження, вмч.&nbsp;Микити"
+        ],
+        nextLabel: "ЖОВТЕНЬ",
+        scheduleNext: [
+          "<strong>4 субота, 18:00</strong>&nbsp;&ndash; Всеношна. 17-та Неділя після П’ятидесятниці, глас 8-й",
+          "<strong>5 неділя, 10:30</strong>&nbsp;&ndash; Божественна Літургія. Апостол Кодрат",
+          "<strong>11 субота, 18:00</strong>&nbsp;&ndash; Всеношна. 18-та Неділя після П’ятидесятниці, глас 1-й",
+          "<strong>12 неділя, 10:30</strong>&nbsp;&ndash; Божественна Літургія. прп.&nbsp;Киріак Самітник",
+          "<strong>13 понеділок, 18:00</strong>&nbsp;&ndash; Всеношна. Навечір’я Покрову Пресвятої Богородиці",
+          "<strong>14 вівторок, 10:00</strong>&nbsp;&ndash; Божественна Літургія. Покров Пресвятої Богородиці",
+          "<strong>18 субота, 18:00</strong>&nbsp;&ndash; Всеношна. 19-та Неділя після П’ятидесятниці, глас 2-й",
+          "<strong>19 неділя, 10:30</strong>&nbsp;&ndash; Божественна Літургія. Апостол Фома",
+          "<strong>25 субота, 18:00</strong>&nbsp;&ndash; Всеношна. 20-та Неділя після П’ятидесятниці, глас 3-й",
+          "<strong>26 неділя, 10:30</strong>&nbsp;&ndash; Божественна Літургія. Іверська ікона Божої Матері"
+        ],
+        footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (лінія 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
+      }
     };
 
+    /* ===================== DOM ===================== */
     const langSwitchers = document.querySelectorAll('.lang-switch span');
     const logoLeft = document.getElementById('logo-left');
     const logoRight = document.getElementById('logo-right');
@@ -394,75 +260,113 @@ ua: {
     const scheduleNext = document.getElementById('schedule-next');
     const footer = document.getElementById('footer');
 
-    // --- Автоматическое "серение" по дате и времени ---
+    /* ===================== Серение прошедших ===================== */
     function parseDateTime(text, monthLabel) {
-      // Пример: "<strong>5 суббота, 18:00</strong>..." → [5, 18, 0]
-      // monthLabel: ИЮЛЬ / АВГУСТ и т.п.
       const months = {
-  // Русский
-  'ЯНВАРЬ': 0, 'ФЕВРАЛЬ': 1, 'МАРТ': 2, 'АПРЕЛЬ': 3, 'МАЙ': 4, 'ИЮНЬ': 5, 'ИЮЛЬ': 6, 'АВГУСТ': 7,
-  'СЕНТЯБРЬ': 8, 'ОКТЯБРЬ': 9, 'НОЯБРЬ': 10, 'ДЕКАБРЬ': 11,
-  
-  // Французский
-  'JANVIER': 0, 'FÉVRIER': 1, 'MARS': 2, 'AVRIL': 3, 'MAI': 4, 'JUIN': 5, 'JUILLET': 6, 'AOÛT': 7,
-  'SEPTEMBRE': 8, 'OCTOBRE': 9, 'NOVEMBRE': 10, 'DÉCEMBRE': 11,
-
-  // Беларуская
-  'СТУДЗЕНЬ': 0, 'ЛЮТЫ': 1, 'САКАВІК': 2, 'КРАСАВІК': 3, 'МАЙ': 4, 'ЧЭРВЕНЬ': 5, 'ЛІПЕНЬ': 6, 'ЖНІВЕНЬ': 7,
-  'ВЕРАСЕНЬ': 8, 'КАСТРЫЧНІК': 9, 'ЛІСТАПАД': 10, 'СНЕЖАНЬ': 11,
-
-  // Українська
-  'СІЧЕНЬ': 0, 'ЛЮТИЙ': 1, 'БЕРЕЗЕНЬ': 2, 'КВІТЕНЬ': 3, 'ТРАВЕНЬ': 4, 'ЧЕРВЕНЬ': 5, 'ЛИПЕНЬ': 6, 'СЕРПЕНЬ': 7,
-  'ВЕРЕСЕНЬ': 8, 'ЖОВТЕНЬ': 9, 'ЛИСТОПАД': 10, 'ГРУДЕНЬ': 11
-};
-      // Получаем дату и время (находим <strong>....</strong>)
+        'ЯНВАРЬ':0,'ФЕВРАЛЬ':1,'МАРТ':2,'АПРЕЛЬ':3,'МАЙ':4,'ИЮНЬ':5,'ИЮЛЬ':6,'АВГУСТ':7,'СЕНТЯБРЬ':8,'ОКТЯБРЬ':9,'НОЯБРЬ':10,'ДЕКАБРЬ':11,
+        'JANVIER':0,'FÉVRIER':1,'MARS':2,'AVRIL':3,'MAI':4,'JUIN':5,'JUILLET':6,'AOÛT':7,'SEPTEMBRE':8,'OCTOBRE':9,'NOVEMBRE':10,'DÉCEMBRE':11,
+        'СТУДЗЕНЬ':0,'ЛЮТЫ':1,'САКАВІК':2,'КРАСАВІК':3,'МАЙ':4,'ЧЭРВЕНЬ':5,'ЛІПЕНЬ':6,'ЖНІВЕНЬ':7,'ВЕРАСЕНЬ':8,'КАСТРЫЧНІК':9,'ЛІСТАПАД':10,'СНЕЖАНЬ':11,
+        'СІЧЕНЬ':0,'ЛЮТИЙ':1,'БЕРЕЗЕНЬ':2,'КВІТЕНЬ':3,'ТРАВЕНЬ':4,'ЧЕРВЕНЬ':5,'ЛИПЕНЬ':6,'СЕРПЕНЬ':7,'ВЕРЕСЕНЬ':8,'ЖОВТЕНЬ':9,'ЛИСТОПАД':10,'ГРУДЕНЬ':11
+      };
       const m = text.match(/<strong>(\d+)[^\d]*(?:, )?(\d{1,2}):(\d{2})<\/strong>/i);
       if (!m) return null;
-      let day = parseInt(m[1]);
-      let hour = parseInt(m[2]);
-      let minute = parseInt(m[3]);
-      // Определяем месяц (название блока)
-      let month = months[monthLabel.toUpperCase()] ?? new Date().getMonth();
-      // Год: если месяц < текущего месяца, значит, следующий год
-      let now = new Date();
+      const day = +m[1], hour = +m[2], minute = +m[3];
+      const month = months[(monthLabel||'').toUpperCase()] ?? new Date().getMonth();
+      const now = new Date();
       let year = now.getFullYear();
       if (month < now.getMonth() - 1) year += 1;
       return new Date(year, month, day, hour, minute);
     }
-
     function renderSchedule(list, monthLabel) {
       const now = new Date();
-      return list.map(text => {
-        if (text.startsWith("__custom__")) return text.replace("__custom__", "");
-        let dt = parseDateTime(text, monthLabel);
-        let isPast = false;
-        if (dt) {
-          // Серая, если прошло больше двух часов от времени службы
-          isPast = (now.getTime() - dt.getTime()) > 2 * 60 * 60 * 1000;
-        }
-        return `<li${isPast ? ' class="past"' : ''}>${text}</li>`;
+      return (list||[]).map(text=>{
+        const dt = parseDateTime(text, monthLabel);
+        const isPast = dt ? (now - dt) > 2*60*60*1000 : false;
+        return `<li${isPast?' class="past"':''}>${text}</li>`;
       }).join('');
     }
 
-    function setLang(lang) {
-      langSwitchers.forEach(s => s.classList.remove('active'));
-      document.querySelector(`.lang-switch span[data-lang="${lang}"]`).classList.add('active');
-      logoLeft.innerHTML = `<span>${translations[lang].logoLeft[0]}</span><span>${translations[lang].logoLeft[1]}</span>`;
-      logoRight.innerHTML = `<span>${translations[lang].logoRight[0]}</span><span>${translations[lang].logoRight[1]}</span>`;
-      subheading.innerText = translations[lang].subheading;
-      notice.innerText = translations[lang].notice;
-      scheduleLabel1.innerText = translations[lang].scheduleLabel1;
-      currentLabel.innerText = translations[lang].currentLabel;
-      nextLabel.innerText = translations[lang].nextLabel;
-      scheduleCurrent.innerHTML = renderSchedule(translations[lang].scheduleCurrent, translations[lang].currentLabel);
-      scheduleNext.innerHTML = renderSchedule(translations[lang].scheduleNext, translations[lang].nextLabel);
-      footer.innerHTML = translations[lang].footer;
+    /* ===================== Хранилище + автопочинка ===================== */
+    const STORAGE_KEYS = { ru:'schedule.ru', fr:'schedule.fr', by:'schedule.by', ua:'schedule.ua' };
+    const STORAGE_VERSION = 1;
+
+    function seedLocalStorageOnce() {
+      Object.keys(STORAGE_KEYS).forEach(lang=>{
+        if (!localStorage.getItem(STORAGE_KEYS[lang])) {
+          const t = translations[lang];
+          const data = {
+            _lang:lang, _ver:STORAGE_VERSION,
+            logoLeft:t.logoLeft, logoRight:t.logoRight,
+            subheading:t.subheading, notice:t.notice,
+            scheduleLabel1:t.scheduleLabel1,
+            currentLabel:t.currentLabel, scheduleCurrent:t.scheduleCurrent,
+            nextLabel:t.nextLabel, scheduleNext:t.scheduleNext,
+            footer:t.footer
+          };
+          localStorage.setItem(STORAGE_KEYS[lang], JSON.stringify(data));
+        }
+      });
     }
 
-    langSwitchers.forEach(s => {
-      s.onclick = () => setLang(s.dataset.lang);
-    });
+    function loadLangData(lang) {
+      const defaults = translations[lang];
+      let stored = null;
+      try { stored = JSON.parse(localStorage.getItem(STORAGE_KEYS[lang])); } catch(e) { stored = null; }
+      let data = { ...defaults, ...(stored||{}) };
 
+      // добиваем недостающие ключи
+      if (!data.footer) data.footer = defaults.footer;
+      if (!Array.isArray(data.scheduleCurrent)) data.scheduleCurrent = defaults.scheduleCurrent;
+      if (!Array.isArray(data.scheduleNext)) data.scheduleNext = defaults.scheduleNext;
+      if (!data.logoLeft) data.logoLeft = defaults.logoLeft;
+      if (!data.logoRight) data.logoRight = defaults.logoRight;
+      if (!data.subheading) data.subheading = defaults.subheading;
+      if (!data.notice) data.notice = defaults.notice;
+      if (!data.scheduleLabel1) data.scheduleLabel1 = defaults.scheduleLabel1;
+      if (!data.currentLabel) data.currentLabel = defaults.currentLabel;
+      if (!data.nextLabel) data.nextLabel = defaults.nextLabel;
+
+      // простой фикс перепутанного языка BY↔UA
+      if (lang==='ua' && data.logoRight && data.logoRight[1]==='Багародзіцы') data = { ...defaults };
+      if (lang==='by' && data.logoRight && data.logoRight[1]==='Богородиці') data = { ...defaults };
+
+      try { localStorage.setItem(STORAGE_KEYS[lang], JSON.stringify({ _lang:lang, _ver:STORAGE_VERSION, ...data })); } catch(e){}
+
+      return data;
+    }
+
+    /* ===================== Шестерёнка в футере ===================== */
+    function injectAdminGearIntoFooter() {
+      footer.innerHTML = footer.innerHTML.replace(
+        /75016(?![^<]*>)/,
+        '75016 <a class="admin-gear" href="admin.html" title="Админ">&#9881;</a>'
+      );
+    }
+
+    /* ===================== Рендер языка ===================== */
+    function setLang(lang) {
+      document.querySelectorAll('.lang-switch span').forEach(s=>s.classList.remove('active'));
+      document.querySelector(`.lang-switch span[data-lang="${lang}"]`).classList.add('active');
+
+      const data = loadLangData(lang);
+
+      logoLeft.innerHTML  = `<span>${data.logoLeft[0]}</span><span>${data.logoLeft[1]}</span>`;
+      logoRight.innerHTML = `<span>${data.logoRight[0]}</span><span>${data.logoRight[1]}</span>`;
+      subheading.innerText = data.subheading;
+      notice.innerText = data.notice;
+      scheduleLabel1.innerText = data.scheduleLabel1;
+      currentLabel.innerText = data.currentLabel;
+      nextLabel.innerText = data.nextLabel;
+      scheduleCurrent.innerHTML = renderSchedule(data.scheduleCurrent, data.currentLabel);
+      scheduleNext.innerHTML = renderSchedule(data.scheduleNext, data.nextLabel);
+      footer.innerHTML = data.footer;
+
+      injectAdminGearIntoFooter(); // ⚙ после «75016»
+    }
+
+    /* ===================== Init ===================== */
+    seedLocalStorageOnce();
+    langSwitchers.forEach(s => s.onclick = () => setLang(s.dataset.lang));
     setLang('ru');
   </script>
 </body>
