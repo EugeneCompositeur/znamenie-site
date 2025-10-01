@@ -104,7 +104,14 @@
   </div>
 
   <script>
-    /* ===================== Переводы ===================== */
+    /* === ВАЖНО: localStorage выключен по умолчанию ===
+       Включается только если открыть адрес как .../index.html?preview=1
+       Тогда можно тестировать черновики в своём браузере. */
+    const USE_LOCAL_STORAGE = location.search.includes('preview=1');
+    const STORAGE_VERSION = 1;
+    const STORAGE_KEYS = { ru:'schedule.ru', fr:'schedule.fr', by:'schedule.by', ua:'schedule.ua' };
+
+    /* ===================== Переводы (твой исходный блок) ===================== */
     const translations = {
       ru: {
         logoLeft: ["Храм","Знамения"],
@@ -127,20 +134,19 @@
         ],
         nextLabel: "НОЯБРЬ",
         scheduleNext: [
-"<strong>1 суббота, 10:00</strong>&nbsp;&ndash; Заупокойная Литургия и&nbsp;общая панихида (Димитриевская родительская суббота)",
-"<strong>1 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 21-я Неделя по Пятидесятнице, глас 4-й",
-"<strong>2 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Память преподобного Гавриила Самтаврийского",
-"<strong>8 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 22-я Неделя по Пятидесятнице, глас 5-й",
-"<strong>9 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Память мученика Нестора Солунского",
-"<strong>15 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 23-я Неделя по Пятидесятнице, глас 6-й",
-"<strong>16 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Обновление храма великомученика Георгия в Лидде",
-"<strong>22 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 24-я Неделя по Пятидесятнице, глас 7-й",
-"<strong>23 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Апп. от 70-ти: Ераст, Олимп, Родион, Сосипатр, Кварт и&nbsp;Тертии",
-"<strong>29 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 25-я Неделя по Пятидесятнице, глас 8-й"
+          "<strong>1 суббота, 10:00</strong>&nbsp;&ndash; Заупокойная Литургия и&nbsp;общая панихида (Димитриевская родительская суббота)",
+          "<strong>1 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 21-я Неделя по Пятидесятнице, глас 4-й",
+          "<strong>2 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Память преподобного Гавриила Самтаврийского",
+          "<strong>8 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 22-я Неделя по Пятидесятнице, глас 5-й",
+          "<strong>9 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Память мученика Нестора Солунского",
+          "<strong>15 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 23-я Неделя по Пятидесятнице, глас 6-й",
+          "<strong>16 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Обновление храма великомученика Георгия в Лидде",
+          "<strong>22 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 24-я Неделя по Пятидесятнице, глас 7-й",
+          "<strong>23 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Апп. от 70-ти: Ераст, Олимп, Родион, Сосипатр, Кварт и&nbsp;Тертии",
+          "<strong>29 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 25-я Неделя по Пятидесятнице, глас 8-й"
         ],
         footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (ligne 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
       },
-
       fr: {
         logoLeft: ["Paroisse","Orthodoxe"],
         logoRight: ["Notre-Dame","du Signe"],
@@ -175,11 +181,10 @@
         ],
         footer: `87, boulevard Exelmans, Paris 75016<br />Métро : Exelmans (ligne 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
       },
-
       by: {
         logoLeft: ["Храм","Знамення"],
         logoRight: ["Прасвятой","Багародзіцы"],
-        subheading: "Вікарыят імя Святых Марыі Парыжскай і Аляксея Южынскага — Сусветны Патрыярхат",
+        subheading: "Вікарыят імя Святых Марыі Парыжскай і Аляксея Южинскага — Сусветны Патрыярхат",
         notice: "Сайт у распрацоўцы",
         scheduleLabel1: "Расклад набажэнстваў",
         currentLabel: "ВЕРАСЕНЬ",
@@ -203,14 +208,13 @@
           "<strong>12 нядзеля, 10:30</strong>&nbsp;&ndash; Боская Літургія. прп.&nbsp;Кірыяк Пустэльнік",
           "<strong>13 панядзелак, 18:00</strong>&nbsp;&ndash; Усяночная. Напярэдадні Пакрову Прасвятой Багародзіцы",
           "<strong>14 аўторак, 10:00</strong>&nbsp;&ndash; Боская Літургія. Пакров Прасвятой Багародзіцы",
-          "<strong>18 субота, 18:00</strong>&nbsp;&ndash; Усяночная. 19-я Нядзеля пасля Пяцідзясятніцы, тон 2-гі",
+          "<strong>18 субата, 18:00</strong>&nbsp;&ndash; Усяночная. 19-я Нядзеля пасля Пяцідзясятніцы, тон 2-гі",
           "<strong>19 нядзеля, 10:30</strong>&nbsp;&ndash; Боская Літургія. Апостал Фама",
           "<strong>25 субота, 18:00</strong>&nbsp;&ndash; Усяночная. 20-я Нядзеля пасля Пяцідзясятніцы, тон 3-ці",
           "<strong>26 нядзеля, 10:30</strong>&nbsp;&ndash; Боская Літургія. Іверская ікона Божай Маці"
         ],
         footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (лінія 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
       },
-
       ua: {
         logoLeft: ["Храм","Знамення"],
         logoRight: ["Пресвятої","Богородиці"],
@@ -260,7 +264,7 @@
     const scheduleNext = document.getElementById('schedule-next');
     const footer = document.getElementById('footer');
 
-    /* ===================== Серение прошедших ===================== */
+    /* ===================== Подсветка прошедших дат ===================== */
     function parseDateTime(text, monthLabel) {
       const months = {
         'ЯНВАРЬ':0,'ФЕВРАЛЬ':1,'МАРТ':2,'АПРЕЛЬ':3,'МАЙ':4,'ИЮНЬ':5,'ИЮЛЬ':6,'АВГУСТ':7,'СЕНТЯБРЬ':8,'ОКТЯБРЬ':9,'НОЯБРЬ':10,'ДЕКАБРЬ':11,
@@ -286,53 +290,28 @@
       }).join('');
     }
 
-    /* ===================== Хранилище + автопочинка ===================== */
-    const STORAGE_KEYS = { ru:'schedule.ru', fr:'schedule.fr', by:'schedule.by', ua:'schedule.ua' };
-    const STORAGE_VERSION = 1;
-
-    function seedLocalStorageOnce() {
-      Object.keys(STORAGE_KEYS).forEach(lang=>{
-        if (!localStorage.getItem(STORAGE_KEYS[lang])) {
-          const t = translations[lang];
-          const data = {
-            _lang:lang, _ver:STORAGE_VERSION,
-            logoLeft:t.logoLeft, logoRight:t.logoRight,
-            subheading:t.subheading, notice:t.notice,
-            scheduleLabel1:t.scheduleLabel1,
-            currentLabel:t.currentLabel, scheduleCurrent:t.scheduleCurrent,
-            nextLabel:t.nextLabel, scheduleNext:t.scheduleNext,
-            footer:t.footer
-          };
-          localStorage.setItem(STORAGE_KEYS[lang], JSON.stringify(data));
-        }
-      });
+    /* ===================== Работа с хранилищем (только для предпросмотра) ===================== */
+    function readFromStorage(lang) {
+      if (!USE_LOCAL_STORAGE) return null;
+      try {
+        const raw = localStorage.getItem(STORAGE_KEYS[lang]);
+        if (!raw) return null;
+        const obj = JSON.parse(raw);
+        if (!obj || obj._ver !== STORAGE_VERSION) return null;
+        return obj;
+      } catch { return null; }
     }
-
-    function loadLangData(lang) {
-      const defaults = translations[lang];
-      let stored = null;
-      try { stored = JSON.parse(localStorage.getItem(STORAGE_KEYS[lang])); } catch(e) { stored = null; }
-      let data = { ...defaults, ...(stored||{}) };
-
-      // добиваем недостающие ключи
-      if (!data.footer) data.footer = defaults.footer;
-      if (!Array.isArray(data.scheduleCurrent)) data.scheduleCurrent = defaults.scheduleCurrent;
-      if (!Array.isArray(data.scheduleNext)) data.scheduleNext = defaults.scheduleNext;
-      if (!data.logoLeft) data.logoLeft = defaults.logoLeft;
-      if (!data.logoRight) data.logoRight = defaults.logoRight;
-      if (!data.subheading) data.subheading = defaults.subheading;
-      if (!data.notice) data.notice = defaults.notice;
-      if (!data.scheduleLabel1) data.scheduleLabel1 = defaults.scheduleLabel1;
-      if (!data.currentLabel) data.currentLabel = defaults.currentLabel;
-      if (!data.nextLabel) data.nextLabel = defaults.nextLabel;
-
-      // простой фикс перепутанного языка BY↔UA
-      if (lang==='ua' && data.logoRight && data.logoRight[1]==='Багародзіцы') data = { ...defaults };
-      if (lang==='by' && data.logoRight && data.logoRight[1]==='Богородиці') data = { ...defaults };
-
-      try { localStorage.setItem(STORAGE_KEYS[lang], JSON.stringify({ _lang:lang, _ver:STORAGE_VERSION, ...data })); } catch(e){}
-
-      return data;
+    function writeToStorage(lang, data) {
+      if (!USE_LOCAL_STORAGE) return;
+      try {
+        localStorage.setItem(STORAGE_KEYS[lang], JSON.stringify({ _lang:lang, _ver:STORAGE_VERSION, ...data }));
+      } catch {}
+    }
+    function seedStorageIfEmpty() {
+      if (!USE_LOCAL_STORAGE) return;
+      Object.keys(STORAGE_KEYS).forEach(lang=>{
+        if (!readFromStorage(lang)) writeToStorage(lang, translations[lang]);
+      });
     }
 
     /* ===================== Шестерёнка в футере ===================== */
@@ -348,7 +327,9 @@
       document.querySelectorAll('.lang-switch span').forEach(s=>s.classList.remove('active'));
       document.querySelector(`.lang-switch span[data-lang="${lang}"]`).classList.add('active');
 
-      const data = loadLangData(lang);
+      const base = translations[lang];
+      const stored = readFromStorage(lang);
+      const data = stored ? { ...base, ...stored } : base;
 
       logoLeft.innerHTML  = `<span>${data.logoLeft[0]}</span><span>${data.logoLeft[1]}</span>`;
       logoRight.innerHTML = `<span>${data.logoRight[0]}</span><span>${data.logoRight[1]}</span>`;
@@ -361,11 +342,11 @@
       scheduleNext.innerHTML = renderSchedule(data.scheduleNext, data.nextLabel);
       footer.innerHTML = data.footer;
 
-      injectAdminGearIntoFooter(); // ⚙ после «75016»
+      injectAdminGearIntoFooter();
     }
 
     /* ===================== Init ===================== */
-    seedLocalStorageOnce();
+    seedStorageIfEmpty();                 // срабатывает только при ?preview=1
     langSwitchers.forEach(s => s.onclick = () => setLang(s.dataset.lang));
     setLang('ru');
   </script>
