@@ -633,6 +633,31 @@
     });
 
     setLang('ru');
+        /* === Автоматическая очистка расписания при наступлении нового месяца (для всех языков) === */
+    (function autoClearAllLangSchedules() {
+      // Текущий месяц и год на устройстве пользователя
+      const now = new Date();
+      const currentMonth = now.getMonth();  // от 0 до 11
+      const currentYear = now.getFullYear();
+
+      // Ключ версии расписания в localStorage
+      const key = 'scheduleVersion';
+      const stored = JSON.parse(localStorage.getItem(key) || '{}');
+
+      // Если месяц или год изменился — очищаем кэш полностью
+      if (stored.month !== currentMonth || stored.year !== currentYear) {
+        console.log('🕯️ Новый месяц или год — очищаю расписание у всех языков...');
+        // Удаляем все языковые ключи расписаний
+        Object.keys(localStorage).forEach(k => {
+          if (k.startsWith('schedule.')) localStorage.removeItem(k);
+        });
+        // Обновляем версию
+        localStorage.setItem(key, JSON.stringify({ month: currentMonth, year: currentYear }));
+        // Перезагружаем страницу, чтобы применить новое расписание
+        location.reload();
+      }
+    })();
+
   </script>
 </body>
 </html>
