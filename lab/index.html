@@ -251,46 +251,90 @@
     /* ===================== Переводы (краткие анонсы + карточки) ===================== */
     const translations = {
       ru: {
-        logoLeft: ["Храм","Знамения"],
-        logoRight: ["Пресвятой","Богородицы"],
-        subheading: "Викариат имени Святых Марии Парижской и Алексия Южинского — Вселенский Патриархат",
-        scheduleLabel1: "Расписание богослужений",
-        currentLabel: "НОЯБРЬ",
-        scheduleCurrent: [
-          "<strong>6 samedi, 18:00</strong>&nbsp;&ndash; Vigiles…",
-          "<strong>7 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie…"
-        ],
-        cards: [
-          { id:"history",  img:"history",  title:"История прихода",  desc:"Как община белой эмиграции стала домом в Париже.",  articleHtml:"<p>Краткий очерк об истории прихода.</p>" },
-          { id:"clergy",   img:"clergy",   title:"Клирики храма",    desc:"Настоятель прот. Владимир Ягелло, свящ. Алексей Уминский.",  articleHtml:"<p>Сведения о клире.</p>" },
-          { id:"school",   img:"school",   title:"Воскресная школа", desc:"Детские и взрослые группы после литургии.", articleHtml:"<p>О школе и записи.</p>" },
-          { id:"icons",    img:"icons",    title:"Иконы",            desc:"Почитаемые образы, молитвы, практика.",      articleHtml:"<p>О святынях храма.</p>" },
-          { id:"white",    img:"white",    title:"Белое движение",   desc:"Память Русского исхода и работа с архивами.", articleHtml:"<p>О памяти и проектах.</p>" },
-          { id:"library",  img:"library",  title:"Библиотека",       desc:"Фонд, выдача на дом, дарение книг.",          articleHtml:"<p>О фонде библиотеки.</p>" }
-        ],
-        footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (ligne 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
-      },
+      logoLeft: ["Храм","Знамения"],
+      logoRight: ["Пресвятой","Богородицы"],
+      subheading: "Викариат имени Святых Марии Парижской и Алексия Южинского — Вселенский Патриархат",
+      scheduleLabel1: "Расписание богослужений",
+      currentLabel: "НОЯБРЬ",
+      nextLabel: "ДЕКАБРЬ",
+      scheduleCurrent: [
+        "<strong>1 суббота, 10:00</strong>&nbsp;&ndash; Заупокойная Литургия и&nbsp;общая панихида (Димитриевская родительская суббота)",
+        "<strong>1 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 21-я Неделя по Пятидесятнице, глас 4-й",
+        "<strong>2 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Память преподобного Гавриила Самтаврийского",
+        "<strong>8 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 22-я Неделя по Пятидесятнице, глас 5-й",
+        "<strong>9 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Память мученика Нестора Солунского",
+        "<strong>15 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 23-я Неделя по Пятидесятнице, глас 6-й",
+        "<strong>16 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Обновление храма великомученика Георгия в Лидде",
+        "<strong>22 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 24-я Неделя по Пятидесятнице, глас 7-й",
+        "<strong>23 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Апп. от 70-ти: Ераст, Олимп, Родион, Сосипатр, Кварт и&nbsp;Тертии",
+        "<strong>29 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 25-я Неделя по Пятидесятнице, глас 8-й",
+        "<strong>30 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Святитель Григорий, еп. Неокесарийский"
+      ],
+      scheduleNext: [
+        "<strong>3 среда, 18:00</strong>&nbsp;&ndash; Всенощная. Канун Введения во храм Пресвятой Богородицы",
+        "<strong>4 четверг, 10:00</strong>&nbsp;&ndash; Литургия. Введение во храм Пресвятой Богородицы",
+        "<strong>6 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 26-я Неделя по Пятидесятнице, глас 1-й",
+        "<strong>7 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Вмц. Екатерина",
+        "<strong>13 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 27-я Неделя по Пятидесятнице, глас 2-й",
+        "<strong>14 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Пророк Наум",
+        "<strong>20 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 28-я Неделя по Пятидесятнице, глас 3-й",
+        "<strong>21 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Прп. Патапий",
+        "<strong>27 суббота, 18:00</strong>&nbsp;&ndash; Всенощное бдение. 29-я Неделя по Пятидесятнице, глас 4-й",
+        "<strong>28 воскресенье, 10:30</strong>&nbsp;&ndash; Литургия. Неделя Святых Праотец"
+      ],
+      cards: [
+        { id:"history",  img:"history",  title:"История прихода",  desc:"Как община белой эмиграции стала домом в Париже.",  articleHtml:"<p>Краткий очерк об истории прихода.</p>" },
+        { id:"clergy",   img:"clergy",   title:"Клирики храма",    desc:"Настоятель прот. Владимир Ягелло, свящ. Алексей Уминский.",  articleHtml:"<p>Сведения о клире.</p>" },
+        { id:"school",   img:"school",   title:"Воскресная школа", desc:"Детские и взрослые группы после литургии.", articleHtml:"<p>О школе и записи.</p>" },
+        { id:"icons",    img:"icons",    title:"Иконы",            desc:"Почитаемые образы, молитвы, практика.",      articleHtml:"<p>О святынях храма.</p>" },
+        { id:"white",    img:"white",    title:"Белое движение",   desc:"Память Русского исхода и работа с архивами.", articleHtml:"<p>О памяти и проектах.</p>" },
+        { id:"library",  img:"library",  title:"Библиотека",       desc:"Фонд, выдача на дом, дарение книг.",          articleHtml:"<p>О фонде библиотеки.</p>" }
+      ],
+      footer: `87, boulevard Exelmans, Paris 75016<br />Метро: Exelmans (ligne 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
+    },
 
-      fr: {
-        logoLeft: ["Paroisse","Orthodoxe"],
-        logoRight: ["Notre-Dame","du Signe"],
-        subheading: "Vicariat Sainte-Marie-de-Paris et Saint-Alexis-d’Ugine – Patriarcat Œcuménique",
-        scheduleLabel1: "Horaires des offices",
-        currentLabel: "SEPTEMBRE",
-        scheduleCurrent: [
-          "<strong>6 samedi, 18:00</strong>&nbsp;&ndash; Vigiles…",
-          "<strong>7 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie…"
-        ],
-        cards: [
-          { id:"history",  img:"history",  title:"Histoire de la paroisse",  desc:"La diaspora russe à Paris.",  articleHtml:"<p>Texte court.</p>" },
-          { id:"clergy",   img:"clergy",   title:"Clergé",                   desc:"Recteur et prêtre.",         articleHtml:"<p>Texte court.</p>" },
-          { id:"school",   img:"school",   title:"École du dimanche",        desc:"Horaires et groupes.",       articleHtml:"<p>Texte court.</p>" },
-          { id:"icons",    img:"icons",    title:"Icônes",                   desc:"Images vénérées.",           articleHtml:"<p>Texte court.</p>" },
-          { id:"white",    img:"white",    title:"Mouvement blanc",          desc:"Mémoire de l’exil.",         articleHtml:"<p>Texte court.</p>" },
-          { id:"library",  img:"library",  title:"Bibliothèque",             desc:"Catalogue et règles.",       articleHtml:"<p>Texte court.</p>" }
-        ],
-        footer: `87, boulevard Exelmans, Paris 75016<br />Métро : Exelmans (ligne 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
-      },
+    fr: {
+      logoLeft: ["Paroisse","Orthodoxe"],
+      logoRight: ["Notre-Dame","du Signe"],
+      subheading: "Vicariat Sainte-Marie-de-Paris et Saint-Alexis-d’Ugine – Patriarcat Œcuménique",
+      scheduleLabel1: "Horaires des offices",
+      currentLabel: "NOVEMBRE",
+      nextLabel: "DÉCEMBRE",
+      scheduleCurrent: [
+        "<strong>1 samedi, 10:00</strong>&nbsp;&ndash; Liturgie pour les défunts et pannychide<br>Samedi des défunts de Dimitri",
+        "<strong>1 samedi, 18:00</strong>&nbsp;&ndash; Vigiles<br>21<sup>e</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 4<sup>e</sup>&nbsp;ton",
+        "<strong>2 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie<br>Saint Gabriel (Ourguébadzé)",
+        "<strong>8 samedi, 18:00</strong>&nbsp;&ndash; Vigiles<br>22<sup>e</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 5<sup>e</sup>&nbsp;ton",
+        "<strong>9 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie<br>Saint Nestor de Salonique",
+        "<strong>15 samedi, 18:00</strong>&nbsp;&ndash; Vigiles<br>23<sup>e</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 6<sup>e</sup>&nbsp;ton",
+        "<strong>16 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie<br>Dédicace de l’Église Saint-Georges à Lydda",
+        "<strong>22 samedi, 18:00</strong>&nbsp;&ndash; Vigiles<br>24<sup>e</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 7<sup>e</sup>&nbsp;ton",
+        "<strong>23 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie<br>Saints Apôtres Eraste, Olympe, Rodion, Sosipater, Quartus et Tertius",
+        "<strong>29 samedi, 18:00</strong>&nbsp;&ndash; Vigiles<br>25<sup>e</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 8<sup>e</sup>&nbsp;ton",
+        "<strong>30 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie<br>Saint Grégoire de Néocésarée"
+      ],
+      scheduleNext: [
+        "<strong>3 mercredi, 18:00</strong>&nbsp;&ndash; Vigiles<br>Veille de la Présentation de la Très Sainte Mère de Dieu au Temple",
+        "<strong>4 jeudi, 10:00</strong>&nbsp;&ndash; Liturgie<br>Présentation de la Très Sainte Mère de Dieu au Temple",
+        "<strong>6 samedi, 18:00</strong>&nbsp;&ndash; Vigiles<br>26<sup>e</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 1<sup>er</sup>&nbsp;ton",
+        "<strong>7 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie<br>Sainte Catherine d’Alexandrie",
+        "<strong>13 samedi, 18:00</strong>&nbsp;&ndash; Vigiles<br>27<sup>e</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 2<sup>e</sup>&nbsp;ton",
+        "<strong>14 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie<br>Saint Prophète Nahum",
+        "<strong>20 samedi, 18:00</strong>&nbsp;&ndash; Vigiles<br>28<sup>e</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 3<sup>e</sup>&nbsp;ton",
+        "<strong>21 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie<br>Saint Patapios",
+        "<strong>27 samedi, 18:00</strong>&nbsp;&ndash; Vigiles<br>29<sup>e</sup>&nbsp;Dimanche après la&nbsp;Pentecôte&nbsp;&ndash; 4<sup>e</sup>&nbsp;ton",
+        "<strong>28 dimanche, 10:30</strong>&nbsp;&ndash; Liturgie<br>Dimanche des Saints Ancêtres du Christ"
+      ],
+      cards: [
+        { id:"history",  img:"history",  title:"Histoire de la paroisse",  desc:"La diaspora russe à Paris.",  articleHtml:"<p>Texte court.</p>" },
+        { id:"clergy",   img:"clergy",   title:"Clergé",                   desc:"Recteur et prêtre.",         articleHtml:"<p>Texte court.</p>" },
+        { id:"school",   img:"school",   title:"École du dimanche",        desc:"Horaires et groupes.",       articleHtml:"<p>Texte court.</p>" },
+        { id:"icons",    img:"icons",    title:"Icônes",                   desc:"Images vénérées.",           articleHtml:"<p>Texte court.</p>" },
+        { id:"white",    img:"white",    title:"Mouvement blanc",          desc:"Mémoire de l’exil.",         articleHtml:"<p>Texte court.</p>" },
+        { id:"library",  img:"library",  title:"Bibliothèque",             desc:"Catalogue et règles.",       articleHtml:"<p>Texte court.</p>" }
+      ],
+      footer: `87, boulevard Exelmans, Paris 75016<br />Métро : Exelmans (ligne 9)<br />✉️ <a id="email" href="mailto:ndsigne@gmail.com">ndsigne@gmail.com</a>`
+    },
 
       by: {
         logoLeft: ["Храм","Знамення"],
