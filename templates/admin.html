@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="card">
+  <h2>Админ-панель</h2>
+
+  <h3>Приглашения</h3>
+  <form method="post" action="{{ url_for('admin_create_invite') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <button class="btn" type="submit">Создать код приглашения</button>
+  </form>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Код</th><th>Активен</th><th>Создан</th><th>Использован</th></tr>
+      {% for i in invites %}
+      <tr>
+        <td>{{ i.code }}</td><td>{{ 'Да' if i.is_active else 'Нет' }}</td><td>{{ i.created_at|fmt_dt }}</td><td>{{ i.used_at|fmt_dt }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <h3>Пользователи</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Имя</th><th>Email</th><th>Роль</th><th>Действие</th></tr>
+      {% for u in users %}
+      <tr>
+        <td>{{ u.first_name }} {{ u.last_name }}</td>
+        <td>{{ u.email }}</td>
+        <td>{{ u.role }}</td>
+        <td>
+          {% if u.role != 'admin' %}
+          <form method="post" action="{{ url_for('admin_delete_user', user_id=u.id) }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <button class="btn danger" type="submit">Удалить</button>
+          </form>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <h3>Последние сообщения</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Автор</th><th>Текст</th><th>Время</th><th>Действие</th></tr>
+      {% for m in messages %}
+      <tr>
+        <td>{{ m.author }}</td>
+        <td>{{ m.content }}</td>
+        <td>{{ m.created_at|fmt_dt }}</td>
+        <td>
+          <form method="post" action="{{ url_for('admin_delete_message', message_id=m.id) }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <button class="btn danger" type="submit">Удалить</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</section>
+{% endblock %}

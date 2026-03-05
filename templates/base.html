@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Театральный чат{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<header class="header">
+  <div class="container header-inner">
+    <a class="brand" href="{{ url_for('chat') if g.user else url_for('index') }}">Театральный чат</a>
+    {% if g.user %}
+      <nav class="menu">
+        <a href="{{ url_for('chat') }}">Чат</a>
+        <a href="{{ url_for('calendar_view') }}">Календарь</a>
+        {% if g.user.role == 'admin' %}<a href="{{ url_for('admin_panel') }}">Админка</a>{% endif %}
+        <form method="post" action="{{ url_for('logout') }}" class="inline-form">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+          <button type="submit" class="link-btn">Выйти</button>
+        </form>
+      </nav>
+    {% endif %}
+  </div>
+</header>
+
+<main class="container">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <section class="alerts">
+        {% for category, message in messages %}
+          <div class="alert {{ category }}">{{ message }}</div>
+        {% endfor %}
+      </section>
+    {% endif %}
+  {% endwith %}
+
+  {% block content %}{% endblock %}
+</main>
+</body>
+</html>

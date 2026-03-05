@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="card">
+  <h2>Календарь событий</h2>
+  {% if g.user.role == 'admin' %}
+  <form method="post" class="event-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <label>Название<input name="title" required></label>
+    <label>Дата<input type="date" name="event_date" required></label>
+    <label>Время<input type="time" name="event_time" required></label>
+    <label>Описание<textarea name="description"></textarea></label>
+    <button class="btn" type="submit">Создать событие</button>
+  </form>
+  {% endif %}
+
+  <div class="events-list">
+    {% for event in events %}
+      <article class="event-item">
+        <h3>{{ event.title }}</h3>
+        <div>{{ event.event_date }} {{ event.event_time }}</div>
+        <p>{{ event.description }}</p>
+        <small>Создал: {{ event.creator }}</small>
+
+        {% if g.user.role == 'admin' %}
+          <details>
+            <summary>Редактировать</summary>
+            <form method="post" action="{{ url_for('edit_event', event_id=event.id) }}" class="event-form">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+              <label>Название<input name="title" value="{{ event.title }}" required></label>
+              <label>Дата<input type="date" name="event_date" value="{{ event.event_date }}" required></label>
+              <label>Время<input type="time" name="event_time" value="{{ event.event_time }}" required></label>
+              <label>Описание<textarea name="description">{{ event.description }}</textarea></label>
+              <button class="btn btn-secondary" type="submit">Сохранить</button>
+            </form>
+            <form method="post" action="{{ url_for('delete_event', event_id=event.id) }}">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+              <button class="btn danger" type="submit">Удалить</button>
+            </form>
+          </details>
+        {% endif %}
+      </article>
+    {% else %}
+      <p class="muted">Событий пока нет.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
