@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Добро пожаловать{% endblock %}
+{% block content %}
+<section class="auth-choice card">
+  <h1>Добро пожаловать в чат труппы</h1>
+  <p>Для доступа нужен код приглашения.</p>
+  <div class="actions">
+    <a class="btn" href="{{ url_for('register') }}">У меня есть код приглашения</a>
+    <a class="btn btn-secondary" href="{{ url_for('login') }}">Войти в систему</a>
+  </div>
+</section>
+{% endblock %}

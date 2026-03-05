@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="chat-layout">
+  <div class="card chat-panel">
+    <h2>Основной чат</h2>
+    <form class="search-form" method="get" action="{{ url_for('chat') }}">
+      <input name="q" placeholder="Поиск по сообщениям..." value="{{ query }}">
+      <button class="btn btn-secondary" type="submit">Искать</button>
+    </form>
+
+    {% if query %}
+      <div class="search-results">
+        <h3>Результаты поиска</h3>
+        {% if search_results %}
+          {% for row in search_results %}
+            <div class="search-item"><strong>{{ row.author }}</strong> [{{ row.kind }}] — {{ row.content|safe }}</div>
+          {% endfor %}
+        {% else %}
+          <div class="muted">Совпадений не найдено.</div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div id="messages" class="messages" data-csrf="{{ csrf_token }}"></div>
+
+    <form id="message-form" class="message-form">
+      <textarea name="content" id="content" placeholder="Введите сообщение..." required></textarea>
+      <button class="btn" type="submit">Отправить</button>
+    </form>
+  </div>
+</section>
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+{% endblock %}
